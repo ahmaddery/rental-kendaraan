@@ -8,7 +8,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Type Kendaraan</th>
+                            <th>Jenis Kendaraan</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

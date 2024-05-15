@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\artikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,22 +42,25 @@ require __DIR__.'/auth.php';
 
 //});
 
+
+// route untuk type dihalaman admin
 Route::middleware(['admin'])->group(function () {
 Route::get('admin/types', [TypeController::class, 'index'])->name('admin.types.index');
 Route::get('admin/types/create', [TypeController::class, 'create'])->name('admin.types.create');
-
-// Route for storing a new type
 Route::post('admin/types', [TypeController::class, 'store'])->name('admin.types.store');
-
-// Route for displaying a specific type
 Route::get('admin/types/{type}', [TypeController::class, 'show'])->name('admin.types.show');
-
-// Route for displaying the form to edit a type
 Route::get('admin/types/{type}/edit', [TypeController::class, 'edit'])->name('admin.types.edit');
-
-// Route for updating a type
 Route::put('admin/types/{type}', [TypeController::class, 'update'])->name('admin.types.update');
-
-// Route for deleting a type
 Route::delete('admin/types/{type}', [TypeController::class, 'destroy'])->name('admin.types.destroy');
+});
+
+//route untuk category dihalaman admin
+Route::middleware(['admin'])->group(function () {
+Route::get('admin/categories', [CategoryController::class, 'index'])->name('admin.categories.index');
+Route::get('admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+Route::post('admin/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('admin/categories/{category}', [CategoryController::class, 'show'])->name('admin.categories.show');
+Route::get('admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+Route::put('admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 });
