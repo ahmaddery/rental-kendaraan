@@ -1,22 +1,18 @@
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1>Edit Brand</h1>
-                <form action="{{ route('admin.brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="gambar">Image</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar">
-                    </div>
-                    <div class="form-group">
-                        <label for="kendaraan">Vehicle</label>
-                        <input type="text" class="form-control" id="kendaraan" name="kendaraan" value="{{ $brand->kendaraan }}" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
+    <div>
+        <h1>Edit Brand</h1>
+        <form action="{{ route('admin.brands.update', $brand->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="gambar">Gambar:</label>
+                <input type="file" name="gambar" id="gambar" class="form-control">
             </div>
-        </div>
+            <div class="form-group">
+                <label for="kendaraan">Kendaraan:</label>
+                <input type="text" name="kendaraan" id="kendaraan" class="form-control" value="{{ $brand->kendaraan }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Brand</button>
+        </form>
     </div>
 

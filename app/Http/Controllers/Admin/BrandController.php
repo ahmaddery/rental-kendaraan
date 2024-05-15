@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -43,15 +42,30 @@ class BrandController extends Controller
             'kendaraan' => 'required|string|max:255',
         ]);
 
-        $gambarPath = $request->file('gambar')->store('brands');
+        $brand = new Brand();
 
-        Brand::create([
-            'gambar' => $gambarPath,
-            'kendaraan' => $request->kendaraan,
-        ]);
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/brands', $imageName);
+            $brand->gambar = $imageName;
+        }
 
-        return redirect()->route('admin.brands.index')
-                         ->with('success', 'Brand created successfully.');
+        $brand->kendaraan = $request->kendaraan;
+        $brand->save();
+
+        return redirect()->route('admin.brands.index')->with('success', 'Brand created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Brand  $brand
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Brand $brand)
+    {
+        return view('admin.brands.show', compact('brand'));
     }
 
     /**
@@ -75,21 +89,24 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand)
     {
         $request->validate([
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kendaraan' => 'required|string|max:255',
         ]);
 
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('brands');
-            Storage::delete($brand->gambar); // Delete old image
-            $brand->gambar = $gambarPath;
+            $request->validate([
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+
+            $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/brands', $imageName);
+            $brand->gambar = $imageName;
         }
 
         $brand->kendaraan = $request->kendaraan;
         $brand->save();
 
-        return redirect()->route('admin.brands.index')
-                         ->with('success', 'Brand updated successfully.');
+        return redirect()->route('admin.brands.index')->with('success', 'Brand updated successfully.');
     }
 
     /**
@@ -100,10 +117,8 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        Storage::delete($brand->gambar); // Delete image from storage
         $brand->delete();
 
-        return redirect()->route('admin.brands.index')
-                         ->with('success', 'Brand deleted successfully.');
+        return redirect()->route('admin.brands.index')->with('success', 'Brand deleted successfully.');
     }
 }
