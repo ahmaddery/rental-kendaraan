@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Menu</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+   <!-- Font Awesome CDN -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
 </head>
@@ -34,6 +37,22 @@
                 <span><i class="ti ti-layout-dashboard"></i></span>
                 <span class="hide-menu">Dashboard</span>
               </a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.types.index') }}" aria-expanded="false">
+                <span><i class="fas fa-folder"></i></span>
+                <span class="hide-menu">Type</span>
+              </a>
+            </li>
+            
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.categories.index') }}" aria-expanded="false">
+                <span><i class="fas fa-tags"></i></span> 
+                <span class="hide-menu">Category</span>
+              </a>
+            </li>
+            
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">UI COMPONENTS</span>
