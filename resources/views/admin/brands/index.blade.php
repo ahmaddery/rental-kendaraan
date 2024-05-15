@@ -1,20 +1,25 @@
-
-    <div>
+@include('admin.layouts.navbar')
+<div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="row w-100 justify-content-center">
+        <div class="col-lg-7">
         <h1>Brands</h1>
         <a href="{{ route('admin.brands.create') }}" class="btn btn-primary">Add Brand</a>
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Gambar</th>
                     <th>Kendaraan</th>
                     <th>Actions</th>
                 </tr>
+                @php
+                 $i = 1;   
+                @endphp
             </thead>
             <tbody>
                 @foreach($brands as $brand)
                     <tr>
-                        <td>{{ $brand->id }}</td>
+                        <td>{{ $i++ }}</td>
                         <td><img src="{{ asset('storage/brands/' . $brand->gambar) }}" alt="Brand Image" style="max-width: 100px;"></td>
                         <td>{{ $brand->kendaraan }}</td>
                         <td>
@@ -31,4 +36,4 @@
             </tbody>
         </table>
     </div>
-
+</div>
