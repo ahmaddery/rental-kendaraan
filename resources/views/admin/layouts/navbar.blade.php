@@ -146,10 +146,13 @@
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
                     
-                    <form method="POST" action="{{ route('logout') }}" class="mt-2">
-                        @csrf
-                        <a type="submit" class="btn btn-outline-primary mx-3 d-block">Logout</a>
-                    </form>
+                    <form method="POST" action="{{ route('logout') }}" class="mt-2" id="logout-form">
+                      @csrf
+                      <a href="#" class="btn btn-outline-primary mx-3 d-block"
+                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                          Logout
+                      </a>
+                  </form>                  
                     
                   </div>
                 </div>
