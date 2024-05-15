@@ -1,7 +1,7 @@
 @include('admin.layouts.navbar')
 
 <!-- Main content -->
-<div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+<div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 80vh;">
   <div class="row w-100 justify-content-center">
     <div class="col-lg-8 d-flex align-items-stretch">
       <div class="card w-100">

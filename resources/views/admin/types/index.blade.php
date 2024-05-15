@@ -1,10 +1,10 @@
 @include('admin.layouts.navbar')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Types</h1>
+    <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-lg-7">
+                <h2>Types</h2>
                 <a href="{{ route('admin.types.create') }}" class="btn btn-primary">Add New Type</a>
-                <table class="table table-bordered mt-3">
+                <table class="table table-bordered mt-2">
                     <thead>
                         <tr>
                             <th>ID</th>
