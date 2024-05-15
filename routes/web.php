@@ -5,6 +5,7 @@ use App\Http\Controllers\artikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -63,4 +64,15 @@ Route::get('admin/categories/{category}', [CategoryController::class, 'show'])->
 Route::get('admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
 Route::put('admin/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
 Route::delete('admin/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+});
+
+//route untuk brand dihalaman admin
+Route::middleware(['admin'])->group(function () {
+Route::get('admin/brands', [BrandController::class, 'index'])->name('admin.brands.index');
+Route::get('admin/brands/create', [BrandController::class, 'create'])->name('admin.brands.create');
+Route::post('admin/brands', [BrandController::class, 'store'])->name('admin.brands.store');
+Route::get('admin/brands/{brand}', [BrandController::class, 'show'])->name('admin.brands.show');
+Route::get('admin/brands/{brand}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
+Route::put('admin/brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
+Route::delete('admin/brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
 });
