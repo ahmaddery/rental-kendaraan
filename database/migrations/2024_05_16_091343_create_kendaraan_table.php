@@ -21,6 +21,7 @@ class CreateKendaraanTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image')->nullable();
             $table->string('warna');
+            $table->string('stok');
             $table->year('tahun');
             $table->decimal('harga', 15, 2);
             $table->text('deskripsi')->nullable();

@@ -34,6 +34,7 @@ class KendaraanController extends Controller
             'category_id' => 'required|integer',
             'image' => 'nullable|image|max:2048', // Validate that uploaded file is an image and less than 2MB
             'warna' => 'nullable|string|max:255',
+            'stok' => 'required|integer|min:0',
             'tahun' => 'nullable|integer',
             'harga' => 'nullable|numeric',
             'deskripsi' => 'nullable|string',
@@ -43,7 +44,7 @@ class KendaraanController extends Controller
         // Store the image
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = $image->getClientOriginalName(); // or use any other logic to set the image name
+            $imageName = $image->getClientOriginalName(); 
     
             // Store the image with a custom name
             $image->storeAs('public/kendaraan', $imageName);
@@ -79,6 +80,7 @@ class KendaraanController extends Controller
             'category_id' => 'required|integer',
             'image' => 'nullable|image|max:2048', // Validate that uploaded file is an image and less than 2MB
             'warna' => 'nullable|string|max:255',
+            'stok' => 'required|integer|min:0', 
             'tahun' => 'nullable|integer',
             'harga' => 'nullable|numeric',
             'deskripsi' => 'nullable|string',

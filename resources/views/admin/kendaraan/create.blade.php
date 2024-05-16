@@ -40,6 +40,11 @@
             <input type="text" name="warna" class="form-control" value="{{ old('warna') }}">
         </div>
         <div class="form-group">
+            <label for="stok">Stok:</label>
+            <input type="number" name="stok" class="form-control" value="{{ old('stok') }}">
+        </div>
+        
+        <div class="form-group">
             <label for="tahun">Tahun:</label>
             <input type="number" name="tahun" class="form-control" value="{{ old('tahun') }}">
         </div>
@@ -49,11 +54,23 @@
         </div>
         <div class="form-group">
             <label for="deskripsi">Deskripsi:</label>
-            <textarea name="deskripsi" class="form-control">{{ old('deskripsi') }}</textarea>
-        </div>
+            <textarea name="deskripsi" class="form-control ckeditor">{{ old('deskripsi') }}</textarea>
+        </div>        
         <div class="form-group">
             <label for="plat_nomor">Plat Nomor:</label>
             <input type="text" name="plat_nomor" class="form-control" value="{{ old('plat_nomor') }}">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('.ckeditor'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    

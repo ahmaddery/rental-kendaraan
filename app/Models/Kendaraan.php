@@ -18,6 +18,7 @@ class Kendaraan extends Model
         'category_id',
         'image',
         'warna',
+        'stok',
         'tahun',
         'harga',
         'deskripsi',

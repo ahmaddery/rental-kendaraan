@@ -13,8 +13,9 @@
                     <p class="card-text">Warna: {{ $kendaraan->warna }}</p>
                     <p class="card-text">Tahun: {{ $kendaraan->tahun }}</p>
                     <p class="card-text">Harga: {{ $kendaraan->harga }}</p>
-                    <p class="card-text">Deskripsi: {{ $kendaraan->deskripsi }}</p>
+                    <p class="card-text">Deskripsi: {!! $kendaraan->deskripsi !!}</p>
                     <p class="card-text">Plat Nomor: {{ $kendaraan->plat_nomor }}</p>
+                    <p class="card-text">Stok: {{ $kendaraan->stok }}</p> <!-- Tambahkan informasi stok -->
                     <p class="card-text">Gambar: <img src="{{ asset($kendaraan->image) }}" alt="Kendaraan Image" class="img-fluid" width="50" height="50"></p>
                 </div>
             </div>
