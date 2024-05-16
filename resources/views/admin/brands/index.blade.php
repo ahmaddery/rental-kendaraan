@@ -20,7 +20,7 @@
                 @foreach($brands as $brand)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td><img src="{{ asset('storage/brands/' . $brand->gambar) }}" alt="Brand Image" style="max-width: 100px;"></td>
+                        <td><img src="{{ asset('storage/brands/' . $brand->gambar) }}" alt="Brand Image" style="max-width: 35px;"></td>
                         <td>{{ $brand->kendaraan }}</td>
                         <td>
                             <a href="{{ route('admin.brands.show', $brand->id) }}" class="btn btn-info">View</a>
