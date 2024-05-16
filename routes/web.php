@@ -82,11 +82,11 @@ Route::delete('admin/brands/{brand}', [BrandController::class, 'destroy'])->name
 
 // route untuk kendaraan dihalaman admin
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin/kendaraan', [KendaraanController::class, 'index'])->name('admin.kendaraan.index');
-    Route::get('/admin/kendaraan/create', [KendaraanController::class, 'create'])->name('admin.kendaraan.create');
-    Route::post('/admin/kendaraan', [KendaraanController::class, 'store'])->name('admin.kendaraan.store');
-    Route::get('/admin/kendaraan/{id}', [KendaraanController::class, 'show'])->name('admin.kendaraan.show');
-    Route::get('/admin/kendaraan/{id}/edit', [KendaraanController::class, 'edit'])->name('admin.kendaraan.edit');
-    Route::put('/admin/kendaraan/{id}', [KendaraanController::class, 'update'])->name('admin.kendaraan.update');
-    Route::delete('/admin/kendaraan/{id}', [KendaraanController::class, 'destroy'])->name('admin.kendaraan.destroy');
+Route::get('/admin/kendaraan', [KendaraanController::class, 'index'])->name('admin.kendaraan.index');
+Route::get('/admin/kendaraan/create', [KendaraanController::class, 'create'])->name('admin.kendaraan.create');
+Route::post('/admin/kendaraan', [KendaraanController::class, 'store'])->name('admin.kendaraan.store');
+Route::get('/admin/kendaraan/{id}', [KendaraanController::class, 'show'])->name('admin.kendaraan.show');
+Route::get('/admin/kendaraan/{id}/edit', [KendaraanController::class, 'edit'])->name('admin.kendaraan.edit');
+Route::put('/admin/kendaraan/{id}', [KendaraanController::class, 'update'])->name('admin.kendaraan.update');
+Route::delete('/admin/kendaraan/{id}', [KendaraanController::class, 'destroy'])->name('admin.kendaraan.destroy');
 });
