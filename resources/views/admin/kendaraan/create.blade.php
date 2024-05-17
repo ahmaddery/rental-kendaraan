@@ -1,4 +1,4 @@
-
+@include('admin.layouts.navbar')
     <h1>Tambah Kendaraan</h1>
 
     <form action="{{ route('admin.kendaraan.store') }}" method="POST" enctype="multipart/form-data">
