@@ -16,7 +16,7 @@
                     <p class="card-text">Deskripsi: {!! $kendaraan->deskripsi !!}</p>
                     <p class="card-text">Plat Nomor: {{ $kendaraan->plat_nomor }}</p>
                     <p class="card-text">Stok: {{ $kendaraan->stok }}</p> <!-- Tambahkan informasi stok -->
-                    <p class="card-text">Gambar: <img src="{{ asset($kendaraan->image) }}" alt="Kendaraan Image" class="img-fluid" width="50" height="50"></p>
+                    <p class="card-text">Gambar: <img src="{{ asset($kendaraan->image) }}" alt="Kendaraan Image" class="img-fluid clickable-image" width="50" height="50"></p>
                 </div>
             </div>
 
@@ -24,3 +24,31 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Gambar Kendaraan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="" id="modalImage" class="img-fluid" alt="Kendaraan Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const image = document.querySelector('.clickable-image');
+        const modalImage = document.getElementById('modalImage');
+
+        image.addEventListener('click', function () {
+            modalImage.src = image.src;
+            const myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            myModal.show();
+        });
+    });
+</script>
