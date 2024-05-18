@@ -6,8 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
-
+use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\Admin\KendaraanController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,9 +27,21 @@ route::get('/home',[HomeController::class,'index']);
 Route::get('/admin/index', [HomeController::class, 'index'])->name('admin.index');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//menampilkan halaman utama 
+// Route untuk menampilkan halaman utama dengan daftar kendaraan
+Route::get('/', [UtamaController::class, 'index'])->name('index');
+Route::get('/kendaraan/{id}', [UtamaController::class, 'show'])->name('kendaraan.detail');
+Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang'])->name('tambah.keranjang');
+Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
+
+
+
+
+
+// aktifkan untuk mengubah ke view default laravel
+//Route::get('/', function () {
+  //  return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
