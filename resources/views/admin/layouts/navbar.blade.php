@@ -141,7 +141,7 @@
       <!-- End Sidebar scroll-->
     </aside>
     <!--  Sidebar End -->
-    <div class="body-wrapper">
+    <div class="body-wrapper fixed-top pb-4">
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
