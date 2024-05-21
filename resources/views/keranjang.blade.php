@@ -73,7 +73,7 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->kendaraan->nama }}</td>
-                        <td>{{ $item->quantity }}</td>
+                        <td>{{ $item->quantity }} Hari</td>
                         <td>{{ $item->kendaraan->harga }}</td>
                         <td>{{ $item->quantity * $item->kendaraan->harga }}</td>
                     </tr>
