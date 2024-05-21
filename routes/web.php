@@ -1,19 +1,22 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\KendaraanController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\artikelController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\TypeController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\UtamaController;
-use App\Http\Controllers\Admin\KendaraanController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaymentsController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RiwayatTransaksiController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
-use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\RiwayatTransaksiController;
+use App\Http\Controllers\UtamaController;
+use App\Http\Controllers\AboutController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +50,9 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/kendaraan/{id}/rating/create', [RatingController::class, 'create'])->name('rating.create');
   Route::post('/kendaraan/{id}/rating', [RatingController::class, 'store'])->name('rating.store');
 });
+
+//route product
+Route::get('/product', [ProductController::class, 'index'])->name('product');
 
 
 // aktifkan untuk mengubah ke view default laravel

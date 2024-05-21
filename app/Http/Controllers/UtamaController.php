@@ -17,8 +17,8 @@ class UtamaController extends Controller
 {
     public function index()
     {
-        $kendaraans = Kendaraan::all();
-        return view('index', ['kendaraans' => $kendaraans]);
+       
+        return view('index');
     }
 
     public function show($id)

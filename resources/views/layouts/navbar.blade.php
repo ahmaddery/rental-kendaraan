@@ -84,13 +84,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-light active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link text-light active" aria-current="page" href="{{ route('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">Product</a>
+                        <a class="nav-link text-light" href="{{ route('product') }}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="#">About</a>
+                        <a class="nav-link text-light" href="">About</a>
                     </li>
                 </ul>
                 <!-- <form class="d-flex me-3" role="search">
