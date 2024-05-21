@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RiwayatTransaksiController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\Admin\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,4 +114,11 @@ Route::get('/admin/kendaraan/{id}', [KendaraanController::class, 'show'])->name(
 Route::get('/admin/kendaraan/{id}/edit', [KendaraanController::class, 'edit'])->name('admin.kendaraan.edit');
 Route::put('/admin/kendaraan/{id}', [KendaraanController::class, 'update'])->name('admin.kendaraan.update');
 Route::delete('/admin/kendaraan/{id}', [KendaraanController::class, 'destroy'])->name('admin.kendaraan.destroy');
+});
+
+// route untuk feedback admin
+Route::middleware(['admin'])->group(function () {
+  Route::get('admin/feedbacks', [FeedbackController::class, 'index'])->name('admin.feedbacks.index');
+  Route::get('admin/feedbacks/{feedback}', [FeedbackController::class, 'show'])->name('admin.feedbacks.show');
+  Route::delete('admin/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('admin.feedbacks.destroy');
 });
