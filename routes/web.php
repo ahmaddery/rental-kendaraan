@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\KendaraanController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RiwayatTransaksiController;
+use App\Http\Controllers\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,18 @@ Route::get('/', [UtamaController::class, 'index'])->name('index');
 Route::get('/kendaraan/{id}', [UtamaController::class, 'show'])->name('kendaraan.detail');
 Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang'])->name('tambah.keranjang');
 Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
+Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');
+//Route::post('/checkout', 'UtamaController@checkout')->name('checkout');
+Route::post('/midtrans/webhook', [UtamaController::class, 'handleMidtransNotification'])->name('midtrans.webhook');
 
 
-
+//route untuk riwayat transaksi 
+Route::get('/riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->name('riwayat.transaksi');
+//route untuk rating 
+Route::group(['middleware' => ['auth']], function () {
+  Route::get('/kendaraan/{id}/rating/create', [RatingController::class, 'create'])->name('rating.create');
+  Route::post('/kendaraan/{id}/rating', [RatingController::class, 'store'])->name('rating.store');
+});
 
 
 // aktifkan untuk mengubah ke view default laravel
