@@ -43,7 +43,7 @@
                 <button type="button" class="btn btn-secondary" id="zoomInBtn">Zoom In</button>
                 <button type="button" class="btn btn-secondary" id="zoomOutBtn">Zoom Out</button>
                 <button type="button" class="btn btn-secondary" id="resetZoomBtn">Reset</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modapl">Close</button>
             </div>
         </div>
     </div>
