@@ -66,6 +66,13 @@
                 <span class="hide-menu">kendaraan</span>
               </a>
             </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.feedbacks.index') }}" aria-expanded="false">
+                <span><i class="fas fa-building"></i></span> 
+                <span class="hide-menu">Rating</span>
+              </a>
+            </li>
             
             
             <li class="nav-small-cap">
