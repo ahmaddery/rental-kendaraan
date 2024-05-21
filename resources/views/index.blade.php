@@ -121,143 +121,37 @@
         <!-- End Column 1 -->
         <div class="row">
         <!-- Start Column 1 -->
+        @if ($kendaraans->isEmpty())
+        <div class="col-md-12">
+            <p>Belum ada kendaraan.</p>
+        </div>
+         @else
+         @foreach($kendaraans as $kendaraan)
         <div class="col-12 col-md-6 col-lg-4 mb-5">
         <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
+            <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
             <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
+                <p class="card-title">{{ $kendaraan->nama }}</p>
                 <p class="card-type">ABC</p>
                 <div class="card-specs">
                     <ul>
                         <li><i class="bi bi-people"></i> 6</li>
                         <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
+                        <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
                         <li><i class="bi bi-suitcase-lg"></i> 2</li>
                     </ul>
                 </div>
-                <p class="card-price">Rp. 000.000</p>
+                <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
                 <div class="btn-card">
                     <button class="btn btn-secondary">Sewa</button>
                 </div>
             </div>
             </div>
         </div>
+        @endforeach
+        @endif
         <!-- End Column 1 -->
-        <!-- Start Column 2 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
-                <p class="card-type">ABC</p>
-                <div class="card-specs">
-                    <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
-                        <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
-                    </ul>
-                </div>
-                <p class="card-price">Rp. 000.000</p>
-                <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Column 2 -->
-        <!-- Start Column 3 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
-                <p class="card-type">ABC</p>
-                <div class="card-specs">
-                    <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
-                        <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
-                    </ul>
-                </div>
-                <p class="card-price">Rp. 000.000</p>
-                <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Column 3 -->
-        <!-- Start Column 4 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
-                <p class="card-type">ABC</p>
-                <div class="card-specs">
-                    <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
-                        <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
-                    </ul>
-                </div>
-                <p class="card-price">Rp. 000.000</p>
-                <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Column 4 -->
-        <!-- Start Column 5 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
-                <p class="card-type">ABC</p>
-                <div class="card-specs">
-                    <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
-                        <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
-                    </ul>
-                </div>
-                <p class="card-price">Rp. 000.000</p>
-                <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Column 5 -->
-        <!-- Start Column 6 -->
-        <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
-            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-title">Toyota New Rush</p>
-                <p class="card-type">ABC</p>
-                <div class="card-specs">
-                    <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
-                        <li><i class="bi bi-shield-check"></i> Insurance</li>
-                        <li><i class="bi bi-car-front"></i> MT</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
-                    </ul>
-                </div>
-                <p class="card-price">Rp. 000.000</p>
-                <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
-                </div>
-            </div>
-            </div>
-        </div>
-        <!-- End Column 6 -->
+    
         </div>
       </div>
     </div>
