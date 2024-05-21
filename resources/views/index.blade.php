@@ -132,18 +132,19 @@
             <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
             <div class="card-body">
                 <p class="card-title">{{ $kendaraan->nama }}</p>
-                <p class="card-type">ABC</p>
+                <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
                 <div class="card-specs">
                     <ul>
-                        <li><i class="bi bi-people"></i> 6</li>
+                        <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
                         <li><i class="bi bi-shield-check"></i> Insurance</li>
                         <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
-                        <li><i class="bi bi-suitcase-lg"></i> 2</li>
+                        <li><i class="bi bi-palette2"></i> {{ $kendaraan->warna }}</li>
                     </ul>
                 </div>
                 <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
                 <div class="btn-card">
-                    <button class="btn btn-secondary">Sewa</button>
+                    <button class="btn btn-secondary mb-2">Detail</button>
+                    <button class="btn btn-secondary">Tambah Keranjang</button>
                 </div>
             </div>
             </div>
