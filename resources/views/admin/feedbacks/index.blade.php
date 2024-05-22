@@ -9,7 +9,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <table class="table mt-3">
+            <table class="table table-bordered table-hover mt-3">
                 <thead>
                     <tr>
                         <th>ID</th>

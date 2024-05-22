@@ -1,4 +1,19 @@
-@include('admin.layouts.navbar')
+@extends('admin.layouts.navbar')
+@section('addCss')
+  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+@endsection
+
+@section('addJavascript')
+  <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script>
+    $(function () {
+      $("#data-table").DataTable();
+    })
+  </script>
+@endsection 
+
+@section('content')
 <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center pt-5" style="min-height: 60vh;">
     <div class="row w-100 justify-content-center">
         <div class="col-lg-7">
@@ -9,8 +24,8 @@
             @if ($kendaraans->isEmpty())
                 <p>Tidak ada kendaraan.</p>
             @else
-                <table class="table">
-                    <thead>
+                <table class="table table-bordered table-hover" id="data-table">
+                    <thead class="table-danger">
                         <tr>
                             <th>Nama</th>
                             <th>Brand</th>
@@ -26,7 +41,7 @@
                                 <td>{{ $kendaraan->brand->kendaraan }}</td>
                                 <td>{{ $kendaraan->type->typekendaraan }}</td>
                                 <td>{{ $kendaraan->category->kendaraan }}</td>
-                                <td>
+                                <td nowrap>
                                     <a href="{{ route('admin.kendaraan.show', $kendaraan->id) }}"
                                         class="btn btn-info btn-sm">Lihat</a>
                                     <a href="{{ route('admin.kendaraan.edit', $kendaraan->id) }}"
@@ -47,3 +62,4 @@
         </div>
     </div>
 </div>
+@endsection

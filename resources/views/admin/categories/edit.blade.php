@@ -11,7 +11,7 @@
                     <input type="text" class="form-control" id="kendaraan" name="kendaraan"
                         value="{{ $category->kendaraan }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary mt-2">Update</button>
             </form>
         </div>
     </div>

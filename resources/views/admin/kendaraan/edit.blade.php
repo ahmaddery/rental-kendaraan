@@ -76,7 +76,7 @@
                     <input type="text" name="plat_nomor" class="form-control"
                         value="{{ old('plat_nomor', $kendaraan->plat_nomor) }}">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary mt-2">Update</button>
             </form>
             <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
             <script>

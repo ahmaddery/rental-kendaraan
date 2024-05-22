@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
+  @yield('addCss')
 </head>
 <body>
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
@@ -63,7 +64,7 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.kendaraan.index') }}" aria-expanded="false">
                 <span><i class="fas fa-building"></i></span> 
-                <span class="hide-menu">kendaraan</span>
+                <span class="hide-menu">Kendaraan</span>
               </a>
             </li>
 
@@ -151,6 +152,8 @@
       </header>
     </div>
   </div>
+
+  @yield('content')
   <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
@@ -158,5 +161,6 @@
   <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+  @yield('addJavascript')
 </body>
 </html>

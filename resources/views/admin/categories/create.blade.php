@@ -10,7 +10,7 @@
                     <input type="text" class="form-control" id="kendaraan" name="kendaraan"
                         value="{{ old('kendaraan') }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary mt-2">Save</button>
             </form>
         </div>
     </div>
