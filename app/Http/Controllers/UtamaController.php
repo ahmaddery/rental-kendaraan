@@ -12,12 +12,16 @@ use Midtrans\Snap;
 use Midtrans\Notification;
 use Illuminate\Support\Facades\Log;
 use App\Models\Feedback;
+use Illuminate\Support\Facades\Cache;
 
 class UtamaController extends Controller
 {
     public function index()
     {
-        $kendaraans = Kendaraan::all();
+        $kendaraans = Cache::remember('random_kendaraans', now()->addMinutes(1), function () {
+            return Kendaraan::inRandomOrder()->limit(6)->get();
+        });
+    
         $feedbacks = Feedback::with('user', 'kendaraan')->get()->map(function ($feedback) {
             $feedback->formatted_date = $feedback->created_at->format('d F Y'); // Format the date
             return $feedback;
@@ -27,7 +31,6 @@ class UtamaController extends Controller
             'kendaraans' => $kendaraans,
             'feedbacks' => $feedbacks, // Pass feedbacks with formatted date to the view
         ]);
-        return view('index');
     }
 
     public function show($id)
@@ -43,12 +46,19 @@ class UtamaController extends Controller
         // Ambil semua rating yang sesuai dengan kendaraan ini
         $ratings = Feedback::where('kendaraan_id', $id)->with('user')->get();
     
+        // Periksa apakah pengguna sudah memberikan rating
+        $userHasRated = Feedback::where('user_id', Auth::id())
+            ->where('kendaraan_id', $id)
+            ->exists();
+    
         return view('detail', [
             'kendaraan' => $kendaraan,
             'payment' => $payment,
-            'ratings' => $ratings
+            'ratings' => $ratings,
+            'userHasRated' => $userHasRated
         ]);
     }
+    
     
     
 

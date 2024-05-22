@@ -49,6 +49,8 @@ Route::get('/riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->
 Route::group(['middleware' => ['auth']], function () {
   Route::get('/kendaraan/{id}/rating/create', [RatingController::class, 'create'])->name('rating.create');
   Route::post('/kendaraan/{id}/rating', [RatingController::class, 'store'])->name('rating.store');
+  Route::get('rating/{id}/edit', [RatingController::class, 'edit'])->name('rating.edit');
+Route::post('rating/{id}', [RatingController::class, 'update'])->name('rating.update');
 });
 
 //route product
