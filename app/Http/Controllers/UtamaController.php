@@ -17,7 +17,16 @@ class UtamaController extends Controller
 {
     public function index()
     {
-       
+        $kendaraans = Kendaraan::all();
+        $feedbacks = Feedback::with('user', 'kendaraan')->get()->map(function ($feedback) {
+            $feedback->formatted_date = $feedback->created_at->format('d F Y'); // Format the date
+            return $feedback;
+        });
+    
+        return view('index', [
+            'kendaraans' => $kendaraans,
+            'feedbacks' => $feedbacks, // Pass feedbacks with formatted date to the view
+        ]);
         return view('index');
     }
 

@@ -48,7 +48,59 @@
             </p>
           </div>
         </div>
-        <!-- End Column 1 --> 
+          
+      @if (session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
+  @if (session('error'))
+      <div class="alert alert-danger">
+          {{ session('error') }}
+      </div>
+  @endif
+
+      <!-- End Column 1 -->
+      <div class="row">
+      <!-- Start Column 1 -->
+      @if ($kendaraans->isEmpty())
+      <div class="col-md-12">
+          <p>Belum ada kendaraan.</p>
+      </div>
+       @else
+       @foreach($kendaraans as $kendaraan)
+      <div class="col-12 col-md-6 col-lg-4 mb-5">
+      <div class="card card-product">
+          <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
+          <div class="card-body">
+              <p class="card-title">{{ $kendaraan->nama }}</p>
+              <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+              <div class="card-specs">
+                  <ul>
+                      <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
+                      <li><i class="bi bi-shield-check"></i> Insurance</li>
+                      <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                      <li><i class="bi bi-palette2"></i> {{ $kendaraan->warna }}</li>
+                  </ul>
+              </div>
+              <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
+              <div class="btn-card">
+                  <button>
+                  <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary">Detail</a>
+
+                  </button>
+                  <button>
+                      
+                      <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
+
+                  </button>
+              </div>
+          </div>
+          </div>
+      </div>
+      @endforeach
+      @endif
+      <!-- End Column 1 -->
       </div>
     </div>
     <!-- End Product Preview -->
@@ -72,114 +124,63 @@
             </p>
           </div>
         </div>
-        <!-- End Column 1 -->
-        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 1</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
+   <!-- Ensure you include Font Awesome CSS in your <head> section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Carousel -->
+<div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
+      <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+        <div class="row justify-content-center">
+          @foreach ($feedbackChunk as $feedback)
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="review-profile d-flex align-items-center">
+                  <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                  <div class="review-profile-info">
+                    <h5 class="card-title">{{ $feedback->kendaraan->nama }}</h5>
+                    <h6 class="text-muted">{{ $feedback->user->name }} Pada {{ $feedback->formatted_date }}</h6>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 2</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
+                <p class="card-text mt-3">"{{ $feedback->komentar }}"</p>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p class="mb-0"><strong>Rating:</strong> 
+                      @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $feedback->rating)
+                          <i class="fas fa-star text-warning"></i>
+                        @else
+                          <i class="far fa-star text-warning"></i>
+                        @endif
+                      @endfor
+                    </p>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 3</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 4</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 5</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="review-profile">
-                        <img src="{{asset('frontend/images/product/car-01.jpg')}}" alt="">
-                        <div class="review-profile-info">
-                          <h5 class="card-title">Card title 6</h5>
-                          <h6>Toyota New Rush</h6>
-                        </div>
-                      </div>
-                      <p class="card-text">"Some quick example text to build on the card title and make up the bulk of the card's content."</p>
-                    </div>
+                  <div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          @endforeach
         </div>
       </div>
+      @endforeach
     </div>
-    <!-- End Customer Review -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- End Customer Review -->
+
+  
     
     <!-- Start About -->
     <div class="section">
