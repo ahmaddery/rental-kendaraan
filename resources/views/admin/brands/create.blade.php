@@ -13,7 +13,7 @@
                 <label for="kendaraan">Kendaraan:</label>
                 <input type="text" name="kendaraan" id="kendaraan" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Add Brand</button>
+            <button type="submit" class="btn btn-primary mt-2">Add Brand</button>
         </form>
     </div>
 </div>

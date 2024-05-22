@@ -1,18 +1,32 @@
-@include('admin.layouts.navbar')
+@extends('admin.layouts.navbar')
+@section('addCss')
+  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+@endsection
 
+@section('addJavascript')
+  <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script>
+    $(function () {
+      $("#data-table").DataTable();
+    })
+  </script>
+@endsection 
+
+@section('content')
 <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 75vh;">
     <div class="row w-100 justify-content-center">
         <div class="col-lg-7">
             <h2>Types</h2>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTypeModal">
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#createTypeModal">
                 Add New Type
             </button>
-            <table class="table table-bordered mt-2">
-                <thead>
+            <table class="table table-bordered table-hover mt-2" id="data-table">
+                <thead class="table-danger">
                     <tr>
                         <th>ID</th>
                         <th>Jenis Kendaraan</th>
-                        <th>Actions</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +34,7 @@
                         <tr>
                             <td>{{ $type->id }}</td>
                             <td>{{ $type->typekendaraan }}</td>
-                            <td>
+                            <td class="text-center">
                                 <button type="button" class="btn btn-warning edit-btn" data-toggle="modal" data-target="#editTypeModal" data-id="{{ $type->id }}" data-typekendaraan="{{ $type->typekendaraan }}">Edit</button>
                                 <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
@@ -35,6 +49,7 @@
         </div>
     </div>
 </div>
+@endsection
 
 <!-- Create Type Modal -->
 <div class="modal fade" id="createTypeModal" tabindex="-1" role="dialog" aria-labelledby="createTypeModalLabel" aria-hidden="true">

@@ -14,7 +14,7 @@
                 <label for="kendaraan">Kendaraan:</label>
                 <input type="text" name="kendaraan" id="kendaraan" class="form-control" value="{{ $brand->kendaraan }}">
             </div>
-            <button type="submit" class="btn btn-primary">Update Brand</button>
+            <button type="submit" class="btn btn-primary mt-2">Update Brand</button>
         </form>
     </div>
 </div>
