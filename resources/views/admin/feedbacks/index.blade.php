@@ -27,7 +27,15 @@
                             <td>{{ $feedback->user->name }}</td>
                             <td>{{ $feedback->kendaraan->nama }}</td>
                             <td>{{ $feedback->komentar }}</td>
-                            <td>{{ $feedback->rating }}</td>
+                            <td>
+                                @php
+                                    $stars = '';
+                                    for ($i = 0; $i < $feedback->rating; $i++) {
+                                        $stars .= '<span style="color: gold;">&#9733;</span>'; // Simbol bintang unicode dengan warna emas
+                                    }
+                                @endphp
+                                {!! $stars !!}
+                            </td>
                             <td>
                                 <form action="{{ route('admin.feedbacks.destroy', $feedback) }}" method="POST"
                                     style="display:inline-block;">
