@@ -167,25 +167,28 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle"></i
-                            <span>Account</span>  
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                            @if (Route::has('login'))
-                                @auth
-                                    <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                                    <li><a href="{{ route('keranjang') }}" class="dropdown-item"><i class="bi bi-cart"></i> Keranjang</a></li>
-                                    <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
-                                @else
-                                    <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
-                                    @if (Route::has('register'))
-                                        <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
-                                    @endif
-                                @endauth
-                            @endif
-                        </ul>
-                    </div>
-                </div>
+                        <i class="bi bi-person-circle"></i>
+                        @auth
+                            <span>Hi, {{ Str::limit(Auth::user()->name, 5, '') }}</span>
+                        @else
+                            <span>Account</span>
+                        @endauth
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        @if (Route::has('login'))
+                            @auth
+                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                                <li><a href="{{ route('keranjang') }}" class="dropdown-item"><i class="bi bi-cart"></i> Keranjang</a></li>
+                                <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
+                            @else
+                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                                @if (Route::has('register'))
+                                    <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
+                                @endif
+                            @endauth
+                        @endif
+                    </ul>
+                </div>                
             </div>
         </nav>
         <!-- End Navbar -->
@@ -193,7 +196,32 @@
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-whSqaZ6MkaTbYZvI8dU5bz+Qbo2U5p7XWfy5+OU0WRTFS+2zI5FSG9E0x4GsPstg" crossorigin="anonymous"></script>
-    </body>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Tampilkan animasi loading saat halaman dimuat
+    Swal.fire({
+        title: "",
+        text: "Memuat data...",
+        imageUrl: "https://media1.tenor.com/m/6JOtyira0KIAAAAd/toshiyuki-toshiyuki-doma.gif",
+       // {{ asset('frontend/loading.gif') }}
+        imageAlt: "Loading animation",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+    });
+
+    // Misalkan di sini Anda memuat data Anda. Setelah data dimuat, sembunyikan animasi loading.
+    window.addEventListener('load', function() {
+        // Simulasi waktu pemuatan data (Anda dapat menggantinya dengan kode pengambilan data aktual)
+        setTimeout(function() {
+            // Sembunyikan animasi loading
+            Swal.close();
+        }, 3000); // Contoh: 3000 milidetik (3 detik), ganti dengan waktu yang sesuai dengan kebutuhan Anda.
+    });
+</script>
+
+        </body>
     
     </html>
     

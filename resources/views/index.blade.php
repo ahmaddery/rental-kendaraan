@@ -49,16 +49,33 @@
           </div>
         </div>
           
-      @if (session('success'))
-      <div class="alert alert-success">
-          {{ session('success') }}
-      </div>
-  @endif
+        <body>
+          @if (session('success'))
+              <script>
+                  Swal.fire({
+                      toast: true,
+                      position: 'top-end',
+                      icon: 'success',
+                      title: '{{ session('success') }}',
+                      showConfirmButton: false,
+                      timer: 6000,
+                      timerProgressBar: true,
+                  });
+              </script>
+          @endif
   @if (session('error'))
-      <div class="alert alert-danger">
-          {{ session('error') }}
-      </div>
-  @endif
+  <script>
+      Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',
+          title: '{{ session('error') }}',
+          showConfirmButton: false,
+          timer: 6000,
+          timerProgressBar: true,
+      });
+  </script>
+@endif
 
   <div class="row">
     @if ($kendaraans->isEmpty())

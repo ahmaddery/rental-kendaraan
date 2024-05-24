@@ -162,5 +162,28 @@
   <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
   @yield('addJavascript')
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      // Tampilkan animasi loading saat halaman dimuat
+      Swal.fire({
+          title: "",
+          text: "Memuat data...",
+          imageUrl: "https://media1.tenor.com/m/6JOtyira0KIAAAAd/toshiyuki-toshiyuki-doma.gif",
+         // {{ asset('frontend/loading.gif') }}
+          imageAlt: "Loading animation",
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false
+      });
+  
+      // Misalkan di sini Anda memuat data Anda. Setelah data dimuat, sembunyikan animasi loading.
+      window.addEventListener('load', function() {
+          // Simulasi waktu pemuatan data (Anda dapat menggantinya dengan kode pengambilan data aktual)
+          setTimeout(function() {
+              // Sembunyikan animasi loading
+              Swal.close();
+          }, 3000); // Contoh: 3000 milidetik (3 detik), ganti dengan waktu yang sesuai dengan kebutuhan Anda.
+      });
+  </script>
 </body>
 </html>

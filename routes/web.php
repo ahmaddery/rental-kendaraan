@@ -31,8 +31,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 route::get('/home',[HomeController::class,'index']);
+Route::middleware(['admin'])->group(function () {
 Route::get('/admin/index', [HomeController::class, 'index'])->name('admin.index');
-
+});
 
 //menampilkan halaman utama 
 // Route untuk menampilkan halaman utama dengan daftar kendaraan
