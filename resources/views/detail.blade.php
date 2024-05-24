@@ -1,3 +1,5 @@
+
+@include('layouts.navbar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,47 @@
     <title>Detail Kendaraan</title>
     <!-- Link Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        .card {
+            border: none;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .card-img-top {
+            transition: transform 0.3s;
+        }
+        .card-img-top:hover {
+            transform: scale(1.05);
+        }
+        .btn {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .text-muted {
+            color: #6c757d;
+        }
+        .modal-content {
+            background-color: #f8f9fa;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Detail Kendaraan</h1>
+        <h1 class="text-center mb-5">Detail Kendaraan</h1>
         <div class="card">
             <img src="{{ asset($kendaraan->image) }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
             <div class="card-body">
@@ -32,53 +70,52 @@
                 @endif
             </div>
         </div>
-
-
-<!-- Bagian Rating dan Komentar -->
-<div class="mt-5">
-    <h2>Rating dan Komentar</h2>
-    @if($ratings->isEmpty())
-        <p>Belum ada rating dan komentar.</p>
-    @else
-        @foreach($ratings as $rating)
-            <div class="card mb-3">
-                @if($rating->user_id == Auth::id())
-                    <!-- Edit Button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRatingModal" data-rating="{{ $rating->rating }}" data-komentar="{{ $rating->komentar }}" data-url="{{ route('rating.update', ['id' => $rating->kendaraan_id]) }}">
-                        Edit
-                    </button>
-                @endif
-                <!-- Display Rating -->
-                <div class="rating-display" style="position: absolute; top: 10px; right: 10px; margin: 0;">
-                    @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <= $rating->rating)
-                            <i class="fas fa-star"></i> <!-- Filled star -->
-                        @else
-                            <i class="far fa-star"></i> <!-- Empty star -->
+        <!-- Bagian Rating dan Komentar -->
+        <div class="mt-5">
+            <h2 class="text-center mb-4">Rating dan Komentar</h2>
+            @if($ratings->isEmpty())
+                <p class="text-center">Belum ada rating dan komentar.</p>
+            @else
+                @foreach($ratings as $rating)
+                    <div class="card mb-3">
+                        @if($rating->user_id == Auth::id())
+                            <!-- Edit Button -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRatingModal" data-rating="{{ $rating->rating }}" data-komentar="{{ $rating->komentar }}" data-url="{{ route('rating.update', ['id' => $rating->kendaraan_id]) }}">
+                                Edit
+                            </button>
                         @endif
-                    @endfor
-                </div>
-                <!-- Display Edit Count -->
-                <p style="position: absolute; bottom: 0; right: 0; margin: 0 10px 10px 0;">
-                    Total Komentar di edit: {{ Cache::get('total_edited_count_' . $rating->kendaraan_id, 0) }}
-                </p>
-                <div class="card-body">
-                    <h5 class="card-title">Rating:
-                        @for ($i = 1; $i <= 5; $i++)
-                            @if ($i <= $rating->rating)
-                                <i class="fas fa-star"></i> <!-- Filled star -->
-                            @else
-                                <i class="far fa-star"></i> <!-- Empty star -->
-                            @endif
-                        @endfor
-                    </h5>
-                    <p class="card-text">{{ $rating->komentar }}</p>
-                    <p class="card-text"><small class="text-muted">Oleh: {{ $rating->user->name }} pada {{ $rating->created_at->format('d M Y') }}</small></p>
-                </div>
-            </div>
-        @endforeach
-    @endif
-</div>
+                        <!-- Display Rating -->
+                        <div class="rating-display" style="position: absolute; top: 10px; right: 10px; margin: 0;">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $rating->rating)
+                                    <i class="fas fa-star"></i> <!-- Filled star -->
+                                @else
+                                    <i class="far fa-star"></i> <!-- Empty star -->
+                                @endif
+                            @endfor
+                        </div>
+                        <!-- Display Edit Count -->
+                        <p style="position: absolute; bottom: 0; right: 0; margin: 0 10px 10px 0;">
+                            Total Komentar di edit: {{ Cache::get('total_edited_count_' . $rating->kendaraan_id, 0) }}
+                        </p>
+                        <div class="card-body">
+                            <h5 class="card-title">Rating:
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $rating->rating)
+                                        <i class="fas fa-star"></i> <!-- Filled star -->
+                                    @else
+                                        <i class="far fa-star"></i> <!-- Empty star -->
+                                    @endif
+                                @endfor
+                            </h5>
+                            <p class="card-text">{{ $rating->komentar }}</p>
+                            <p class="card-text"><small class="text-muted">Oleh: {{ $rating->user->name }} pada {{ $rating->created_at->format('d M Y') }}</small></p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
 
     <!-- Rating Modal -->
     <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">

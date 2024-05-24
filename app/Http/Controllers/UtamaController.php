@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\Cache;
 
+
 class UtamaController extends Controller
 {
     public function index()
@@ -142,6 +143,13 @@ class UtamaController extends Controller
                     'gross_amount' => $total_amount, // Total harga dari semua barang di keranjang
                 ],
                 'item_details' => $items,
+                'customer_details' => [
+                    'first_name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                ],
+                'callbacks' => [
+                    'finish' => route('payment.redirect'),
+                ],
             ];
     
             // Buat transaksi baru di Midtrans
@@ -174,8 +182,9 @@ class UtamaController extends Controller
         }
     }
     
+    
 
-    public function handleMidtransNotification(Request $request)
+    public function handleMidtransNotification(Request $request)    ///  untuk mengatur  transaksi apakah berhasil atau tidak
     {
         // Set konfigurasi Midtrans
         Config::$serverKey = 'SB-Mid-server-Sz3uHCan9L0Lv7TkT6S4gku2'; // Ganti dengan server key Anda
@@ -269,6 +278,58 @@ class UtamaController extends Controller
             return response('Unauthenticated', 401);
         }
     }
+
+
+public function handlePaymentRedirect(Request $request)
+{
+    $orderId = $request->input('order_id');
+    $statusCode = $request->input('status_code');
+
+    // Retrieve payment based on order_id
+    $payment = Payment::where('order_id', $orderId)->first();
+
+    if ($payment) {
+        // Update the payment status if necessary
+        if ($statusCode == '200' && $payment->transaction_status != 'settlement') {
+            $payment->transaction_status = 'settlement';
+            $payment->save();
+
+            // Log successful payment
+            Log::info("Payment successful for Order ID: $orderId");
+        } else {
+            // Handle other status codes if necessary
+            Log::info("Payment redirect received with status code: $statusCode for Order ID: $orderId");
+        }
+
+        // Calculate duration
+        $duration = 0;
+        $kendaraanIds = explode(',', $payment->kendaraan_id);
+        $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
+        foreach ($kendaraans as $kendaraan) {
+            $duration += floor($payment->gross_amount / $kendaraan->harga);
+        }
+
+        // Check if vehicle has been taken
+        $isVehicleTaken = // Implement logic to check if vehicle has been taken
+
+        // Retrieve related transactions
+        $user_id = $payment->user_id;
+        $riwayatTransaksi = Payment::where('user_id', $user_id)->orderBy('purchase_date', 'desc')->get();
+
+        // Pass payment, history, duration, and isVehicleTaken to the view
+        return view('payment_success', [
+            'payment' => $payment,
+            'riwayatTransaksi' => $riwayatTransaksi,
+            'duration' => $duration,
+            'isVehicleTaken' => $isVehicleTaken
+        ]);
+    } else {
+        // Handle case where payment is not found
+        Log::error("Payment not found for Order ID: $orderId");
+        return redirect()->route('index')->with('error', 'Pembayaran tidak ditemukan.');
+    }
+}
+
     
         private function isValidSignature(Request $request)
     {

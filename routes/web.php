@@ -15,7 +15,9 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RiwayatTransaksiController;
 use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PengambilanPengembalianController;
 use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -41,6 +43,8 @@ Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keran
 Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');
 //Route::post('/checkout', 'UtamaController@checkout')->name('checkout');
 Route::post('/midtrans/webhook', [UtamaController::class, 'handleMidtransNotification'])->name('midtrans.webhook');
+Route::get('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect'])->name('payment.redirect');
+Route::post('/pengambilan/store', [PengambilanPengembalianController::class, 'store'])->name('pengambilan.store');
 
 
 //route untuk riwayat transaksi 

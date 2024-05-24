@@ -19,7 +19,7 @@ body {
 /* body::-webkit-scrollbar {
     display: none;
 } */
-.navbar {
+/*.navbar {
     background-color: var(--dot);
     padding: 1rem 6rem;
 }
@@ -29,7 +29,7 @@ body {
 }
 .navbar-nav .nav-link.active {
     color: var(--text);
-}
+} */
 .reg-log .btn {
     width: 6rem;
 }

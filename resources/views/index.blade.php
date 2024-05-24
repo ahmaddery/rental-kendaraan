@@ -200,5 +200,7 @@
         </div>
       </div>
     </div>
+    </div>
+  </div>
     <!-- End About -->
     @include('layouts.footer')
