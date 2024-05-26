@@ -40,7 +40,7 @@ Route::get('/admin/index', [HomeController::class, 'index'])->name('admin.index'
 Route::get('/', [UtamaController::class, 'index'])->name('index');
 Route::get('/kendaraan/{id}', [UtamaController::class, 'show'])->name('kendaraan.detail');
 Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang'])->name('tambah.keranjang');
-Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
+//Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
 Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');
 //Route::post('/checkout', 'UtamaController@checkout')->name('checkout');
 Route::post('/midtrans/webhook', [UtamaController::class, 'handleMidtransNotification'])->name('midtrans.webhook');

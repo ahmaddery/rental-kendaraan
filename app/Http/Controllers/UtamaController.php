@@ -28,11 +28,21 @@ class UtamaController extends Controller
             return $feedback;
         });
     
+        if (Auth::check()) {
+            $user_id = Auth::id();
+            $keranjang = Keranjang::where('user_id', $user_id)->get();
+        } else {
+            $keranjang = null; // Jika pengguna tidak terautentikasi, keranjang akan null
+        }
+    
         return view('index', [
             'kendaraans' => $kendaraans,
             'feedbacks' => $feedbacks, // Pass feedbacks with formatted date to the view
+            'keranjang' => $keranjang, // Pass keranjang data to the view
         ]);
     }
+    
+    
 
     public function show($id)
     {
@@ -73,7 +83,7 @@ class UtamaController extends Controller
                 // Periksa apakah keranjang sudah memiliki kendaraan_id lainnya
                 $keranjangLain = Keranjang::where('user_id', $user_id)->first();
                 if ($keranjangLain) {
-                    return redirect()->route('keranjang')->with('error', 'Silakan selesaikan pesanan Anda atau hapus keranjang untuk memilih kendaraan lainnya.');
+                    return redirect()->route('index')->with('error', 'Silakan selesaikan pesanan Anda atau hapus keranjang untuk memilih kendaraan lainnya.');
                 } else {
                     Keranjang::create([
                         'user_id' => $user_id,

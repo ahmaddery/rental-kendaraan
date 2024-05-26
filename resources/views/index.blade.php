@@ -1,121 +1,156 @@
 @include('layouts.navbar')
 
 
-    <!-- Start Hero -->
-    <div class="section hero">
-      <div class="container">
-        <div class="row justify-content-between">
-          <!-- <div class="col-lg-5">
-            
-          </div> -->
-          <div class="hero-content col-lg-12">
-            <div class="row">
-              <div class="hero-top col-lg-6">
-                <p class="web-title mb-0">ABCDE</p>
-                <p class="web-sub">SEWA MOBIL</p>
-              </div>
-              <div class="hero-top hero-top-right col-lg-6">
-              <p class="web-tagline mt-3">Your Best Transportation Partner</p>
-              <p class="web-tagline-desc">Layanan sewa mobil kami menggunakan armada mobil keluaran terbaru, dengan kondisi terawat untuk disewakan kepada Anda dengan harga yang bersahabat.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-              <div class="hero-bot float-end col-lg-12">
-                <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="img-fluid" />
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Hero -->
-
-    <!-- Start Product Preview -->
-    <div class="section">
-      <div class="container">
+   <!-- Start Hero -->
+<div class="section hero">
+  <div class="container">
+    <div class="row justify-content-between">
+      <!-- Hero Content -->
+      <div class="hero-content col-lg-12">
         <div class="row">
-          <!-- Start Column 1 -->
-          <div class="dot-title">
-            <i class="bi bi-circle-fill"></i>
-            <h5>Produk</h5>
+          <div class="hero-top col-lg-6">
+            <p class="web-title mb-0">ABCDE</p>
+            <p class="web-sub">SEWA MOBIL</p>
           </div>
-          <div class="subtitle col-lg-7">
-            <h2 class="mb-4 section-title">Sewa mobil terpercaya dengan harga bersahabat</h2>
-          </div>
-          <div class="subtitle-btn col-lg-5">
-            <p class="mb-4">
-                <p><a href="{{ route('product') }}" class="btn btn-secondary">Explore All</a></p>
-            </p>
+          <div class="hero-top hero-top-right col-lg-6">
+            <p class="web-tagline mt-3">Your Best Transportation Partner</p>
+            <p class="web-tagline-desc">Layanan sewa mobil kami menggunakan armada mobil keluaran terbaru, dengan kondisi terawat untuk disewakan kepada Anda dengan harga yang bersahabat.</p>
           </div>
         </div>
-          
-        <body>
-          @if (session('success'))
-              <script>
-                  Swal.fire({
-                      toast: true,
-                      position: 'top-end',
-                      icon: 'success',
-                      title: '{{ session('success') }}',
-                      showConfirmButton: false,
-                      timer: 6000,
-                      timerProgressBar: true,
-                  });
-              </script>
-          @endif
-  @if (session('error'))
-  <script>
-      Swal.fire({
-          toast: true,
-          position: 'top-end',
-          icon: 'error',
-          title: '{{ session('error') }}',
-          showConfirmButton: false,
-          timer: 6000,
-          timerProgressBar: true,
-      });
-  </script>
-@endif
-
-  <div class="row">
-    @if ($kendaraans->isEmpty())
-        <div class="col-md-12">
-            <p>Belum ada kendaraan.</p>
+      </div>
+      <!-- Hero Carousel -->
+      <div id="heroCarousel" class="carousel slide col-lg-12" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 1">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 2">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 3">
+          </div>
         </div>
-    @else
-        @foreach($kendaraans as $kendaraan)
-            <div class="col-12 col-md-6 col-lg-4 mb-5">
-                <div class="card card-product">
-                    <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
-                    <div class="card-body">
-                        <p class="card-title">{{ $kendaraan->nama }}</p>
-                        <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
-                        <div class="card-specs">
-                            <ul>
-                                <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
-                                <li><i class="bi bi-shield-check"></i> Insurance</li>
-                                <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
-                                <li><i class="bi bi-palette2"></i> {{ $kendaraan->warna }}</li>
-                            </ul>
-                        </div>
-                        <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-                        <div class="btn-card">
-                            <button>
-                                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary">Detail</a>
-                            </button>
-                            <button>
-                                <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    @endif
-</div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
-    <!-- End Product Preview -->
+  </div>
+</div>
+<!-- End Hero -->
+
+
+<!-- Start Product Preview -->
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="dot-title">
+        <i class="bi bi-circle-fill"></i>
+        <h5>Produk</h5>
+      </div>
+      <div class="subtitle col-lg-7">
+        <h2 class="mb-4 section-title">Sewa mobil terpercaya dengan harga bersahabat</h2>
+      </div>
+      <div class="subtitle-btn col-lg-5">
+        <p class="mb-4">
+          <a href="{{ route('product') }}" class="btn btn-secondary">Explore All</a>
+        </p>
+      </div>
+    </div>
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 6000,
+            timerProgressBar: true,
+        });
+    </script>
+@endif
+@if (session('error'))
+<script>
+Swal.fire({
+toast: true,
+position: 'top-end',
+icon: 'error',
+title: '{{ session('error') }}',
+showConfirmButton: false,
+timer: 6000,
+timerProgressBar: true,
+});
+</script>
+@endif
+    <div class="row">
+      @if ($kendaraans->isEmpty())
+      <div class="col-md-12">
+        <p>Belum ada kendaraan.</p>
+      </div>
+      @else
+      @foreach($kendaraans as $kendaraan)
+      <div class="col-12 col-md-6 col-lg-4 mb-5">
+        <div class="card card-product">
+          <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
+          <div class="card-body">
+            <p class="card-title">{{ $kendaraan->nama }}</p>
+            <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+            <div class="card-specs">
+              <ul>
+                <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
+                <li><i class="bi bi-shield-check"></i> Insurance</li>
+                <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                <li><i class="bi bi-palette2"></i> {{ $kendaraan->warna }}</li>
+              </ul>
+            </div>
+            <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
+            <div class="btn-card">
+              <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary">Detail</a>
+              <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endforeach
+      @endif
+    </div>
+  </div>
+</div>
+<!-- End Product Preview -->
+<script>
+  // Fungsi untuk menyimpan URL gambar ke dalam localStorage
+function cacheImage(imageUrl) {
+    localStorage.setItem('cachedImage', imageUrl);
+}
+
+// Fungsi untuk memuat gambar dari cache jika tersedia
+function loadImageFromCache() {
+    return localStorage.getItem('cachedImage');
+}
+
+// Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat gambar dimuat
+cacheImage('url_gambar_anda');
+
+// Di halaman yang sesuai, panggil fungsi untuk memuat gambar dari cache saat halaman diperbarui
+window.onload = function() {
+    var cachedImageUrl = loadImageFromCache();
+    if (cachedImageUrl) {
+        // Gunakan URL gambar dari cache
+        document.getElementById('gambar').src = cachedImageUrl;
+    } else {
+        // Jika tidak ada di cache, muat gambar seperti biasa
+        document.getElementById('gambar').src = 'url_gambar_default';
+    }
+};
+
+</script>
     
 
     <!-- Start Customer Review -->
@@ -220,4 +255,5 @@
     </div>
   </div>
     <!-- End About -->
+    @include('layouts.modal')
     @include('layouts.footer')

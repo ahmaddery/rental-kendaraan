@@ -4,7 +4,8 @@
     <div class="row align-items-center">
       <div class="col-1">
         <div class="footer-logo">
-          <img src="logo.png" alt="Footer Logo">
+<img src="" alt="Footer Logo">
+
         </div>
       </div>
       <div class="col-7">
@@ -36,35 +37,45 @@
 </div>
 <!-- End Footer -->
 
-<!-- Start Modal -->
-<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="background-color: rgba(0, 0, 0, 0.7); box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); color: white;">
-      <div class="modal-header" style="background-color: #212529; border-bottom: none;">
-        <h5 class="modal-title" id="contactModalLabel">Hubungi Kami</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="contactForm">
-          <div class="mb-3">
-            <label for="name" class="form-label">Nama <i class="bi bi-person-fill"></i></label>
-            <input type="text" class="form-control" id="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email <i class="bi bi-envelope-fill"></i></label>
-            <input type="email" class="form-control" id="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Pesan <i class="bi bi-chat-left-fill"></i></label>
-            <textarea class="form-control" id="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-secondary">Kirim Pesan</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Modal -->
+<!-- Script JavaScript untuk caching gambar -->
+<script>
+  // Fungsi untuk menyimpan URL gambar ke dalam localStorage
+  function cacheImages(imageUrls) {
+      imageUrls.forEach(function(imageUrl) {
+          localStorage.setItem('cachedImage_' + imageUrl.id, imageUrl.url);
+      });
+  }
+
+  // Fungsi untuk memuat gambar dari cache jika tersedia
+  function loadImageFromCache(imageId) {
+      return localStorage.getItem('cachedImage_' + imageId);
+  }
+
+  // Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat halaman dimuat
+  window.onload = function() {
+      // Ambil semua URL gambar dari localStorage
+      var cachedImageUrls = [];
+      @foreach($kendaraans as $kendaraan)
+          cachedImageUrls.push({ id: {{ $kendaraan->id }}, url: '{{ $kendaraan->image }}' });
+      @endforeach
+
+      // Simpan semua URL gambar ke dalam localStorage
+      cacheImages(cachedImageUrls);
+
+      // Muat gambar dari cache jika tersedia saat halaman dimuat
+      var cachedImageUrl;
+      for (var i = 0; i < cachedImageUrls.length; i++) {
+          cachedImageUrl = loadImageFromCache(cachedImageUrls[i].id);
+          if (cachedImageUrl) {
+              document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrl;
+          } else {
+              // Jika tidak ada di cache, muat gambar dari database
+              document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrls[i].url;
+          }
+      }
+  };
+</script>
+
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
