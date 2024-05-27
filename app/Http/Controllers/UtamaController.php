@@ -103,16 +103,16 @@ class UtamaController extends Controller
     }
     
 
-    public function showKeranjang()
-    {
-        if (Auth::check()) {
-            $user_id = Auth::id();
-            $keranjang = Keranjang::where('user_id', $user_id)->get();
-            return view('keranjang', ['keranjang' => $keranjang]);
-        } else {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk melihat keranjang.');
-        }
-    }
+   // public function showKeranjang()
+    //{
+     //   if (Auth::check()) {
+       //     $user_id = Auth::id();
+      //      $keranjang = Keranjang::where('user_id', $user_id)->get();
+     //       return view('keranjang', ['keranjang' => $keranjang]);
+      //  } else {
+       //     return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk melihat keranjang.');
+      //  }
+   // }
 
     public function checkout()
     {

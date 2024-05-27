@@ -182,7 +182,7 @@
           setTimeout(function() {
               // Sembunyikan animasi loading
               Swal.close();
-          }, 3000); // Contoh: 3000 milidetik (3 detik), ganti dengan waktu yang sesuai dengan kebutuhan Anda.
+          }, 500); // Contoh: 3000 milidetik (3 detik), ganti dengan waktu yang sesuai dengan kebutuhan Anda.
       });
   </script>
 </body>
