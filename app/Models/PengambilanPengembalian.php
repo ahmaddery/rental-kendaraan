@@ -14,6 +14,7 @@ class PengambilanPengembalian extends Model
     protected $fillable = [
         'user_id',
         'kendaraan_id',
+        'order_id',
         'tanggal_pengambilan',
         'tanggal_pengembalian'
     ];

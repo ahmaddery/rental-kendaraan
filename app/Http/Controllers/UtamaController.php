@@ -114,90 +114,106 @@ class UtamaController extends Controller
       //  }
    // }
 
-    public function checkout()
-    {
-        if (Auth::check()) {
-            $user_id = Auth::id();
-            $keranjang = Keranjang::where('user_id', $user_id)->get();
-            
-            // Inisialisasi konfigurasi Midtrans
-            Config::$serverKey = 'SB-Mid-server-Sz3uHCan9L0Lv7TkT6S4gku2'; // Ganti dengan server key Anda
-            Config::$isProduction = false;
-            Config::$isSanitized = true;
-            Config::$is3ds = true;
-    
-            // Hitung total harga dari semua barang di keranjang
-            $total_amount = 0;
-            foreach ($keranjang as $item) {
-                $total_amount += $item->quantity * $item->kendaraan->harga;
-            }
-    
-            // Buat array item untuk transaksi
-            $items = [];
-            foreach ($keranjang as $item) {
-                $items[] = [
-                    'id' => $item->kendaraan->id,
-                    'price' => $item->kendaraan->harga,
-                    'quantity' => $item->quantity,
-                    'name' => $item->kendaraan->nama,
-                ];
-            }
-    
-            // Ambil kendaraan_id dari entri di tabel keranjang
-            $kendaraan_ids = $keranjang->pluck('kendaraan_id')->toArray();
-    
-            // Buat transaksi menggunakan Midtrans
-            $transaction_params = [
-                'transaction_details' => [
-                    'order_id' => uniqid(),
-                    'gross_amount' => $total_amount, // Total harga dari semua barang di keranjang
-                ],
-                'item_details' => $items,
-                'customer_details' => [
-                    'first_name' => Auth::user()->name,
-                    'email' => Auth::user()->email,
-                ],
-                'callbacks' => [
-                    'finish' => route('payment.redirect'),
-                ],
-            ];
-    
-            // Buat transaksi baru di Midtrans
-            $snapToken = Snap::getSnapToken($transaction_params);
-    
-            // Buat entri pembayaran dalam tabel Payment
-            $payment = Payment::create([
-                'user_id' => $user_id,
-                'kendaraan_id' => implode(',', $kendaraan_ids),
-                'order_id' => $transaction_params['transaction_details']['order_id'],
-                'purchase_date' => now(),
-                'transaction_time' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'transaction_status' => 'pending', // Default status
-                'transaction_id' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'status_message' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'status_code' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'signature_key' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'settlement_time' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-                'payment_type' => 'gopay', // Default payment type
-                'gross_amount' => $total_amount,
-                'fraud_status' => 'accept', // Default fraud status
-                'currency' => 'IDR', // Default currency
-                'merchant_id' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
-            ]);
-    
-            // Redirect ke halaman pembayaran Midtrans dengan snapToken
-            return view('checkout', ['snapToken' => $snapToken, 'payment' => $payment]);
-        } else {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk checkout.');
-        }
-    }
+   public function checkout(Request $request)
+   {
+       if (Auth::check()) {
+           $user_id = Auth::id();
+           $keranjang = Keranjang::where('user_id', $user_id)->get();
+   
+           // Inisialisasi konfigurasi Midtrans
+           Config::$serverKey = 'SB-Mid-server-Sz3uHCan9L0Lv7TkT6S4gku2'; // Ganti dengan server key Anda
+           Config::$isProduction = false;
+           Config::$isSanitized = true;
+           Config::$is3ds = true;
+   
+           // Hitung total harga dari semua barang di keranjang
+           $total_amount = 0;
+           foreach ($keranjang as $item) {
+               $total_amount += $item->quantity * $item->kendaraan->harga;
+           }
+   
+           // Buat array item untuk transaksi
+           $items = [];
+           foreach ($keranjang as $item) {
+               $items[] = [
+                   'id' => $item->kendaraan->id,
+                   'price' => $item->kendaraan->harga,
+                   'quantity' => $item->quantity,
+                   'name' => $item->kendaraan->nama,
+               ];
+           }
+   
+           // Ambil kendaraan_id dari entri di tabel keranjang
+           $kendaraan_ids = $keranjang->pluck('kendaraan_id')->toArray();
+   
+           // Buat transaksi menggunakan Midtrans
+           $transaction_params = [
+               'transaction_details' => [
+                   'order_id' => uniqid(),
+                   'gross_amount' => $total_amount, // Total harga dari semua barang di keranjang
+               ],
+               'item_details' => $items,
+               'customer_details' => [
+                   'first_name' => Auth::user()->name,
+                   'email' => Auth::user()->email,
+               ],
+               'callbacks' => [
+                   'finish' => route('payment.redirect'),
+               ],
+           ];
+   
+           // Buat transaksi baru di Midtrans
+           $snapToken = Snap::getSnapToken($transaction_params);
+   
+           $payment = null;
+   
+           if ($request->has('payment_id')) {
+               // Use existing payment record
+               $payment = Payment::find($request->input('payment_id'));
+               if ($payment) {
+                   $payment->update([
+                       'order_id' => $transaction_params['transaction_details']['order_id'],
+                       'gross_amount' => $total_amount,
+                   ]);
+               }
+           }
+   
+           if (!$payment) {
+               // Buat entri pembayaran dalam tabel Payment jika tidak ada pembayaran yang ada
+               $payment = Payment::create([
+                   'user_id' => $user_id,
+                   'kendaraan_id' => implode(',', $kendaraan_ids),
+                   'order_id' => $transaction_params['transaction_details']['order_id'],
+                   'purchase_date' => now(),
+                   'transaction_time' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'transaction_status' => 'pending', // Default status
+                   'transaction_id' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'status_message' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'status_code' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'signature_key' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'settlement_time' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+                   'payment_type' => 'gopay', // Default payment type
+                   'gross_amount' => $total_amount,
+                   'fraud_status' => 'accept', // Default fraud status
+                   'currency' => 'IDR', // Default currency
+                   'merchant_id' => null, // Akan diupdate setelah notifikasi diterima dari Midtrans
+               ]);
+           }
+   
+           // Redirect ke halaman pembayaran Midtrans dengan snapToken
+           return view('checkout', ['snapToken' => $snapToken, 'payment' => $payment]);
+       } else {
+           return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk checkout.');
+       }
+   }
+   
     
     
 
     public function handleMidtransNotification(Request $request)    ///  untuk mengatur  transaksi apakah berhasil atau tidak
     {
         // Set konfigurasi Midtrans
-        Config::$serverKey = 'SB-Mid-server-Sz3uHCan9L0Lv7TkT6S4gku2'; // Ganti dengan server key Anda
+        Config::$serverKey = 'SB-Mid-server-Sz3uHCan9L0Lv7TkT6S4gku2'; 
         Config::$isProduction = false;
         Config::$is3ds = true;
     
@@ -290,55 +306,60 @@ class UtamaController extends Controller
     }
 
 
-public function handlePaymentRedirect(Request $request)
-{
-    $orderId = $request->input('order_id');
-    $statusCode = $request->input('status_code');
-
-    // Retrieve payment based on order_id
-    $payment = Payment::where('order_id', $orderId)->first();
-
-    if ($payment) {
-        // Update the payment status if necessary
-        if ($statusCode == '200' && $payment->transaction_status != 'settlement') {
-            $payment->transaction_status = 'settlement';
-            $payment->save();
-
-            // Log successful payment
-            Log::info("Payment successful for Order ID: $orderId");
+    public function handlePaymentRedirect(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        $statusCode = $request->input('status_code');
+    
+        // Retrieve payment based on order_id
+        $payment = Payment::where('order_id', $orderId)->first();
+    
+        if ($payment) {
+            // Check if order_id has already been processed
+            $isProcessed = \App\Models\PengambilanPengembalian::where('order_id', $orderId)->exists();
+    
+            // Update the payment status if necessary
+            if ($statusCode == '200' && $payment->transaction_status != 'settlement') {
+                $payment->transaction_status = 'settlement';
+                $payment->save();
+    
+                // Log successful payment
+                Log::info("Payment successful for Order ID: $orderId");
+            } else {
+                // Handle other status codes if necessary
+                Log::info("Payment redirect received with status code: $statusCode for Order ID: $orderId");
+            }
+    
+            // Calculate duration
+            $duration = 0;
+            $kendaraanIds = explode(',', $payment->kendaraan_id);
+            $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
+            foreach ($kendaraans as $kendaraan) {
+                $duration += floor($payment->gross_amount / $kendaraan->harga);
+            }
+    
+            // Check if vehicle has been taken
+            $isVehicleTaken = $isProcessed; // Use the existing check
+    
+            // Retrieve related transactions
+            $user_id = $payment->user_id;
+            $riwayatTransaksi = Payment::where('user_id', $user_id)->orderBy('purchase_date', 'desc')->get();
+    
+            // Pass payment, history, duration, and isVehicleTaken to the view
+            return view('payment_success', [
+                'payment' => $payment,
+                'riwayatTransaksi' => $riwayatTransaksi,
+                'duration' => $duration,
+                'isVehicleTaken' => $isVehicleTaken
+            ]);
         } else {
-            // Handle other status codes if necessary
-            Log::info("Payment redirect received with status code: $statusCode for Order ID: $orderId");
+            // Handle case where payment is not found
+            Log::error("Payment not found for Order ID: $orderId");
+            return redirect()->route('index')->with('error', 'Pembayaran tidak ditemukan.');
         }
-
-        // Calculate duration
-        $duration = 0;
-        $kendaraanIds = explode(',', $payment->kendaraan_id);
-        $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
-        foreach ($kendaraans as $kendaraan) {
-            $duration += floor($payment->gross_amount / $kendaraan->harga);
-        }
-
-        // Check if vehicle has been taken
-        $isVehicleTaken = // Implement logic to check if vehicle has been taken
-
-        // Retrieve related transactions
-        $user_id = $payment->user_id;
-        $riwayatTransaksi = Payment::where('user_id', $user_id)->orderBy('purchase_date', 'desc')->get();
-
-        // Pass payment, history, duration, and isVehicleTaken to the view
-        return view('payment_success', [
-            'payment' => $payment,
-            'riwayatTransaksi' => $riwayatTransaksi,
-            'duration' => $duration,
-            'isVehicleTaken' => $isVehicleTaken
-        ]);
-    } else {
-        // Handle case where payment is not found
-        Log::error("Payment not found for Order ID: $orderId");
-        return redirect()->route('index')->with('error', 'Pembayaran tidak ditemukan.');
     }
-}
+    
+    
 
     
         private function isValidSignature(Request $request)

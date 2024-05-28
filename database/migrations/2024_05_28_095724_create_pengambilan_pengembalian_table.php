@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('kendaraan_id')->unsigned();
+            $table->string('order_id', 255)->nullable()->collation('utf8mb4_unicode_ci');
             $table->date('tanggal_pengambilan');
             $table->date('tanggal_pengembalian')->nullable();
             $table->timestamps();
