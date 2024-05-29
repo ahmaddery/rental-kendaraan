@@ -2,7 +2,7 @@
 
 
    <!-- Start Hero -->
-<div class="section hero">
+<div class="section hero" data-aos="fade-up" data-aos-duration="1500">
   <div class="container">
     <div class="row justify-content-between">
       <!-- Hero Content -->
@@ -50,16 +50,16 @@
 <div class="section">
   <div class="container">
     <div class="row">
-      <div class="dot-title">
+      <div class="dot-title" data-aos="fade-up-right">
         <i class="bi bi-circle-fill"></i>
         <h5>Produk</h5>
       </div>
-      <div class="subtitle col-lg-7">
+      <div class="subtitle col-lg-7" data-aos="fade-up-right" data-aos-delay="100">
         <h2 class="mb-4 section-title">Sewa mobil terpercaya dengan harga bersahabat</h2>
       </div>
       <div class="subtitle-btn col-lg-5">
         <p class="mb-4">
-          <a href="{{ route('product') }}" class="btn btn-secondary">Explore All</a>
+          <a href="{{ route('product') }}" class="btn btn-secondary" data-aos="zoom-in" data-aos-delay="500">Explore All</a>
         </p>
       </div>
     </div>
@@ -97,7 +97,7 @@ timerProgressBar: true,
       @else
       @foreach($kendaraans as $kendaraan)
       <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product">
+        <div class="card card-product" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
           <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
           <div class="card-body">
             <p class="card-title">{{ $kendaraan->nama }}</p>
@@ -112,7 +112,7 @@ timerProgressBar: true,
             </div>
             <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
             <div class="btn-card">
-              <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary">Detail</a>
+              <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary mb-1">Detail</a>
               <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
             </div>
           </div>

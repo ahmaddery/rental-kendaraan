@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- CSS Style -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    {{-- AOS CDN --}}
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -199,6 +202,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            {{-- AOS JS --}}
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+              AOS.init();
+            </script>
 <script>
     // Tampilkan animasi loading saat halaman dimuat
     Swal.fire({
