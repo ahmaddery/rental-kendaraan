@@ -44,9 +44,12 @@ Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang']
 Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');
 //Route::post('/checkout', 'UtamaController@checkout')->name('checkout');
 Route::post('/midtrans/webhook', [UtamaController::class, 'handleMidtransNotification'])->name('midtrans.webhook');
-Route::get('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect'])->name('payment.redirect');
+Route::post('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect'])->name('payment.redirect');
 Route::post('/pengambilan/store', [PengambilanPengembalianController::class, 'store'])->name('pengambilan.store');
+//Route::get('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect'])->name('payment.redirect');
 
+//route untuk pengambilan
+Route::get('/pengambilan-pengembalian', [PengambilanPengembalianController::class, 'index'])->name('pengambilan_pengembalian.index');
 
 //route untuk riwayat transaksi 
 Route::get('/riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->name('riwayat.transaksi');

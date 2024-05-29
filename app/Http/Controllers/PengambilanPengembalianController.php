@@ -10,7 +10,16 @@ use App\Models\Keranjang;
 use Illuminate\Support\Facades\Auth;
 
 class PengambilanPengembalianController extends Controller
+{   
+    public function index()
 {
+    // Mendapatkan data pengambilan pengembalian
+    $pengambilanPengembalian = PengambilanPengembalian::all();
+
+    // Mengirim data ke view
+    return view('pengambilan_pengembalian.index', ['pengambilanPengembalian' => $pengambilanPengembalian]);
+}
+
     public function store(Request $request)
     {
         // Validasi input

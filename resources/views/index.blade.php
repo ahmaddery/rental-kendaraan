@@ -136,7 +136,7 @@ function loadImageFromCache() {
 }
 
 // Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat gambar dimuat
-cacheImage('url_gambar_anda');
+cacheImage('image');
 
 // Di halaman yang sesuai, panggil fungsi untuk memuat gambar dari cache saat halaman diperbarui
 window.onload = function() {

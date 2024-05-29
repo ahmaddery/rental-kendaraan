@@ -146,55 +146,58 @@
 </head>
 
 <body>
-    <!-- Start Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">ABCDE</a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('product') }}">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
+<!-- Start Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ABCDE</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('product') }}">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i>
+                    @auth
+                        <span>Hi, {{ Str::limit(Auth::user()->name, 5, '') }}</span>
+                    @else
+                        <span>Account</span>
+                    @endauth
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                    @if (Route::has('login'))
                         @auth
-                            <span>Hi, {{ Str::limit(Auth::user()->name, 5, '') }}</span>
+                            <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                            <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#keranjangModal"><i class="bi bi-cart"></i> Keranjang</a></li>
+                            <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
+                            <li><a href="{{ route('pengambilan_pengembalian.index') }}" class="dropdown-item"><i class="bi bi-arrow-down-circle"></i> Pengambilan</a></li>
                         @else
-                            <span>Account</span>
+                            <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                            @if (Route::has('register'))
+                                <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
+                            @endif
                         @endauth
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                        @if (Route::has('login'))
-                            @auth
-                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-                                <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#keranjangModal"><i class="bi bi-cart"></i> Keranjang</a></li>
-                                <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
-                            @else
-                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
-                                @if (Route::has('register'))
-                                    <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
-                                @endif
-                            @endauth
-                        @endif
-                    </ul>
-                </div>                
-            </div>
-        </nav>
-        <!-- End Navbar -->
+                    @endif
+                </ul>
+            </div>                
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
         
         
         <!-- Bootstrap JS -->
@@ -212,21 +215,18 @@
     Swal.fire({
         title: "",
         text: "Memuat data...",
-        imageUrl: "https://media1.tenor.com/m/6JOtyira0KIAAAAd/toshiyuki-toshiyuki-doma.gif",
-       //  {{ asset('frontend/loading.gif') }}
+        imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
         imageAlt: "Loading animation",
         showConfirmButton: false,
         allowOutsideClick: false,
         allowEscapeKey: false
     });
 
-    // Misalkan di sini Anda memuat data Anda. Setelah data dimuat, sembunyikan animasi loading.
     window.addEventListener('load', function() {
-        // Simulasi waktu pemuatan data (Anda dapat menggantinya dengan kode pengambilan data aktual)
         setTimeout(function() {
             // Sembunyikan animasi loading
             Swal.close();
-        }, 500); // Contoh: 3000 milidetik (3 detik), ganti dengan waktu yang sesuai dengan kebutuhan Anda.
+        }, 500);
     });
 </script>
 
