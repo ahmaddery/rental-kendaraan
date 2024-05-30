@@ -164,7 +164,7 @@
                     <a class="nav-link" href="{{ route('product') }}">Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{{ route('about') }}">About</a>
                 </li>
             </ul>
             <div class="dropdown">
