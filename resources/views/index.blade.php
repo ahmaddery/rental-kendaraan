@@ -2,9 +2,9 @@
 
 
    <!-- Start Hero -->
-<div class="section hero" data-aos="fade-up" data-aos-duration="1500">
+<div class="section hero">
   <div class="container">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between" data-aos="fade-up" data-aos-duration="1500">
       <!-- Hero Content -->
       <div class="hero-content col-lg-12">
         <div class="row">
@@ -97,7 +97,7 @@ timerProgressBar: true,
       @else
       @foreach($kendaraans as $kendaraan)
       <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
+        <div class="card card-product" data-aos="zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
           <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
           <div class="card-body">
             <p class="card-title">{{ $kendaraan->nama }}</p>
@@ -159,15 +159,15 @@ window.onload = function() {
         <div class="row">
           <!-- Start Column 1 -->
           <div class="subtitle col-lg-7">
-            <div class="dot-title">
+            <div class="dot-title" data-aos="fade-up-right">
               <i class="bi bi-circle-fill"></i>
               <h5>Testimoni</h5>
             </div>
-            <h2 class="mb-4 section-title">Testimoni dari pelanggan kami</h2>
+            <h2 class="mb-4 section-title" data-aos="fade-up-right" data-aos-delay="100">Testimoni dari pelanggan kami</h2>
           </div>
           <div class="subtitle-btn col-lg-5">
             <p class="mb-5">
-              <p><a href="" class="btn btn-secondary">Explore</a></p>
+              <p><a href="" class="btn btn-secondary" data-aos="zoom-in" data-aos-delay="500">Explore</a></p>
             </p>
           </div>
         </div>
@@ -175,7 +175,7 @@ window.onload = function() {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- Carousel -->
-<div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" data-aos="zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
     <div class="carousel-inner">
       @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
       <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">

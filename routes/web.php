@@ -64,6 +64,11 @@ Route::post('rating/{id}', [RatingController::class, 'update'])->name('rating.up
 //route product
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 
+//route about
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+
+
 
 // aktifkan untuk mengubah ke view default laravel
 //Route::get('/', function () {
