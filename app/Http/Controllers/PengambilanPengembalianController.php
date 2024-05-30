@@ -12,13 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class PengambilanPengembalianController extends Controller
 {   
     public function index()
-{
-    // Mendapatkan data pengambilan pengembalian
-    $pengambilanPengembalian = PengambilanPengembalian::all();
+    {
+        // Mendapatkan ID pengguna yang sedang login
+        $userId = Auth::id();
 
-    // Mengirim data ke view
-    return view('pengambilan_pengembalian.index', ['pengambilanPengembalian' => $pengambilanPengembalian]);
-}
+        // Mendapatkan data pengambilan pengembalian berdasarkan ID pengguna yang sedang login
+        $pengambilanPengembalian = PengambilanPengembalian::where('user_id', $userId)->get();
+
+        // Mengirim data ke view
+        return view('pengambilan_pengembalian.index', ['pengambilanPengembalian' => $pengambilanPengembalian]);
+    }
+
 
     public function store(Request $request)
     {

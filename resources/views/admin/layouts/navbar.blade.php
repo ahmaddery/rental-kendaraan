@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Menu</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
-   <!-- Font Awesome CDN -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}">
@@ -19,9 +19,9 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="{{ route('admin.index') }}" class="text-nowrap logo-img">
-             <h2>   Admin Menu  </h2>
-              </a>
+          <a href="{{ route('admin.index') }}" class="text-nowrap logo-img">
+            <h2>Admin Menu</h2>
+          </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
           </div>
@@ -74,6 +74,13 @@
                 <span class="hide-menu">Rating</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.pengambilan_pengembalian.index') }}" aria-expanded="false">
+                <span><i class="fas fa-car"></i></span>
+                <span class="hide-menu">Pengambilan & Pengembalian</span>
+              </a>
+            </li>
+            
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">AUTH</span>
@@ -106,16 +113,32 @@
                 <i class="ti ti-menu-2"></i>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li>
           </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <h href="" target="_blank" class="">HI, {{ Auth::user()->name }}</h>
+              <li class="nav-item">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="ti ti-bell-ringing"></i>
+                  <div class="notification bg-primary rounded-circle"></div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="notificationDropdown">
+                  <div class="message-body">
+                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-info-circle fs-6"></i>
+                      <p class="mb-0 fs-3">Notification 1</p>
+                    </a>
+                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-info-circle fs-6"></i>
+                      <p class="mb-0 fs-3">Notification 2</p>
+                    </a>
+                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-info-circle fs-6"></i>
+                      <p class="mb-0 fs-3">Notification 3</p>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <h href="" target="_blank" class="">HI, {{ Str::limit(Auth::user()->name, 5, '') }}</h>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
@@ -141,8 +164,7 @@
                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                           Logout
                       </a>
-                  </form>                  
-                    
+                    </form>
                   </div>
                 </div>
               </li>
@@ -169,7 +191,7 @@
           title: "",
           text: "Memuat data...",
           imageUrl: "https://media1.tenor.com/m/6JOtyira0KIAAAAd/toshiyuki-toshiyuki-doma.gif",
-         // {{ asset('frontend/loading.gif') }}
+          // {{ asset('frontend/loading.gif') }}
           imageAlt: "Loading animation",
           showConfirmButton: false,
           allowOutsideClick: false,

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\KendaraanController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\PengembalianController;
 use App\Http\Controllers\artikelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeranjangController;
@@ -137,4 +138,10 @@ Route::middleware(['admin'])->group(function () {
   Route::get('admin/feedbacks', [FeedbackController::class, 'index'])->name('admin.feedbacks.index');
   Route::get('admin/feedbacks/{feedback}', [FeedbackController::class, 'show'])->name('admin.feedbacks.show');
   Route::delete('admin/feedbacks/{feedback}', [FeedbackController::class, 'destroy'])->name('admin.feedbacks.destroy');
+});
+
+// route untuk pengembalian admin
+Route::prefix('admin')->group(function () {
+  Route::get('pengambilan-pengembalian', [PengembalianController::class, 'index'])->name('admin.pengambilan_pengembalian.index');
+  Route::get('/notifications/{id}', [PengembalianController::class, 'read'])->name('notifications.read');
 });
