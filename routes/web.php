@@ -17,6 +17,7 @@ use App\Http\Controllers\RiwayatTransaksiController;
 use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PengambilanPengembalianController;
+use App\Http\Controllers\admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -149,4 +150,11 @@ Route::middleware(['admin'])->group(function () {
 Route::prefix('admin')->group(function () {
   Route::get('pengambilan-pengembalian', [PengembalianController::class, 'index'])->name('admin.pengambilan_pengembalian.index');
   Route::get('/notifications/{id}', [PengembalianController::class, 'read'])->name('notifications.read');
+});
+
+
+
+// untuk halaman dashboard 
+Route::prefix('admin')->group(function () {
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });

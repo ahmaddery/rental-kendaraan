@@ -190,8 +190,7 @@
       Swal.fire({
           title: "",
           text: "Memuat data...",
-          imageUrl: "https://media1.tenor.com/m/6JOtyira0KIAAAAd/toshiyuki-toshiyuki-doma.gif",
-          // {{ asset('frontend/loading.gif') }}
+          imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
           imageAlt: "Loading animation",
           showConfirmButton: false,
           allowOutsideClick: false,

@@ -27,4 +27,10 @@ class Feedback extends Model
     {
         return $this->belongsTo(Kendaraan::class);
     }
+
+     // Scope method to fetch feedback by rating
+     public function scopeByRating($query, $rating)
+     {
+         return $query->where('rating', $rating);
+     }
 }
