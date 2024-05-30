@@ -1,259 +1,292 @@
 @include('layouts.navbar')
 
 
-   <!-- Start Hero -->
+<!-- Start Hero -->
 <div class="section hero">
-  <div class="container">
-    <div class="row justify-content-between" data-aos="fade-up" data-aos-duration="1500">
-      <!-- Hero Content -->
-      <div class="hero-content col-lg-12">
-        <div class="row">
-          <div class="hero-top col-lg-6">
-            <p class="web-title mb-0">ABCDE</p>
-            <p class="web-sub">SEWA MOBIL</p>
-          </div>
-          <div class="hero-top hero-top-right col-lg-6">
-            <p class="web-tagline mt-3">Your Best Transportation Partner</p>
-            <p class="web-tagline-desc">Layanan sewa mobil kami menggunakan armada mobil keluaran terbaru, dengan kondisi terawat untuk disewakan kepada Anda dengan harga yang bersahabat.</p>
-          </div>
+    <div class="container">
+        <div class="hero-title">
+            <p>SEWA KENDARAAN</p>
         </div>
-      </div>
-      <!-- Hero Carousel -->
-      <div id="heroCarousel" class="carousel slide col-lg-12" data-bs-ride="carousel" data-bs-interval="5000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 1">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 2">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('frontend/images/banner/banner-1.jpg') }}" class="d-block w-100 img-fluid" alt="Banner 3">
-          </div>
+        <div class="hero-banner">
+            <img class="img-fluid" src="{{ asset('frontend/images/banner/banner-1.jpg') }}" alt="" />
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+        <!-- <div class="running-text">
+          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
+          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
+          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
+        </div> -->
     </div>
-  </div>
 </div>
 <!-- End Hero -->
 
-
-<!-- Start Product Preview -->
-<div class="section">
-  <div class="container">
-    <div class="row">
-      <div class="dot-title" data-aos="fade-up-right">
-        <i class="bi bi-circle-fill"></i>
-        <h5>Produk</h5>
-      </div>
-      <div class="subtitle col-lg-7" data-aos="fade-up-right" data-aos-delay="100">
-        <h2 class="mb-4 section-title">Sewa mobil terpercaya dengan harga bersahabat</h2>
-      </div>
-      <div class="subtitle-btn col-lg-5">
-        <p class="mb-4">
-          <a href="{{ route('product') }}" class="btn btn-secondary" data-aos="zoom-in" data-aos-delay="500">Explore All</a>
-        </p>
-      </div>
-    </div>
-    @if (session('success'))
-    <script>
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'success',
-            title: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 6000,
-            timerProgressBar: true,
-        });
-    </script>
-@endif
-@if (session('error'))
-<script>
-Swal.fire({
-toast: true,
-position: 'top-end',
-icon: 'error',
-title: '{{ session('error') }}',
-showConfirmButton: false,
-timer: 6000,
-timerProgressBar: true,
-});
-</script>
-@endif
-    <div class="row">
-      @if ($kendaraans->isEmpty())
-      <div class="col-md-12">
-        <p>Belum ada kendaraan.</p>
-      </div>
-      @else
-      @foreach($kendaraans as $kendaraan)
-      <div class="col-12 col-md-6 col-lg-4 mb-5">
-        <div class="card card-product" data-aos="zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
-          <img src="{{ $kendaraan->image }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
-          <div class="card-body">
-            <p class="card-title">{{ $kendaraan->nama }}</p>
-            <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
-            <div class="card-specs">
-              <ul>
-                <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
-                <li><i class="bi bi-shield-check"></i> Insurance</li>
-                <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
-                <li><i class="bi bi-palette2"></i> {{ $kendaraan->warna }}</li>
-              </ul>
-            </div>
-            <p class="card-price">{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-            <div class="btn-card">
-              <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary mb-1">Detail</a>
-              <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-success">Tambah ke Keranjang</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endforeach
-      @endif
-    </div>
-  </div>
-</div>
-<!-- End Product Preview -->
-<script>
-  // Fungsi untuk menyimpan URL gambar ke dalam localStorage
-function cacheImage(imageUrl) {
-    localStorage.setItem('cachedImage', imageUrl);
-}
-
-// Fungsi untuk memuat gambar dari cache jika tersedia
-function loadImageFromCache() {
-    return localStorage.getItem('cachedImage');
-}
-
-// Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat gambar dimuat
-cacheImage('image');
-
-// Di halaman yang sesuai, panggil fungsi untuk memuat gambar dari cache saat halaman diperbarui
-window.onload = function() {
-    var cachedImageUrl = loadImageFromCache();
-    if (cachedImageUrl) {
-        // Gunakan URL gambar dari cache
-        document.getElementById('gambar').src = cachedImageUrl;
-    } else {
-        // Jika tidak ada di cache, muat gambar seperti biasa
-        document.getElementById('gambar').src = 'url_gambar_default';
-    }
-};
-
-</script>
-    
-
-    <!-- Start Customer Review -->
-    <div class="section">
-      <div class="container">
+<!-- Start Keunggulan -->
+<div class="section keunggulan">
+    <div class="container">
+        <!-- Start Title Section -->
         <div class="row">
-          <!-- Start Column 1 -->
-          <div class="subtitle col-lg-7">
-            <div class="dot-title" data-aos="fade-up-right">
-              <i class="bi bi-circle-fill"></i>
-              <h5>Testimoni</h5>
+            <div class="dot-title">
+                <i class="bi bi-circle-fill"></i>
+                <h5>Keunggulan</h5>
             </div>
-            <h2 class="mb-4 section-title" data-aos="fade-up-right" data-aos-delay="100">Testimoni dari pelanggan kami</h2>
-          </div>
-          <div class="subtitle-btn col-lg-5">
-            <p class="mb-5">
-              <p><a href="" class="btn btn-secondary" data-aos="zoom-in" data-aos-delay="500">Explore</a></p>
-            </p>
-          </div>
-        </div>
-   <!-- Ensure you include Font Awesome CSS in your <head> section -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<!-- Carousel -->
-<div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" data-aos="zoom-in" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
-    <div class="carousel-inner">
-      @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
-      <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-        <div class="row justify-content-center">
-          @foreach ($feedbackChunk as $feedback)
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="review-profile d-flex align-items-center">
-                  <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="" class="rounded-circle me-3" style="width: 50px; height: 50px;">
-                  <div class="review-profile-info">
-                    <h5 class="card-title">{{ $feedback->kendaraan->nama }}</h5>
-                    <h6 class="text-muted">{{ $feedback->user->name }} Pada {{ $feedback->formatted_date }}</h6>
-                  </div>
-                </div>
-                <p class="card-text mt-3">"{{ $feedback->komentar }}"</p>
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <p class="mb-0"><strong>Rating:</strong> 
-                      @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <= $feedback->rating)
-                          <i class="fas fa-star text-warning"></i>
-                        @else
-                          <i class="far fa-star text-warning"></i>
-                        @endif
-                      @endfor
-                    </p>
-                  </div>
-                  <div>
-                  </div>
-                </div>
-              </div>
+            <div class="sub-title col-xl-7 col-lg-9">
+                <h2 class="mb-4 section-title">Mengapa harus memilih kami?</h2>
             </div>
-          </div>
-          @endforeach
+            <div class="sub-title-btn col-xl-5 col-lg-3">
+                <p><a href="" class="btn btn-secondary mb-4">Explore</a></p>
+            </div>
         </div>
-      </div>
-      @endforeach
+        <!-- End Title Section -->
+        <!-- Start Main Section -->
+        <div class="row">
+            <!-- Start Keunggulan 1 -->
+            <div class="col-12 col-xl-6 col-xxl-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Asuransi</h5>
+                        <p class="card-text">
+                            Semua unit kendaraan menggunakan asuransi untuk memberikan
+                            perlindungan total.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Keunggulan 1 -->
+            <!-- Start Keunggulan 2 -->
+            <div class="col-12 col-xl-6 col-xxl-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Kendaraan Terbaru</h5>
+                        <p class="card-text">
+                            Menyediakan kendaraan terbaru dengan kondisi prima, bersih,
+                            dan terawat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Keunggulan 2 -->
+            <!-- Start Keunggulan 3 -->
+            <div class="col-12 col-xl-6 col-xxl-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Legalitas</h5>
+                        <p class="card-text">
+                            Memiliki legalitas hukum dan terdaftar sebagai Perusahaan Jasa
+                            Transportasi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Keunggulan 3 -->
+            <!-- Start Keunggulan 4 -->
+            <div class="col-12 col-xl-6 col-xxl-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Servis Resmi</h5>
+                        <p class="card-text">
+                            Melakukan servis berkala di bengkel resmi sehingga performa
+                            kendaraan tetap terjaga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End Keunggulan 4 -->
+        </div>
+        <!-- End Main Section -->
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
 </div>
+<!-- End Keunggulan -->
 
-<!-- End Customer Review -->
-
-  
-    
-    <!-- Start About -->
-    <div class="section">
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-lg-5 mb-5">
-            <div class="about-left">
-              <img class="img-fluid" src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="" />
+<!-- Start Sewa Kendaraan -->
+<div class="section kendaraan">
+    <div class="container">
+        <!-- Start Title Section -->
+        <div class="row">
+            <div class="dot-title">
+                <i class="bi bi-circle-fill"></i>
+                <h5>Sewa Kendaraan</h5>
             </div>
-          </div>
-          <div class="col-lg-7">
-            <div class="about-right">
-              <h2 class="mb-4 section-title">Tentang kami</h2>
-              <p class="mb-4">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil dolores commodi reprehenderit consequatur corporis quia qui itaque, rerum iusto laboriosam placeat ratione hic alias in facilis neque ducimus labore nulla?
-                Eum, maxime? Nam tempore alias soluta inventore nihil commodi nemo laboriosam repellendus est perspiciatis? Aspernatur aut sequi, magni optio voluptatum est culpa blanditiis vel unde exercitationem eum ea quisquam ad.
-                Incidunt quas facere reprehenderit expedita repellendus sapiente impedit ut animi ab mollitia alias reiciendis illum porro voluptate doloribus blanditiis repellat dolores non, assumenda, optio dolor sequi? Mollitia id esse eveniet.
-              </p>
-              <p><a href="" class="btn btn-secondary">More</a></p>
+            <div class="sub-title col-xl-7 col-lg-9">
+                <h2 class="mb-4 section-title">
+                    Sewa kendaraan terpercaya dengan harga bersahabat
+                </h2>
             </div>
-          </div>
+            <div class="sub-title-btn col-xl-5 col-lg-3">
+                <p><a href="{{ route('product') }}" class="btn btn-secondary mb-4">Explore</a></p>
+            </div>
         </div>
-      </div>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                });
+            </script>
+        @endif
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                });
+            </script>
+        @endif
+        <!-- End Title Section -->
+        <div class="row">
+            @if ($kendaraans->isEmpty())
+                <div class="col-md-12">
+                    <p>Belum ada kendaraan.</p>
+                </div>
+            @else
+                @foreach ($kendaraans as $kendaraan)
+                    <!-- Start Column 1 -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card card-vehicle">
+                            <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <p class="card-title">{{ $kendaraan->nama }}</p>
+                                <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+                                <div class="card-specs">
+                                    <ul>
+                                        <li><i class="bi bi-123"></i> {{ $kendaraan->plat_nomor }}</li>
+                                        <li><i class="bi bi-shield-check"></i> Insurance</li>
+                                        <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                                        <li><i class="bi bi-palette"></i> {{ $kendaraan->warna }}</li>
+                                    </ul>
+                                </div>
+                                <p class="card-price mt-2">IDR {{ number_format($kendaraan->harga, 0, ',', '.') }}</p>
+                                <div class="btn-card">
+                                    <button href="{{ route('kendaraan.detail', $kendaraan->id) }}"
+                                        class="btn btn-secondary">Detail</button>
+                                    <button href="{{ route('tambah.keranjang', $kendaraan->id) }}"
+                                        class="btn btn-secondary">Tambah ke keranjang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+            <!-- End Column 1 -->
+        </div>
     </div>
+</div>
+<!-- End Sewa Kendaraan -->
+
+<script>
+    // Fungsi untuk menyimpan URL gambar ke dalam localStorage
+    function cacheImage(imageUrl) {
+        localStorage.setItem('cachedImage', imageUrl);
+    }
+
+    // Fungsi untuk memuat gambar dari cache jika tersedia
+    function loadImageFromCache() {
+        return localStorage.getItem('cachedImage');
+    }
+
+    // Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat gambar dimuat
+    cacheImage('image');
+
+    // Di halaman yang sesuai, panggil fungsi untuk memuat gambar dari cache saat halaman diperbarui
+    window.onload = function() {
+        var cachedImageUrl = loadImageFromCache();
+        if (cachedImageUrl) {
+            // Gunakan URL gambar dari cache
+            document.getElementById('gambar').src = cachedImageUrl;
+        } else {
+            // Jika tidak ada di cache, muat gambar seperti biasa
+            document.getElementById('gambar').src = 'url_gambar_default';
+        }
+    };
+</script>
+
+<!-- Start Review Pelanggan -->
+<div class="section review">
+    <div class="container">
+        <!-- Start Title Section -->
+        <div class="row">
+            <div class="dot-title">
+                <i class="bi bi-circle-fill"></i>
+                <h5>Testimoni</h5>
+            </div>
+            <div class="sub-title col-xl-7 col-lg-9">
+                <h2 class="mb-4 section-title">Testimoni dari pelanggan kami</h2>
+            </div>
+            <div class="sub-title-btn col-xl-5 col-lg-3">
+                <p><a href="" class="btn btn-secondary mb-4">Explore</a></p>
+            </div>
+        </div>
+        <!-- End Title Section -->
+        <!-- Start Main Review -->
+        <!-- Start Review Card 1 -->
+        <div id="custom-cards">
+            <div class="owl-carousel owl-theme">
+                @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
+                    <div class="item">
+                        @foreach ($feedbackChunk as $feedback)
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="review-profile">
+                                        <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
+                                        <div class="review-profile-info">
+                                            <p class="card-profile-name">{{ $feedback->user->name }} pada
+                                                {{ $feedback->formatted_date }}</p>
+                                            <p class="card-vehicle-name">{{ $feedback->kendaraan->nama }}</p>
+                                            <div class="rating">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $feedback->rating)
+                                                        <i class="bi bi-star-fill"></i>
+                                                    @else
+                                                        <i class="bi bi-star-fill"></i>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <blockquote class="card-text">
+                                        {{ $feedback->komentar }}
+                                    </blockquote>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <!--End Review Card 1-->
+                @endforeach
+            </div>
+        </div>
+        <!-- End Main Review -->
     </div>
-  </div>
-    <!-- End About -->
-    @include('layouts.modal')
-    @include('layouts.footer')
+</div>
+<!-- End Review Pelanggan -->
+
+<!-- Start About Preview -->
+<div class="section about">
+    <div class="container">
+        <div class="banner-about">
+            <img src="{{ asset('frontend/images/banner/banner-2.png') }}" alt="Banner Image"
+                class="banner-about-img img-fluid" />
+            <!-- Start Title Section -->
+            <div class="banner-text">
+                <div class="dot-title">
+                    <i class="bi bi-circle-fill"></i>
+                    <h5>Tentang Kami</h5>
+                </div>
+                <h2 class="section-title">Ingin tahu lebih banyak tentang kami?</h2>
+                <p><a href="" class="btn btn-secondary">Explore</a></p>
+            </div>
+            <!-- End Title Section -->
+        </div>
+    </div>
+</div>
+<!-- End About Preview -->
+
+@include('layouts.modal')
+@include('layouts.footer')
