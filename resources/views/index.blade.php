@@ -280,7 +280,7 @@
                     <h5>Tentang Kami</h5>
                 </div>
                 <h2 class="section-title">Ingin tahu lebih banyak tentang kami?</h2>
-                <p><a href="" class="btn btn-secondary">Explore</a></p>
+                <p><a href="{{ route('about') }}" class="btn btn-secondary">Explore</a></p>
             </div>
             <!-- End Title Section -->
         </div>

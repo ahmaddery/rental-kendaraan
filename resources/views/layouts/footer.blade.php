@@ -3,10 +3,7 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-1">
-        <div class="footer-logo">
-<img src="" alt="Footer Logo">
-
-        </div>
+    
       </div>
       <div class="col-7">
         <ul>
@@ -32,7 +29,7 @@
         </ul>
       </div>
     </div>
-    <p class="footer-cr mt-4" style="color: #adb5bd;">© 2024. Hak cipta dilindungi.</p>
+    <p class="footer-cr mt-4 text-center" style="color: #adb5bd;">© 2024. Hak cipta dilindungi.</p>
   </div>
 </div>
 <!-- End Footer -->

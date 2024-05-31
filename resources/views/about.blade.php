@@ -1,7 +1,7 @@
 @include('layouts.navbar')
 <div class="section">
-    <div class="container">
-        <div class="row justify-content-between">
+    <div class="container pt-5">
+        <div class="row justify-content-between mt-5">
             <div class="col-lg-5 mb-5">
                 <div class="about-left">
                     <img class="img-fluid" src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="" />
@@ -21,7 +21,7 @@
                         alias reiciendis illum porro voluptate doloribus blanditiis repellat dolores non, assumenda,
                         optio dolor sequi? Mollitia id esse eveniet.
                     </p>
-                    <p><a href="" class="btn btn-secondary">More</a></p>
+                    
                 </div>
             </div>
         </div>
