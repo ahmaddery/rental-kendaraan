@@ -18,6 +18,7 @@ use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PengambilanPengembalianController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -158,3 +159,12 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
+
+
+Route::middleware(['admin'])->group(function () {
+  Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
+  Route::get('admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
+  Route::delete('admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+  Route::post('admin/users/{id}/restore', [UserController::class, 'restore'])->name('admin.users.restore');
+});
+
