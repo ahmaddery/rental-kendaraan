@@ -15,6 +15,20 @@ body {
     align-items: center;
     margin: 0rem 6rem !important;
 }
+.underline-active {
+    position: relative;
+}
+
+.underline-active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    bottom: -2px;
+    left: 0;
+}
+
 @media (max-width: 768px) {
     .section {
         margin: 1.5rem;

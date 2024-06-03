@@ -38,13 +38,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
+                        <a class="nav-link {{ Request::routeIs('index') ? 'active underline-active' : '' }}" aria-current="page" href="{{ route('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('product') }}">Product</a>
+                        <a class="nav-link {{ Request::routeIs('product') ? 'active underline-active' : '' }}" href="{{ route('product') }}">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about') }}">About</a>
+                        <a class="nav-link {{ Request::routeIs('about') ? 'active underline-active' : '' }}" href="{{ route('about') }}">About</a>
                     </li>
                 </ul>
                 <div class="dropdown">
@@ -60,26 +60,21 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                         @if (Route::has('login'))
                             @auth
-                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i>
-                                        Dashboard</a></li>
-                                <li><a href="#" class="dropdown-item" data-toggle="modal"
-                                        data-target="#keranjangModal"><i class="bi bi-cart"></i> Keranjang</a></li>
-                                <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i
-                                            class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
-                                <li><a href="{{ route('pengambilan_pengembalian.index') }}" class="dropdown-item"><i
-                                            class="bi bi-arrow-down-circle"></i> Pengambilan</a></li>
+                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                                <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#keranjangModal"><i class="bi bi-cart"></i> Keranjang</a></li>
+                                <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
+                                <li><a href="{{ route('pengambilan_pengembalian.index') }}" class="dropdown-item"><i class="bi bi-arrow-down-circle"></i> Pengambilan</a></li>
                             @else
-                                <li><a href="{{ route('login') }}" class="dropdown-item"><i
-                                            class="bi bi-box-arrow-in-right"></i> Login</a></li>
+                                <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
                                 @if (Route::has('register'))
-                                    <li><a href="{{ route('register') }}" class="dropdown-item"><i
-                                                class="bi bi-person-plus"></i> Register</a></li>
+                                    <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
                                 @endif
                             @endauth
                         @endif
                     </ul>
                 </div>
             </div>
+            
         </div>
     </nav>
     <!-- End Navbar -->
