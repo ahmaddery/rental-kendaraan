@@ -15,6 +15,7 @@
                                 <th>Order ID</th>
                                 <th>Tanggal Pengambilan</th>
                                 <th>Tanggal Pengembalian</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,6 +27,21 @@
                                     <td>{{ $item->order_id }}</td>
                                     <td>{{ $item->tanggal_pengambilan }}</td>
                                     <td>{{ $item->tanggal_pengembalian }}</td>
+                                    <td>
+                                        @php
+                                            $today = now();
+                                            $tanggalPengambilan = \Carbon\Carbon::parse($item->tanggal_pengambilan);
+                                            $tanggalPengembalian = \Carbon\Carbon::parse($item->tanggal_pengembalian);
+
+                                            if ($today->greaterThan($tanggalPengembalian)) {
+                                                echo 'Selesai';
+                                            } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
+                                                echo 'On Process';
+                                            } else {
+                                                echo 'Belum Diambil';
+                                            }
+                                        @endphp
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
