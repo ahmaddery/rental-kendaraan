@@ -265,7 +265,6 @@
         <!-- End Main Review -->
     </div>
 </div>
-<!-- End Review Pelanggan -->
 
 <!-- Start About Preview -->
 <div class="section about">
