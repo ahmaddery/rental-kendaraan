@@ -31,9 +31,6 @@
             <div class="sub-title col-xl-7 col-lg-9">
                 <h2 class="mb-4 section-title">Mengapa harus memilih kami?</h2>
             </div>
-            <div class="sub-title-btn col-xl-5 col-lg-3">
-                <p><a href="" class="btn btn-secondary mb-4">Explore</a></p>
-            </div>
         </div>
         <!-- End Title Section -->
         <!-- Start Main Section -->
@@ -219,9 +216,6 @@
             </div>
             <div class="sub-title col-xl-7 col-lg-9">
                 <h2 class="mb-4 section-title">Testimoni dari pelanggan kami</h2>
-            </div>
-            <div class="sub-title-btn col-xl-5 col-lg-3">
-                <p><a href="" class="btn btn-secondary mb-4">Explore</a></p>
             </div>
         </div>
         <!-- End Title Section -->
