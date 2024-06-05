@@ -86,6 +86,13 @@
                 <span class="hide-menu">Users</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.payments.index') }}" aria-expanded="false">
+                  <span><i class="fas fa-money-bill"></i></span>
+                  <span class="hide-menu">Payments</span>
+              </a>
+          </li>
+          
             
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -124,26 +131,50 @@
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
               <li class="nav-item">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="ti ti-bell-ringing"></i>
-                  <div class="notification bg-primary rounded-circle"></div>
+                    <i class="ti ti-bell-ringing"></i>
+                    <div class="notification bg-primary rounded-circle" id="notificationCount"></div> <!-- Notification count -->
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="notificationDropdown">
-                  <div class="message-body">
-                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-info-circle fs-6"></i>
-                      <p class="mb-0 fs-3">Notification 1</p>
-                    </a>
-                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-info-circle fs-6"></i>
-                      <p class="mb-0 fs-3">Notification 2</p>
-                    </a>
-                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-info-circle fs-6"></i>
-                      <p class="mb-0 fs-3">Notification 3</p>
-                    </a>
-                  </div>
+                    <div class="message-body" id="notificationList">
+                        <!-- Notifications will be appended here -->
+                    </div>
                 </div>
-              </li>
+            </li>
+            
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                function fetchNotifications() {
+                    $.ajax({
+                        url: '/admin/pengambilan-pengembalian',
+                        method: 'GET',
+                        success: function(data) {
+                            let notificationList = $('#notificationList');
+                            let notificationCount = $('#notificationCount'); // Select the notification count element
+                            notificationList.empty(); // Clear existing notifications
+            
+                            // Update notification count
+                            notificationCount.text(data.length); // Update count based on fetched data
+            
+                            data.forEach(notification => {
+                                let notificationItem = `
+                                    <a href="#" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-info-circle fs-6"></i>
+                                        <p class="mb-0 fs-3">Notifikasi Pesanan Dari ${notification.user.name} menyewa ${notification.kendaraan.nama}</p>
+                                    </a>
+                                `;
+                                notificationList.append(notificationItem);
+                            });
+                        }
+                    });
+                }
+            
+                // Poll for new notifications every 5 seconds
+                setInterval(fetchNotifications, 5000);
+            
+                // Fetch notifications when the dropdown is clicked
+                $('#notificationDropdown').on('click', fetchNotifications);
+            </script>
+            
               <h href="" target="_blank" class="">HI, {{ Str::limit(Auth::user()->name, 5, '') }}</h>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">

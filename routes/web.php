@@ -19,6 +19,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PengambilanPengembalianController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -168,3 +169,10 @@ Route::middleware(['admin'])->group(function () {
   Route::post('admin/users/{id}/restore', [UserController::class, 'restore'])->name('admin.users.restore');
 });
 
+
+
+  // route untuk transaksi di halaman admin
+  Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
+    Route::get('/admin/payments/{id}', [PaymentController::class, 'show'])->name('admin.payments.show');
+});
