@@ -67,7 +67,7 @@
                             @else
                                 <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
                                 @if (Route::has('register'))
-                                    <li><a href="{{ route('register') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
+                                    <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-person-plus"></i> Register</a></li>
                                 @endif
                             @endauth
                         @endif
