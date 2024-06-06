@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         * {
             margin: 0;
@@ -74,6 +75,12 @@
             border-radius: 5px;
         }
 
+        .input-group .error {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 5px;
+        }
+
         .actions {
             display: flex;
             justify-content: space-between;
@@ -98,6 +105,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         .form-btn:hover {
@@ -134,21 +142,27 @@
 
 <body>
     <div class="container">
-        <div class="card">
+        <div class="card animate__animated">
             <div class="form-section col-12 col-md-6">
                 <!-- Login Form -->
-                <div id="login-form">
+                <div id="login-form" class="animate__animated animate__fadeIn">
                     <h1>Selamat Datang!</h1>
                     <p>Silahkan masuk jika sudah memiliki account</p>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="input-group">
                             <label for="email">Email address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email">
+                            <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
+                                <span class="error">{{ $errors->first('email') }}</span>
+                            @endif
                         </div>
                         <div class="input-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password" placeholder="Enter your password">
+                            @if ($errors->has('password'))
+                                <span class="error">{{ $errors->first('password') }}</span>
+                            @endif
                         </div>
                         <div class="actions">
                             <a href="{{ route('password.request') }}" class="forgot-password">forgot password</a>
@@ -159,56 +173,50 @@
                         <p>Don't have an account? <a href="#" id="show-register">Sign Up</a></p>
                     </div>
                 </div>
-<!-- Register Form -->
-<div id="register-form" style="display: none;">
-    <h1>Register</h1>
-    <p>Silahkan daftar untuk membuat account baru</p>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-        
-        <!-- Name -->
-        <div class="input-group">
-            <label for="register-name">Name</label>
-            <input type="text" id="register-name" name="name" value="{{ old('name') }}" placeholder="Enter your name" required autofocus autocomplete="name">
-            @if ($errors->has('name'))
-                <span class="error">{{ $errors->first('name') }}</span>
-            @endif
-        </div>
-        
-        <!-- Email Address -->
-        <div class="input-group">
-            <label for="register-email">Email address</label>
-            <input type="email" id="register-email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required autocomplete="username">
-            @if ($errors->has('email'))
-                <span class="error">{{ $errors->first('email') }}</span>
-            @endif
-        </div>
-        
-        <!-- Password -->
-        <div class="input-group">
-            <label for="register-password">Password</label>
-            <input type="password" id="register-password" name="password" placeholder="Enter your password" required autocomplete="new-password">
-            @if ($errors->has('password'))
-                <span class="error">{{ $errors->first('password') }}</span>
-            @endif
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="input-group">
-            <label for="register-password-confirm">Confirm Password</label>
-            <input type="password" id="register-password-confirm" name="password_confirmation" placeholder="Confirm your password" required autocomplete="new-password">
-            @if ($errors->has('password_confirmation'))
-                <span class="error">{{ $errors->first('password_confirmation') }}</span>
-            @endif
-        </div>
-
-        <button type="submit" class="form-btn">Register</button>
-    </form>
-    
-    <div class="toggle-link">
-        <p>Already have an account? <a href="#" id="show-login">Login</a></p>
-    </div>
-</div> 
+                <!-- Register Form -->
+                <div id="register-form" class="animate__animated" style="display: none;">
+                    <h1>Register</h1>
+                    <p>Silahkan daftar untuk membuat account baru</p>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <!-- Name -->
+                        <div class="input-group">
+                            <label for="register-name">Name</label>
+                            <input type="text" id="register-name" name="name" value="{{ old('name') }}" placeholder="Enter your name" required autofocus autocomplete="name">
+                            @if ($errors->has('name'))
+                                <span class="error">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                        <!-- Email Address -->
+                        <div class="input-group">
+                            <label for="register-email">Email address</label>
+                            <input type="email" id="register-email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required autocomplete="username">
+                            @if ($errors->has('email'))
+                                <span class="error">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                        <!-- Password -->
+                        <div class="input-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" name="password" placeholder="Enter your password" required autocomplete="new-password">
+                            @if ($errors->has('password'))
+                                <span class="error">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div>
+                        <!-- Confirm Password -->
+                        <div class="input-group">
+                            <label for="register-password-confirm">Confirm Password</label>
+                            <input type="password" id="register-password-confirm" name="password_confirmation" placeholder="Confirm your password" required autocomplete="new-password">
+                            @if ($errors->has('password_confirmation'))
+                                <span class="error">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
+                        </div>
+                        <button type="submit" class="form-btn">Register</button>
+                    </form>
+                    <div class="toggle-link">
+                        <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+                    </div>
+                </div>
             </div>
             <div class="image-section col-12 col-md-6">
                 <!-- Image will be displayed only on tablets and larger screens -->
@@ -221,14 +229,32 @@
     <script>
         document.getElementById('show-register').addEventListener('click', function (e) {
             e.preventDefault();
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'block';
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            loginForm.classList.remove('animate__fadeIn');
+            loginForm.classList.add('animate__fadeOut');
+            setTimeout(function() {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                registerForm.classList.remove('animate__fadeOut');
+                registerForm.classList.add('animate__fadeIn');
+            }, 500);
         });
 
         document.getElementById('show-login').addEventListener('click', function (e) {
             e.preventDefault();
-            document.getElementById('register-form').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+
+            registerForm.classList.remove('animate__fadeIn');
+            registerForm.classList.add('animate__fadeOut');
+            setTimeout(function() {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                loginForm.classList.remove('animate__fadeOut');
+                loginForm.classList.add('animate__fadeIn');
+            }, 500);
         });
     </script>
 </body>
