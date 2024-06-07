@@ -15,15 +15,15 @@
 
 @include('admin.layouts.navbar')
 
-<div class="container-fluid content-wrapper pt-5">
+<div class="container-fluid content-wrapper p-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="card">
+            <div class="card pl-20">
                 <div class="card-header">
                     <h3 class="card-title">Daftar Pembayaran</h3>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive pl-15">
                         <table class="table table-striped">
                             <thead>
                                 <tr>

@@ -1,7 +1,7 @@
-@include('layouts.navbar')
+@extends('layouts.navbar')
 
-<div class="container mt-5">
-    <h1 class="mb-4">Data Pengambilan Pengembalian</h1>
+<div class="container p-5">
+    <h1 class="mb-4 mt-5">Data Pengambilan Pengembalian</h1>
 
     @if (session('success'))
         <div class="alert alert-success">
