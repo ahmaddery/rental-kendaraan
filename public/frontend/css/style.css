@@ -429,3 +429,59 @@ button.owl-dot {
         margin-bottom: 0rem;
     }
 }
+
+.list-inline {
+    display: flex;
+    gap: 30px; /* Jarak antar item */
+    padding: 0;
+    list-style-type: none;
+}
+.card-product {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.card-header {
+    height: 250px; 
+    padding: 10px;
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-header img {
+    height: 100%;
+    width: 100%;
+}
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.price-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-inline-item {
+    margin-right: 15px; 
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto; 
+}
+.button-group .btn {
+    margin: 5px;
+}
+.btn-detail {
+    flex: 2;
+}
+.btn-cart {
+    flex: 1;
+}

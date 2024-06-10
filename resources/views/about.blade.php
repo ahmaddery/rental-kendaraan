@@ -11,15 +11,9 @@
                 <div class="about-right">
                     <h2 class="mb-4 section-title">Tentang kami</h2>
                     <p class="mb-4">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil dolores commodi reprehenderit
-                        consequatur corporis quia qui itaque, rerum iusto laboriosam placeat ratione hic alias in
-                        facilis neque ducimus labore nulla?
-                        Eum, maxime? Nam tempore alias soluta inventore nihil commodi nemo laboriosam repellendus est
-                        perspiciatis? Aspernatur aut sequi, magni optio voluptatum est culpa blanditiis vel unde
-                        exercitationem eum ea quisquam ad.
-                        Incidunt quas facere reprehenderit expedita repellendus sapiente impedit ut animi ab mollitia
-                        alias reiciendis illum porro voluptate doloribus blanditiis repellat dolores non, assumenda,
-                        optio dolor sequi? Mollitia id esse eveniet.
+                        Kami adalah perusahaan jasa sewa mobil dan travel yang berkomitmen memberikan pelayanan terbaik untuk pelanggan kami. <br>
+                        Dengan pengalaman luas dalam melayani pelanggan asing maupun lokal, kami memastikan kendaraan yang nyaman untuk menjamin keistimewaan wisata anda.Kami siap memberikan pelayanan terbaik dalam hall rental mobil dan layanan perjalanan anda. <br>
+                        Kami sangat menantikan kedatangan anda untuk menggunakan jasa kami. Untuk pertanyaan lebih lanjut silahkan hubungi kami melalui kontak yang tertera di bawah halaman ini.
                     </p>
                     
                 </div>
