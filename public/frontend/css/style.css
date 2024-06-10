@@ -220,6 +220,15 @@ body {
     }
 } */
 
+/* Logo */
+.logo img{
+    width: 150px;
+    height: 150px;
+    margin-top: 50px;
+    text-align: center;
+
+}
+
 /* Keunggulan Section */
 .keunggulan {
     margin-top: 6rem !important;
@@ -273,6 +282,56 @@ h6 {
     font-size: 0.875em !important;
     font-weight: bold;
 }
+
+/* Langkah Pemesanan */
+.langkah{
+    margin-top:50px !important;
+}
+.step {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.step-number {
+    width: 50px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.step-content {
+    flex-grow: 1;
+    padding: 15px;
+}
+
+.arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; 
+    height: 30px; 
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    line-height: 30px; 
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.arrow-up::before {
+    content: '↑'; 
+    transform: rotate(-45deg);
+}
+
+.arrow-down::before {
+    content: '↑';
+    transform: rotate(135deg); 
+}
+
 /* Rent Preview Section */
 .kendaraan {
     margin-top: 6rem !important;

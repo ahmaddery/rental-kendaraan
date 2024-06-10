@@ -20,7 +20,7 @@ class UtamaController extends Controller
     public function index()
     {
         $kendaraans = Cache::remember('random_kendaraans', now()->addMinutes(1), function () {
-            return Kendaraan::inRandomOrder()->limit(6)->get();
+            return Kendaraan::inRandomOrder()->limit(3)->get();
         });
     
         $feedbacks = Feedback::with('user', 'kendaraan')->get()->map(function ($feedback) {
