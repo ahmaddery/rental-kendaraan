@@ -8,6 +8,10 @@ use App\Models\Kendaraan;
 use App\Models\User;
 use App\Models\Keranjang;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\PickUpReceipt;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
+use App\Models\Payment;
 
 class PengambilanPengembalianController extends Controller
 {   
@@ -32,28 +36,38 @@ class PengambilanPengembalianController extends Controller
             'kendaraan_id' => 'required|integer',
             'tanggal_pengambilan' => 'required|date',
             'tanggal_pengembalian' => 'required|date',
-            'order_id' => 'required|unique:pengambilan_pengembalian,order_id', // validasi agar order_id unik dalam tabel pengambilan_pengembalian
+            'order_id' => 'required|unique:pengambilan_pengembalian,order_id',
         ]);
-
-        // Cek apakah order_id sudah ada dalam database
-        if ($this->checkOrderID($request->order_id)) {
-            // Jika sudah ada, kembalikan ke halaman sebelumnya dengan pesan error
-            return back()->with('error', 'Order ID already exists in the database.');
+    
+        // Retrieve payment details
+        $payment = Payment::where('order_id', $request->order_id)->first();
+    
+        if (!$payment) {
+            return back()->with('error', 'Payment details not found for the provided Order ID.');
         }
-
+    
         // Buat entri baru dalam tabel pengambilan_pengembalian
-        PengambilanPengembalian::create([
+        $pengambilanPengembalian = PengambilanPengembalian::create([
             'user_id' => $request->user_id,
             'kendaraan_id' => $request->kendaraan_id,
-            'order_id' => $request->order_id, // simpan order_id dari request
+            'order_id' => $request->order_id,
             'tanggal_pengambilan' => $request->tanggal_pengambilan,
             'tanggal_pengembalian' => $request->tanggal_pengembalian,
+            'transaction_status' => $payment->transaction_status,
+            'gross_amount' => $payment->gross_amount,
         ]);
-
-        // Redirect ke halaman yang sesuai (misalnya, halaman sukses)
+    
+        // Kirim email dengan lampiran PDF
+        $user = User::find($request->user_id);
+        Mail::to($user->email)->send(new PickUpReceipt(
+            $user, 
+            $pengambilanPengembalian, 
+            $request->tanggal_pengambilan, 
+            $request->tanggal_pengembalian
+        ));
+    
         return redirect()->route('index')->with('success', 'Data pengambilan pengembalian berhasil disimpan.');
     }
-
     public function checkOrderID($orderId)
     {
         // Periksa apakah order_id sudah ada dalam tabel pengambilan_pengembalian

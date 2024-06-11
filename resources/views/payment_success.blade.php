@@ -4,6 +4,7 @@
     <title>Payment {{ $payment->transaction_status }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         body {
             background-color: #f8f9fa;
@@ -109,6 +110,37 @@
             var day = String(pickUpDate.getDate()).padStart(2, '0');
             var formattedDate = `${year}-${month}-${day}`;
             document.getElementById('tanggal_pengembalian').value = formattedDate;
+        });
+
+        // Tampilkan animasi loading saat halaman dimuat
+        Swal.fire({
+            title: "",
+            text: "Memuat data...",
+            imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
+            imageAlt: "Loading animation",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Sembunyikan animasi loading
+                Swal.close();
+            }, 500);
+        });
+
+        // Tampilkan animasi loading saat mengirimkan formulir
+        document.getElementById('pickUpForm').addEventListener('submit', function() {
+            Swal.fire({
+                title: "",
+                text: "Mengirim data...",
+                imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
+                imageAlt: "Loading animation",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
         });
     </script>
 </body>
