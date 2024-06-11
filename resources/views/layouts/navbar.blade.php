@@ -64,15 +64,6 @@
                                 <li><a href="#" class="dropdown-item" data-toggle="modal" data-target="#keranjangModal"><i class="bi bi-cart"></i> Keranjang</a></li>
                                 <li><a href="{{ route('riwayat.transaksi') }}" class="dropdown-item"><i class="bi bi-clock-history"></i> Riwayat Transaksi</a></li>
                                 <li><a href="{{ route('pengambilan_pengembalian.index') }}" class="dropdown-item"><i class="bi bi-arrow-down-circle"></i> Pengambilan</a></li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}" class="mt-1" id="logout-form">
-                                        @csrf
-                                        <a href="#" class="btn btn-outline-info mx-2 d-block"
-                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                      </form>
-                                </li>
                             @else
                                 <li><a href="{{ route('login') }}" class="dropdown-item"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
                                 @if (Route::has('register'))
