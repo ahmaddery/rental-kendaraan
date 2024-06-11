@@ -44,7 +44,7 @@ class TypeController extends Controller
         Type::create($request->all());
 
         return redirect()->route('admin.types.index')
-                         ->with('success', 'Type created successfully.');
+                                ->with('success', 'Tipe berhasil dibuat.');
     }
 
     /**
@@ -85,7 +85,7 @@ class TypeController extends Controller
         $type->update($request->all());
 
         return redirect()->route('admin.types.index')
-                         ->with('success', 'Type updated successfully.');
+                         ->with('success', 'Tipe berhasil diperbarui.');
     }
 
     /**
@@ -96,9 +96,17 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
-
-        return redirect()->route('admin.types.index')
-                         ->with('success', 'Type deleted successfully.');
+        try {
+            $type->delete();
+            return redirect()->route('admin.types.index')
+                             ->with('success', 'Tipe berhasil dihapus.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == '23000') { // Integrity constraint violation
+                return redirect()->route('admin.types.index')
+                                 ->with('error', 'Tipe tidak dapat dihapus karena sedang digunakan di data lain.');
+            }
+            return redirect()->route('admin.types.index')
+                             ->with('error', 'Terjadi kesalahan saat mencoba menghapus tipe.');
+        }
     }
 }

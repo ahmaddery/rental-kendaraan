@@ -1,6 +1,27 @@
 @extends('admin.layouts.navbar')
 @section('addCss')
   <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+  <style>
+    .modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100% - 1rem);
+    }
+    .btn-margin-top {
+      margin-top: 15px;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    .help-text {
+      font-size: 0.875em;
+      color: #6c757d;
+    }
+  </style>
 @endsection
 
 @section('addJavascript')
@@ -17,14 +38,14 @@
 <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 75vh;">
     <div class="row w-100 justify-content-center">
         <div class="col-lg-7">
-            <h2>Types</h2>
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#createTypeModal">
-                Add New Type
+            <h2 class="mb-4">Tipe Kendaraan</h2>
+            <button type="button" class="btn btn-primary mb-3 btn-margin-top" data-toggle="modal" data-target="#createTypeModal">
+                Tambah Tipe Baru
             </button>
             <table class="table table-bordered table-hover mt-2" id="data-table">
                 <thead class="table-danger">
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Jenis Kendaraan</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -39,7 +60,7 @@
                                 <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -53,10 +74,10 @@
 
 <!-- Create Type Modal -->
 <div class="modal fade" id="createTypeModal" tabindex="-1" role="dialog" aria-labelledby="createTypeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createTypeModalLabel">Create New Type</h5>
+                <h5 class="modal-title" id="createTypeModalLabel">Tambah Tipe Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -65,10 +86,11 @@
                 <form action="{{ route('admin.types.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="typekendaraan">Type Kendaraan</label>
-                        <input type="text" class="form-control" id="typekendaraan" name="typekendaraan" value="{{ old('typekendaraan') }}" required>
+                        <label for="typekendaraan" class="form-label">Tipe Kendaraan</label>
+                        <input type="text" class="form-control" id="typekendaraan" name="typekendaraan" value="{{ old('typekendaraan') }}" placeholder="Masukkan tipe kendaraan" required>
+                        <small class="help-text">Contoh: Matic, Manual, dll.</small>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Save</button>
+                    <button type="submit" class="btn btn-primary mt-2">Simpan</button>
                 </form>
             </div>
         </div>
@@ -77,10 +99,10 @@
 
 <!-- Edit Type Modal -->
 <div class="modal fade" id="editTypeModal" tabindex="-1" role="dialog" aria-labelledby="editTypeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editTypeModalLabel">Edit Type</h5>
+                <h5 class="modal-title" id="editTypeModalLabel">Edit Tipe</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -90,8 +112,9 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="editTypeKendaraan">Jenis Kendaraan</label>
+                        <label for="editTypeKendaraan" class="form-label">Jenis Kendaraan</label>
                         <input type="text" class="form-control" id="editTypeKendaraan" name="typekendaraan" required>
+                        <small class="help-text">Pastikan tipe kendaraan sudah benar.</small>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Update</button>
                 </form>
@@ -104,6 +127,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Core ApexCharts library -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<!-- Optional theme CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.css" />
+
 
 <script>
     $(document).ready(function() {
