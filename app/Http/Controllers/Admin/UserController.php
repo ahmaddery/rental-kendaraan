@@ -13,14 +13,25 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Get all users including soft deleted users
-        $users = User::withTrashed()->get();
-
+        // Define the number of items per page
+        $perPage = $request->input('per_page', 10);
+    
+        // Filter users based on search query
+        $query = User::withTrashed();
+        if ($request->input('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%')
+                  ->orWhere('email', 'like', '%' . $request->input('search') . '%');
+        }
+    
+        // Get paginated users
+        $users = $query->paginate($perPage);
+    
         // Return the users data to a view
         return view('admin.users.index', compact('users'));
     }
+    
 
     /**
      * Display the specified user.
@@ -33,8 +44,13 @@ class UserController extends Controller
         // Find user by ID
         $user = User::withTrashed()->findOrFail($id);
 
-        // Return the user data to a view
-        return view('admin.users.show', compact('user'));
+        // Return the user data as JSON
+        return response()->json([
+            'name' => $user->name,
+            'email' => $user->email,
+            'userType' => $user->userType,
+            // Add other user details as needed
+        ]);
     }
 
     /**

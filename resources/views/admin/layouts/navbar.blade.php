@@ -39,14 +39,17 @@
                 <span class="hide-menu">Dashboard</span>
               </a>
             </li>
-
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('admin.users.index') }}" aria-expanded="false">
+                <span><i class="fas fa-users"></i></span>
+                <span class="hide-menu">Users</span>
+              </a>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.types.index') }}" aria-expanded="false">
                 <span><i class="fas fa-folder"></i></span>
-                <span class="hide-menu">Type</span>
+                <span class="hide-menu">Tipe</span>
               </a>
             </li>
-            
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.categories.index') }}" aria-expanded="false">
                 <span><i class="fas fa-tags"></i></span> 
@@ -80,11 +83,6 @@
                 <span class="hide-menu">Pengambilan & Pengembalian</span>
               </a>
             </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ route('admin.users.index') }}" aria-expanded="false">
-                <span><i class="fas fa-users"></i></span>
-                <span class="hide-menu">Users</span>
-              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.payments.index') }}" aria-expanded="false">
