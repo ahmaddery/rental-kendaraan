@@ -52,7 +52,7 @@
                     <form method="POST" action="{{ route('checkout') }}" class="w-full">
                         @csrf
                         <div class="flex justify-between items-center w-full">
-                            <button type="button" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" data-dismiss="modal">Lanjut Belanja</button>
+                            <a href="{{ route('product') }}" class="btn btn-secondary bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Lanjut Belanja</a>
                             <button type="submit" class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Checkout</button>
                         </div>
                     </form>
