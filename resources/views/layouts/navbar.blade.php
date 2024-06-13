@@ -38,13 +38,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('index') ? 'active underline-active' : '' }}" aria-current="page" href="{{ route('index') }}">Home</a>
+                        <a class="nav-link {{ Request::routeIs('index') ? 'active underline-active' : '' }}" aria-current="page" href="{{ route('index') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('product') ? 'active underline-active' : '' }}" href="{{ route('product') }}">Product</a>
+                        <a class="nav-link {{ Request::routeIs('product') ? 'active underline-active' : '' }}" href="{{ route('product') }}">Sewa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('about') ? 'active underline-active' : '' }}" href="{{ route('about') }}">About</a>
+                        <a class="nav-link {{ Request::routeIs('about') ? 'active underline-active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
                     </li>
                 </ul>
                 <div class="dropdown">
