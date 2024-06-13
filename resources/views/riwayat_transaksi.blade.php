@@ -5,72 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Transaksi</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .receipt {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #ffffff;
-            font-family: Arial, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .receipt .header, .receipt .footer {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .receipt .header img {
-            max-width: 100px;
-            margin-bottom: 10px;
-        }
-        .receipt .header h1 {
-            margin-bottom: 5px;
-            font-size: 28px;
-            color: #333;
-            font-weight: bold;
-        }
-        .receipt .header p {
-            margin: 0;
-            font-size: 14px;
-            color: #666;
-        }
-        .receipt h3 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-            text-align: center;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-        }
-        .receipt .details p, .receipt .items p {
-            margin: 5px 0;
-            font-size: 16px;
-        }
-        .receipt .items p span {
-            display: inline-block;
-            min-width: 150px;
-            font-weight: bold;
-        }
-        .receipt .footer p {
-            font-size: 14px;
-            color: #555;
-        }
-        .receipt .footer p.company-details {
-            margin: 0;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .badge {
-            font-size: 14px;
-        }
-    </style>
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="mb-5 text-center">Riwayat Transaksi</h1>
+    <div class="row">
+        <div class="col-6">
+            <h2 class="mb-1">Riwayat Transaksi</h2>
+            <div class="mb-3">
+                <div class="">
+                    {{ $riwayatTransaksi->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <form method="GET" action="{{ route('riwayat.transaksi') }}" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search Id Transaksi...." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-light">Search</button>
+            </form>
+        </div>
+    </div>
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -172,9 +125,7 @@
                                                 <p><strong>Total Pembayaran</strong></p>
                                             </div>
                                             <div class="col-8">
-                                                @foreach ($kendaraans as $kendaraan)
                                                 <p>: {{ number_format($transaksi->gross_amount, 0, ',', '.') }} IDR</p>
-                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +143,7 @@
             @endforeach
         </div>
     @endif
-    <a class="btn btn-danger" href="{{ route('index') }}">back</a>
+    <a class="btn btn-danger" href="{{ route('index') }}">Back</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
