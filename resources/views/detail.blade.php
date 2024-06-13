@@ -1,5 +1,5 @@
+@extends('layouts.navbar')
 
-@include('layouts.navbar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,76 +16,208 @@
             border: none;
             transition: transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .card-img-top {
-            transition: transform 0.3s;
-        }
-        .card-img-top:hover {
-            transform: scale(1.05);
-        }
-        .btn {
-            background-color: #007bff;
-            border-color: #007bff;
-            transition: background-color 0.3s;
+        .btn-1 {
+            margin: 20px;
         }
         .btn:hover {
             background-color: #0056b3;
             border-color: #0056b3;
-        }
-        .text-muted {
-            color: #6c757d;
         }
         .modal-content {
             background-color: #f8f9fa;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        img {
+            padding: 15px;
+            width: 100%;
+            height: 85%;
+            border-radius: 35px;
+        }
+        .harga {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .deskripsi {
+            padding: 10px;
+        }
+        .detail {
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid #ccc;
+        }
+        .detail-number {
+            width: 50px;
+            font-weight: bold;
+            margin-right: 10px;
+            padding: 10px;
+        }
+        .detail-content {
+            flex-grow: 1;
+            padding: 5px;
+        }
+        .keterangan {
+            display: flex;
+            justify-content: space-between;
+        }
+        .keterangan div {
+            width: 50%;
+        }
+        .garis{
+            border-top:3px solid black;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+        .btn-2{
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+        .rating-box{
+            background-color: #d6e7f8;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin:25px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #90caf9;
+            margin-right: 15px;
+        }
+        .user-name {
+            font-weight: bold;
+        }
+        .car{
+            font-size: 12px;
+            color: #666;
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-left:65px;
+        }
+        .comment {
+            margin-top: 10px;
+        }
+        .count-edit-rating{
+            padding-right: 40px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 0 10px 10px 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center mb-5">Detail Kendaraan</h1>
-        <div class="card">
-            <img src="{{ asset($kendaraan->image) }}" class="card-img-top" alt="{{ $kendaraan->nama }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ $kendaraan->nama }}</h5>
-                <p class="card-text">Tipe: {{ $kendaraan->type->typekendaraan }}</p>
-                <p class="card-text">Brand: {{ $kendaraan->brand->kendaraan }}</p>
-                <p class="card-text">Kategori: {{ $kendaraan->category->kendaraan }}</p>
-                <p class="card-text">Tahun: {{ $kendaraan->tahun }}</p>
-                <p class="card-text">Warna: {{ $kendaraan->warna }}</p>
-                <p class="card-text">Stok: {{ $kendaraan->stok }}</p>
-                <p class="card-text">Harga: {{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-                <p class="card-text">Deskripsi: {!! $kendaraan->deskripsi !!}</p>
-                <p class="card-text">Plat Nomor: {{ $kendaraan->plat_nomor }}</p>
-                <a href="{{ route('index') }}" class="btn btn-primary">Kembali</a>
-
-                <!-- Formulir Rating -->
+    <div class="container pt-5">
+        <div class="card mt-5 rounded-5">
+            <div class="row justify-content-between">
+                <div class="col-lg-7">
+                    <img src="{{ asset($kendaraan->image) }}" class="" alt="{{ $kendaraan->nama }}">
+                </div>
+                <div class="col-lg-5">
+                    <div class="deskripsi">
+                        <h3 class="text-primary">MOBIL</h3>
+                        <h3 class="card-title"><b>{{ $kendaraan->nama }}</b></h3>
+                        <div class="harga mt-4">
+                            <h4><b>IDR</b></h4>
+                            <h4 class="ml-auto">{{ number_format($kendaraan->harga, 0, ',', '.') }}</h4>
+                        </div>
+                        <hr style="border-top:3px solid black">
+                        <div class="detail">
+                            <div class="detail-number">
+                                <h5>01.</h5>
+                            </div>
+                            <div class="detail-content">
+                                <h4>DETAIL</h4>
+                                <div class="keterangan">
+                                    <div><b>Brand</b></div>
+                                    <div>{{ $kendaraan->brand->kendaraan }}</div>
+                                </div>
+                                <div class="keterangan">
+                                    <div><b>Warna</b></div>
+                                    <div>{{ $kendaraan->warna }}</div>
+                                </div>
+                                <div class="keterangan">
+                                    <div><b>Tahun</b></div>
+                                    <div>{{ $kendaraan->tahun }}</div>
+                                </div>
+                                <div class="keterangan">
+                                    <div><b>Plat Nomor</b></div>
+                                    <div>{{ $kendaraan->plat_nomor }}</div>
+                                </div>
+                            </div>
+                        </div>              
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <hr class="garis">
+                </div>
+            </div>
+            <div class="row">
+                <div class="detail">
+                    <div class="detail-number">
+                        <h5>02.</h5>
+                    </div>
+                    <div class="detail-content">
+                        <h5><b>DESKRIPSI</b></h5>
+                        <p>{!! $kendaraan->deskripsi !!}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <hr class="garis">
+                </div>
+            </div>
+            <div class="row p-5">
+                   <!-- Formulir Rating -->
                 @if($payment && $payment->transaction_status === 'settlement' && !$userHasRated)
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ratingModal">Berikan Rating</button>
+                <button type="button" class="btn btn-success btn-1 rounded-4" data-toggle="modal" data-target="#ratingModal">Berikan Rating</button>
                 @endif
             </div>
         </div>
+        
         <!-- Bagian Rating dan Komentar -->
-        <div class="mt-5">
-            <h2 class="text-center mb-4">Rating dan Komentar</h2>
+        <div class="card mt-5 rounded-5">
+            <h1 class="p-3">Rating dan Komentar</h1>
             @if($ratings->isEmpty())
-                <p class="text-center">Belum ada rating dan komentar.</p>
+                <p class="text-center text-primary">Belum ada rating dan komentar.</p>
             @else
-                @foreach($ratings as $rating)
-                    <div class="card mb-3">
-                        @if($rating->user_id == Auth::id())
-                            <!-- Edit Button -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRatingModal" data-rating="{{ $rating->rating }}" data-komentar="{{ $rating->komentar }}" data-url="{{ route('rating.update', ['id' => $rating->kendaraan_id]) }}">
-                                Edit
-                            </button>
-                        @endif
-                        <!-- Display Rating -->
-                        <div class="rating-display" style="position: absolute; top: 10px; right: 10px; margin: 0;">
+                @foreach ($ratings as $rating )
+                    @if($rating->user_id == Auth::id())
+                        <!-- Edit Button -->
+                        <button type="button" class="btn btn-primary btn-2 rounded-5" data-toggle="modal" data-target="#editRatingModal" data-rating="{{ $rating->rating }}" data-komentar="{{ $rating->komentar }}" data-url="{{ route('rating.update', ['id' => $rating->kendaraan_id]) }}">
+                            Edit
+                        </button>
+                    @endif
+                    <div class="rating-box">
+                        <div class="user-info">
+                            <div class="user-avatar"></div>
+                            <div>
+                                <div class="user-name">
+                                    <p class="card-text">{{ $rating->user->name }}</p>
+                                </div>
+                                <div class="car">
+                                    <p>{{ $rating->kendaraan->nama }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rating text-warning">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $rating->rating)
                                     <i class="fas fa-star"></i> <!-- Filled star -->
@@ -94,22 +226,15 @@
                                 @endif
                             @endfor
                         </div>
-                        <!-- Display Edit Count -->
-                        <p style="position: absolute; bottom: 0; right: 0; margin: 0 10px 10px 0;">
-                            Total Komentar di edit: {{ Cache::get('total_edited_count_' . $rating->kendaraan_id, 0) }}
-                        </p>
-                        <div class="card-body">
-                            <h5 class="card-title">Rating:
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $rating->rating)
-                                        <i class="fas fa-star"></i> <!-- Filled star -->
-                                    @else
-                                        <i class="far fa-star"></i> <!-- Empty star -->
-                                    @endif
-                                @endfor
-                            </h5>
-                            <p class="card-text">{{ $rating->komentar }}</p>
+                        <div class="comment">
+                            <p class="card-text">"{{ $rating->komentar }}"</p>
                             <p class="card-text"><small class="text-muted">Oleh: {{ $rating->user->name }} pada {{ $rating->created_at->format('d M Y') }}</small></p>
+                        </div>
+                        <div class="count-edit-rating">
+                            <!-- Display Edit Count -->
+                            <p>
+                                Total Komentar di edit: {{ Cache::get('total_edited_count_' . $rating->kendaraan_id, 0) }}
+                            </p>
                         </div>
                     </div>
                 @endforeach
