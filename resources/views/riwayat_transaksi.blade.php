@@ -71,7 +71,6 @@
 <body>
 <div class="container mt-5">
     <h1 class="mb-5 text-center">Riwayat Transaksi</h1>
-
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -179,32 +178,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="items">
-                                        <p><strong>Detail Kendaraan:</strong></p>
-                                        @foreach ($kendaraans as $kendaraan)
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <p>{{ $kendaraan->nama }}</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p>{{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="items">
-                                        <p><strong>Quantity:</strong></p>
-                                        @foreach ($kendaraans as $kendaraan)
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <p>{{ floor($transaksi->gross_amount / $kendaraan->harga) }}</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p><strong>Total Pembayaran:</strong> {{ number_format($transaksi->gross_amount, 0, ',', '.') }} IDR</p>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div> --}}
                                     <div class="footer">
                                         <p>Terima kasih telah berbelanja bersama kami!</p>
                                         <p class="company-details">Rental Kendaraan</p>
@@ -219,6 +192,7 @@
             @endforeach
         </div>
     @endif
+    <a class="btn btn-danger" href="{{ route('index') }}">back</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
