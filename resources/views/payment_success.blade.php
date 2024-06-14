@@ -18,6 +18,15 @@
             color: #155724;
             background-color: #d4edda;
         }
+        .card-body .col-6 {
+            margin-bottom: 15px;
+            margin-right:15px; 
+            margin-left:30px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         footer {
             margin-top: 50px;
             text-align: center;
@@ -29,40 +38,46 @@
     <div class="container mt-10">
         <div class="card shadow-lg">
             <div class="card-header bg-blue-500 text-white">
-                <h1 class="text-xl font-bold">Payment 
+                <h1 class="text-center">
                     @if ($payment->transaction_status == 'settlement')
-                        <span class="badge badge-success">Success</span>
+                        <span class="badge badge-success text-xl font-bold ">Payment Success</span>
                     @else
                         <span class="badge badge-warning">{{ $payment->transaction_status }}</span>
                     @endif
                 </h1>
             </div>
-            <div class="card-body p-6">
-                <p class="card-text mb-4">Thank you for your payment!</p>
-                <p class="card-text"><strong>Order ID:</strong> {{ $payment->order_id }}</p>
-                <p class="card-text"><strong>Tanggal Pembelian: {{ date('d F Y, H:i', strtotime($payment->purchase_date)) }}</strong></p>
-                <p class="card-text mb-4"><strong>Transaction Status:</strong> 
-                    @if ($payment->transaction_status == 'settlement')
-                        <span class="badge badge-success">Success</span>
-                    @else
-                        <span class="badge badge-warning">{{ $payment->transaction_status }}</span>
-                    @endif
-                </p>
-                <ul class="list-group mb-4">
+            <div class="card-body row">
+                <div class="col-6 ">
                     @php
-                        $kendaraanIds = explode(',', $payment->kendaraan_id);
-                        $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
+                    $kendaraanIds = explode(',', $payment->kendaraan_id);
+                    $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
+                @endphp
+                @foreach ($kendaraans as $kendaraan)
+                    <img src="{{ $kendaraan->image }}" alt="{{ $kendaraan->nama }}" class="img-fluid mb-4">
+                @endforeach
+                </div>
+                <div class="col-5 mx-4 pt-5 mb-1 bg-light">
+                    <p class="card-text"><strong>Order ID:</strong> {{ $payment->order_id }}</p>
+                    <p class="card-text"><strong>Tanggal Pembelian: {{ date('d F Y, H:i', strtotime($payment->purchase_date)) }}</strong></p>
+                    <p class="card-text mb-4"><strong>Transaction Status:</strong> 
+                        @if ($payment->transaction_status == 'settlement')
+                            <span class="badge badge-success">Success</span>
+                        @else
+                            <span class="badge badge-warning">{{ $payment->transaction_status }}</span>
+                        @endif
+                    </p>
+                    @php
+                    $kendaraanIds = explode(',', $payment->kendaraan_id);
+                    $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
                     @endphp
                     @foreach ($kendaraans as $kendaraan)
-                        <li class="list-group-item">
-                            <strong>Kendaraan:</strong> {{ $kendaraan->nama }}<br>
-                            <strong>Price:</strong> Rp. {{ number_format($kendaraan->harga, 0, ',', '.') }} / Hari<br>
-                            <strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} days<br>
-                        </li>
+                        <p><strong>Kendaraan:</strong> {{ $kendaraan->nama }}</p>
+                        <p><strong>Price:</strong> Rp. {{ number_format($kendaraan->harga, 0, ',', '.') }} / Hari</p>
+                        <p><strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} days</p>
                     @endforeach
-                </ul>
-
-                @if ($payment->transaction_status == 'settlement')
+                </div>
+                <div class="col-12 bg-light">
+                    @if ($payment->transaction_status == 'settlement')
                     @if (!$isVehicleTaken)
                         <h2 class="mt-4 mb-4 text-xl font-semibold">Pick Up Vehicle:</h2>
                         <form action="{{ route('pengambilan.store') }}" method="POST" id="pickUpForm">
@@ -70,7 +85,7 @@
                             <div class="form-group mb-4">
                                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                 <input type="hidden" name="kendaraan_id" value="{{ $payment->kendaraan_id }}">
-                                <input type="readonly" name="order_id" value="{{ $payment->order_id }}" readonly>
+				                <input type="readonly" name="order_id" value="{{ $payment->order_id }}" readonly>
                                 <label for="tanggal_pengambilan" class="block font-bold mb-2">Pick Up Date:</label>
                                 <input type="date" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control" required min="{{ date('Y-m-d') }}">
                             </div>
@@ -78,7 +93,7 @@
                                 <label for="tanggal_pengembalian" class="block font-bold mb-2">Return Date:</label>
                                 <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian" class="form-control" readonly>
                             </div>
-                            <button type="submit" class="btn btn-primary">Pick Up</button>
+                            <button type="submit" class="btn btn-primary d-flex justify-content-center">Pick Up</button>
                         </form>
                     @else
                         <p class="text-success">Anda telah menentukan Tanggal pengambilan kendaraan</p>
@@ -91,6 +106,7 @@
                         <button type="submit" class="btn btn-warning">Retry Payment</button>
                     </form>
                 @endif
+                </div>
             </div>
         </div>
         <a href="{{ route('index') }}" class="btn btn-secondary mt-6">Return to Home</a>
