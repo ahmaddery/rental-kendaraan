@@ -18,15 +18,15 @@
             color: #155724;
             background-color: #d4edda;
         }
+        
         .card-body .col-6 {
-            margin-bottom: 15px;
-            margin-right:15px; 
-            margin-left:30px; 
+            margin-bottom: 15px; 
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
+
         footer {
             margin-top: 50px;
             text-align: center;
@@ -36,8 +36,8 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mt-10">
-        <div class="card shadow-lg">
-            <div class="card-header bg-blue-500 text-white">
+        <div class="card m-0 p-0 col-md-12 shadow-lg">
+            <div class="card-header bg-light">
                 <h1 class="text-center">
                     @if ($payment->transaction_status == 'settlement')
                         <span class="badge badge-success text-xl font-bold ">Payment Success</span>
@@ -56,7 +56,7 @@
                     <img src="{{ $kendaraan->image }}" alt="{{ $kendaraan->nama }}" class="img-fluid mb-4">
                 @endforeach
                 </div>
-                <div class="col-5 mx-4 pt-5 mb-1 bg-light">
+                <div class="col-6 bg-light">
                     <p class="card-text"><strong>Order ID:</strong> {{ $payment->order_id }}</p>
                     <p class="card-text"><strong>Tanggal Pembelian: {{ date('d F Y, H:i', strtotime($payment->purchase_date)) }}</strong></p>
                     <p class="card-text mb-4"><strong>Transaction Status:</strong> 
@@ -76,16 +76,16 @@
                         <p><strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} days</p>
                     @endforeach
                 </div>
-                <div class="col-12 bg-light">
+                <div class="col-12 mt-2 bg-light">
                     @if ($payment->transaction_status == 'settlement')
                     @if (!$isVehicleTaken)
-                        <h2 class="mt-4 mb-4 text-xl font-semibold">Pick Up Vehicle:</h2>
+                        <h2 class="mt-4 mb-4 text-xl font-semibold">Pick Up Vehicle</h2>
                         <form action="{{ route('pengambilan.store') }}" method="POST" id="pickUpForm">
                             @csrf
                             <div class="form-group mb-4">
                                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                 <input type="hidden" name="kendaraan_id" value="{{ $payment->kendaraan_id }}">
-				                <input type="readonly" name="order_id" value="{{ $payment->order_id }}" readonly>
+				                <input type="hidden" name="order_id" value="{{ $payment->order_id }}" hidden>
                                 <label for="tanggal_pengambilan" class="block font-bold mb-2">Pick Up Date:</label>
                                 <input type="date" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control" required min="{{ date('Y-m-d') }}">
                             </div>
