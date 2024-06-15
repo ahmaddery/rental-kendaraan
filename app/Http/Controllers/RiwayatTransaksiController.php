@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
+use App\Models\Feedback;
 
 class RiwayatTransaksiController extends Controller
 {
@@ -26,7 +27,21 @@ class RiwayatTransaksiController extends Controller
                     ->paginate($perPage);
             }
 
-            return view('riwayat_transaksi', ['riwayatTransaksi' => $riwayatTransaksi]);
+            // Prepare an array to hold feedback statuses
+            $feedbackStatuses = [];
+
+            foreach ($riwayatTransaksi as $transaksi) {
+                $kendaraanIds = explode(',', $transaksi->kendaraan_id);
+                foreach ($kendaraanIds as $kendaraanId) {
+                    $feedback = Feedback::where('user_id', $user_id)->where('kendaraan_id', $kendaraanId)->first();
+                    $feedbackStatuses[$transaksi->id][$kendaraanId] = $feedback ? 'exists' : 'not_exists';
+                }
+            }
+
+            return view('riwayat_transaksi', [
+                'riwayatTransaksi' => $riwayatTransaksi,
+                'feedbackStatuses' => $feedbackStatuses,
+            ]);
         } else {
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk melihat riwayat transaksi.');
         }

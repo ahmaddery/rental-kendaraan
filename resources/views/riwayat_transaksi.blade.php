@@ -39,7 +39,6 @@
                                     <div class="col-md-3">
                                         <p><strong>Order ID:</strong> {{ $transaksi->order_id }}</p>
                                         <p><strong>Tgl Order:</strong> {{ $transaksi->purchase_date }}</p>
-                                        </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p><strong>Total Pembayaran:</strong> {{ number_format($transaksi->gross_amount, 0, ',', '.') }} IDR</p>
@@ -51,10 +50,13 @@
                                             $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
                                         @endphp
                                         @foreach ($kendaraans as $kendaraan)
-                                        <p><strong>Detail:</strong> {{ $kendaraan->nama }} - {{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-                                        @endforeach
-                                        @foreach ($kendaraans as $kendaraan)
-                                        <p><strong>Quantity:</strong> {{ floor($transaksi->gross_amount / $kendaraan->harga) }}</p>
+                                            <p><strong>Detail:</strong> {{ $kendaraan->nama }} - {{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
+                                            <p><strong>Quantity:</strong> {{ floor($transaksi->gross_amount / $kendaraan->harga) }}</p>
+                                            @if ($feedbackStatuses[$transaksi->id][$kendaraan->id] === 'not_exists')
+                                                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-warning">Beri Feedback</a>
+                                            @else
+                                                <span class="badge badge-success">Feedback Diberikan</span>
+                                            @endif
                                         @endforeach
                                     </div>
                                     <div class="col-md-3">
@@ -152,7 +154,6 @@
            
         </div>
     </section>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

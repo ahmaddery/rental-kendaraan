@@ -30,7 +30,7 @@
         <nav class="sidebar-nav scroll-sidebar" data-simplebar>
           <ul id="sidebarnav">
             <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <i class="ti ti-home"></i>
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
@@ -66,20 +66,20 @@
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.kendaraan.index') }}" aria-expanded="false">
-                <span><i class="fas fa-building"></i></span> 
+                <span><i class="fas fa-car"></i></span> 
                 <span class="hide-menu">Kendaraan</span>
               </a>
             </li>
 
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.feedbacks.index') }}" aria-expanded="false">
-                <span><i class="fas fa-building"></i></span> 
+                <span><i class="fas fa-star"></i></span> 
                 <span class="hide-menu">Rating</span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.pengambilan_pengembalian.index') }}" aria-expanded="false">
-                <span><i class="fas fa-car"></i></span>
+                <span><i class="fas fa-exchange-alt"></i></span>
                 <span class="hide-menu">Pengambilan & Pengembalian</span>
               </a>
             </li>
@@ -87,27 +87,12 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ route('admin.payments.index') }}" aria-expanded="false">
                   <span><i class="fas fa-money-bill"></i></span>
-                  <span class="hide-menu">Payments</span>
+                  <span class="hide-menu">Pembayaran</span>
               </a>
           </li>
           
             
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span><i class="ti ti-login"></i></span>
-                <span class="hide-menu">Login</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span><i class="ti ti-user-plus"></i></span>
-                <span class="hide-menu">Register</span>
-              </a>
-            </li>
+
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -180,14 +165,17 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
+                    <a href="{{ route('index') }}" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="fas fa-home fs-6"></i>
+                      <p class="mb-0 fs-3">Halaman Utama</p>
+                    </a>   
+
                     <a href="{{ route('profile.edit') }}" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
+                      <i class="fas fa-user-circle fs-6"></i>
                       <p class="mb-0 fs-3">Profile</p>
                     </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
+                    
+                                   
                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
@@ -197,9 +185,10 @@
                       @csrf
                       <a href="#" class="btn btn-outline-primary mx-3 d-block"
                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                          Logout
+                          <i class="fas fa-sign-out-alt"></i> Logout
                       </a>
                     </form>
+                    
                   </div>
                 </div>
               </li>

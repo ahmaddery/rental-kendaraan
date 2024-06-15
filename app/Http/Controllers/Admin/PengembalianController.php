@@ -10,6 +10,9 @@ class PengembalianController extends Controller
 {
     public function index(Request $request)
     {
+        // Default value for items per page
+        $perPage = $request->input('per_page', 10);
+
         // Check if the request is an AJAX request
         if ($request->ajax()) {
             $notifications = PengambilanPengembalian::with(['user', 'kendaraan'])
@@ -20,8 +23,11 @@ class PengembalianController extends Controller
             return response()->json($notifications);
         }
 
-        // Regular page load
-        $data = PengambilanPengembalian::with(['user', 'kendaraan'])->get();
-        return view('admin.pengambilan_pengembalian.index', compact('data'));
+        // Regular page load with pagination
+        $data = PengambilanPengembalian::with(['user', 'kendaraan'])
+            ->paginate($perPage);
+
+        return view('admin.pengambilan_pengembalian.index', compact('data'))
+            ->with('perPage', $perPage);
     }
 }

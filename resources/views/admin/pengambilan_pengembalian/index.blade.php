@@ -1,11 +1,24 @@
 @extends('admin.layouts.navbar')
 
 @section('content')
-    <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center pt-5"
-        style="min-height: 60vh;">
+    <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center pt-5" style="min-height: 60vh;">
         <div class="row w-100 justify-content-center">
             <div class="col-lg-7">
                 <h1 class="mb-4">Data Pengambilan dan Pengembalian</h1>
+
+                <!-- Dropdown for items per page -->
+                <div class="mb-3">
+                    <form action="{{ url()->current() }}" method="GET" id="itemsPerPageForm">
+                        <label for="per_page">Items per page:</label>
+                        <select name="per_page" id="per_page" class="form-select w-auto" onchange="document.getElementById('itemsPerPageForm').submit()">
+                            <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                            <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ $perPage == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </form>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -47,6 +60,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Pagination links -->
+                <div class="d-flex justify-content-center">
+                    {{ $data->appends(['per_page' => $perPage])->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
