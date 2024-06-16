@@ -375,4 +375,17 @@ class UtamaController extends Controller
         return $generatedSignature === $inputSignature;
     }
 
+    public function deleteCartItem($id)
+    {
+        $user_id = Auth::id();
+        $keranjang = Keranjang::where('user_id', $user_id)->where('id', $id)->first();
+
+        if ($keranjang) {
+            $keranjang->delete();
+            return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
+        } else {
+            return redirect()->back()->with('error', 'Item tidak ditemukan atau Anda tidak memiliki izin untuk menghapus item ini.');
+        }
+    }
+
 }

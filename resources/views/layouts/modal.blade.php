@@ -25,6 +25,7 @@
                                     <th class="p-2 border-b text-left">Jumlah</th>
                                     <th class="p-2 border-b text-left">Harga</th>
                                     <th class="p-2 border-b text-left">Total</th>
+                                    <th class="p-2 border-b text-left">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +37,13 @@
                                         <td class="p-2 border-b">{{ $item->quantity }} Hari</td>
                                         <td class="p-2 border-b">{{ number_format($item->kendaraan->harga, 2) }}</td>
                                         <td class="p-2 border-b">{{ number_format($item->quantity * $item->kendaraan->harga, 2) }}</td>
+                                        <td class="p-2 border-b">
+                                            <form method="POST" action="{{ route('cart.delete', $item->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -63,8 +71,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!--modal untuk contact di bagian footer-->
 <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
