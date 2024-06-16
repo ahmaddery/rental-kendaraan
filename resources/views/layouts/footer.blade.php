@@ -1,76 +1,111 @@
 <!-- Start Footer -->
-<div class="footer-section py-5" style="background-color: #212529; color: white;">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-1">
-    
-      </div>
-      <div class="col-7">
-        <ul>
-          <li class="footer-list-title mb-3">Ikuti Kami</li>
-          <li><a href="https://www.instagram.com/" style="color: #adb5bd;"><i class="bi bi-instagram"></i> @rental_mobil</a></li>
-          <li><a href="https://wa.me/" style="color: #adb5bd;"><i class="bi bi-whatsapp"></i> 08123456789</a></li>
-        </ul>
-        <ul>
-          <li class="footer-list-title mt-4 mb-3">Kontak Kami</li>
-          <li>
-            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#contactModal" style="background-color: #6c757d; border-color: #6c757d; color: white;">
-              Hubungi Kami <i class="bi bi-arrow-right"></i>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="col-4">
-        <ul>
-          <li class="footer-list-title mb-3">Tautan Penting</li>
-          <li><a href="#" style="color: #adb5bd;">Beranda</a></li>
-          <li><a href="#" style="color: #adb5bd;">Produk</a></li>
-          <li><a href="#" style="color: #adb5bd;">Tentang Kami</a></li>
-        </ul>
-      </div>
+<div class="footer">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-8">
+                    <div class="followus mb-4">
+                        <p class="footer-title">Sosial Media</p>
+                        <ul>
+                            <li>
+                                <a href="https://twitter.com"><i class="bi bi-twitter-x"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://youtube.com"><i class="bi bi-youtube"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://facebook.com"><i class="bi bi-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://instagram.com"><i class="bi bi-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://whatsapp.com"><i class="bi bi-whatsapp"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://tiktok.com"><i class="bi bi-tiktok"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contactus mt-4">
+                        <p class="footer-title">Berlangganan</p>
+                    </div>
+                    <div class="contactus-desc">
+                        <p>Hubungi kami untuk bantuan, pertanyaan lebih lanjut atau saran.</p>
+                    </div>
+                    <div class="btn-styled" data-bs-toggle="modal" data-bs-target="#contactModal"">
+                        <ul>
+                            <li>
+                                <p><a class="btn">Hubungi Kami</a></p>
+                            </li>
+                            <li><i class="btn bi bi-arrow-right"></i></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="usefullinks col-lg-6 col-sm-4">
+                    <p class="footer-title">Tautan Penting</p>
+                    <ul>
+                        <li>
+                            <a href="">Beranda</a>
+                        </li>
+                        <li>
+                            <a href="">Sewa</a>
+                        </li>
+                        <li>
+                            <a href="">Tentang Kami</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-cr">
+                <p>© 2024</p>
+            </div>
+        </div>
     </div>
-    <p class="footer-cr mt-4 text-center" style="color: #adb5bd;">© 2024. Hak cipta dilindungi.</p>
-  </div>
 </div>
 <!-- End Footer -->
 
 <!-- Script JavaScript untuk caching gambar -->
 <script>
-  // Fungsi untuk menyimpan URL gambar ke dalam localStorage
-  function cacheImages(imageUrls) {
-      imageUrls.forEach(function(imageUrl) {
-          localStorage.setItem('cachedImage_' + imageUrl.id, imageUrl.url);
-      });
-  }
+    // Fungsi untuk menyimpan URL gambar ke dalam localStorage
+    function cacheImages(imageUrls) {
+        imageUrls.forEach(function(imageUrl) {
+            localStorage.setItem('cachedImage_' + imageUrl.id, imageUrl.url);
+        });
+    }
 
-  // Fungsi untuk memuat gambar dari cache jika tersedia
-  function loadImageFromCache(imageId) {
-      return localStorage.getItem('cachedImage_' + imageId);
-  }
+    // Fungsi untuk memuat gambar dari cache jika tersedia
+    function loadImageFromCache(imageId) {
+        return localStorage.getItem('cachedImage_' + imageId);
+    }
 
-  // Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat halaman dimuat
-  window.onload = function() {
-      // Ambil semua URL gambar dari localStorage
-      var cachedImageUrls = [];
-      @foreach($kendaraans as $kendaraan)
-          cachedImageUrls.push({ id: {{ $kendaraan->id }}, url: '{{ $kendaraan->image }}' });
-      @endforeach
+    // Di halaman yang sesuai, panggil fungsi untuk menyimpan gambar ke dalam cache saat halaman dimuat
+    window.onload = function() {
+        // Ambil semua URL gambar dari localStorage
+        var cachedImageUrls = [];
+        @foreach ($kendaraans as $kendaraan)
+            cachedImageUrls.push({
+                id: {{ $kendaraan->id }},
+                url: '{{ $kendaraan->image }}'
+            });
+        @endforeach
 
-      // Simpan semua URL gambar ke dalam localStorage
-      cacheImages(cachedImageUrls);
+        // Simpan semua URL gambar ke dalam localStorage
+        cacheImages(cachedImageUrls);
 
-      // Muat gambar dari cache jika tersedia saat halaman dimuat
-      var cachedImageUrl;
-      for (var i = 0; i < cachedImageUrls.length; i++) {
-          cachedImageUrl = loadImageFromCache(cachedImageUrls[i].id);
-          if (cachedImageUrl) {
-              document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrl;
-          } else {
-              // Jika tidak ada di cache, muat gambar dari database
-              document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrls[i].url;
-          }
-      }
-  };
+        // Muat gambar dari cache jika tersedia saat halaman dimuat
+        var cachedImageUrl;
+        for (var i = 0; i < cachedImageUrls.length; i++) {
+            cachedImageUrl = loadImageFromCache(cachedImageUrls[i].id);
+            if (cachedImageUrl) {
+                document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrl;
+            } else {
+                // Jika tidak ada di cache, muat gambar dari database
+                document.getElementById('gambar_' + cachedImageUrls[i].id).src = cachedImageUrls[i].url;
+            }
+        }
+    };
 </script>
 
 

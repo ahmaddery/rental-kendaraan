@@ -22,7 +22,7 @@ body {
 }
 @media (max-width: 768px) {
     .section {
-        margin: 2rem !important;
+        margin: 0rem 2rem !important;
     }
 }
 .container {
@@ -526,26 +526,23 @@ body {
     text-align: left;
     padding: 0rem 1rem;
 }
+@media (max-width: 992px) {
+    .banner-about img {
+        height: 25rem;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 @media (max-width: 768px) {
     .banner-text {
         top: 10%;
         left: 0;
-    }
-    .banner-about img {
-        height: 12rem;
-        width: 100%;
-        object-fit: cover;
     }
 }
 @media (max-width: 576px) {
     .banner-text {
         top: 10%;
         left: 0;
-    }
-    .banner-about img {
-        height: 20rem;
-        width: 100%;
-        object-fit: cover;
     }
 }
 
@@ -658,6 +655,9 @@ button.owl-dot {
 }
 .footer .followus {
     font-weight: bold;
+}
+.footer .followus a {
+    cursor: pointer;
 }
 .footer .contactus {
     font-weight: bold;
