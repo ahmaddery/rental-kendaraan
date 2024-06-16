@@ -123,46 +123,41 @@
 <body>
     <div class="container pt-5">
         <div class="card mt-5 rounded-5">
-            <div class="row justify-content-between">
-                <div class="col-lg-7">
-                    <img src="{{ asset($kendaraan->image) }}" class="" alt="{{ $kendaraan->nama }}">
-                </div>
-                <div class="col-lg-5">
-                    <div class="deskripsi">
-                        <h3 class="text-primary">MOBIL</h3>
-                        <h3 class="card-title"><b>{{ $kendaraan->nama }}</b></h3>
-                        <div class="harga mt-4">
-                            <h4><b>IDR</b></h4>
-                            <h4 class="ml-auto">{{ number_format($kendaraan->harga, 0, ',', '.') }}</h4>
+ <!-- Start Product Column -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card card-vehicle">
+                            <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <div class="card-title-year">
+                                    <ul>
+                                        <li class="card-title">{{ $kendaraan->nama }}</li>
+                                        <li class="card-year">{{ $kendaraan->tahun }}</li>
+                                    </ul>
+                                </div>
+                                <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+                                <div class="card-specs mt-3">
+                                    <ul>
+                                        <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
+                                        <li><i class="bi bi-shield-check"></i> {{ $kendaraan->category->kendaraan}}</li>
+                                        <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                                        <li><i class="bi bi-suitcase-lg"></i> {{ $kendaraan->warna }}</li>
+                                    </ul>
+                                </div>
+                                <hr class="mt-4">
+                                <div class="card-price mb-2">
+                                    <ul>
+                                        <li class="idr">Rp</li>
+                                        <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
+                                    </ul>
+                                </div>
+                                <div class="btn-card mt-3">
+                                    <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn me-2">Detail</a>
+                                    <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <hr style="border-top:3px solid black">
-                        <div class="detail">
-                            <div class="detail-number">
-                                <h5>01.</h5>
-                            </div>
-                            <div class="detail-content">
-                                <h4>DETAIL</h4>
-                                <div class="keterangan">
-                                    <div><b>Brand</b></div>
-                                    <div>{{ $kendaraan->brand->kendaraan }}</div>
-                                </div>
-                                <div class="keterangan">
-                                    <div><b>Warna</b></div>
-                                    <div>{{ $kendaraan->warna }}</div>
-                                </div>
-                                <div class="keterangan">
-                                    <div><b>Tahun</b></div>
-                                    <div>{{ $kendaraan->tahun }}</div>
-                                </div>
-                                <div class="keterangan">
-                                    <div><b>Plat Nomor</b></div>
-                                    <div>{{ $kendaraan->plat_nomor }}</div>
-                                </div>
-                            </div>
-                        </div>              
                     </div>
-                </div>
-            </div>
+                <!-- End Product Column -->
             <div class="row">
                 <div class="container">
                     <hr class="garis">

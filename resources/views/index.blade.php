@@ -256,8 +256,8 @@
                                 <hr class="mt-4">
                                 <div class="card-price mb-2">
                                     <ul>
-                                        <li class="idr">IDR</li>
-                                        <li class="idrnom">{{ number_format($kendaraan->harga, 0, ',', '.') }}</li>
+                                        <li class="idr">Rp</li>
+                                        <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
                                     </ul>
                                 </div>
                                 <div class="btn-card mt-3">
