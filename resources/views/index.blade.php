@@ -5,7 +5,7 @@
 <div class="hero-container">
     <img src="{{asset('frontend/images/banner/banner-1.jpg')}}" alt="" class="hero-img">
 </div>
-<div class="hero">
+<div class="hero" data-aos="fade-up">
     <div class="hero-text-bg"></div>
     <div class="hero-text mb-4">
         <div class="hero-title">
@@ -53,7 +53,7 @@
 <!-- End Brands -->
 
 <!-- Start Keunggulan -->
-<div class="keunggulan section">
+<div class="keunggulan section" data-aos="fade-up" data-aos-duration="1000">
     <div class="row p-3">
         <!-- First Column -->
         <div class="col-12 col-lg-4 p-2">
@@ -120,7 +120,7 @@
 <!-- End Keunggulan -->
 
 {{-- Start Langkah --}}
-<div class="langkah section">
+<div class="langkah section" data-aos="fade-up" data-aos-duration="1000">
     <div class="container">
         <div class="title-section mb-4">
             <div class="sub-title">Langkah Pemesanan</div>
@@ -174,7 +174,7 @@
 {{-- End Langkah --}}
 
 <!-- Start Sewa Kendaraan -->
-<div class="section kendaraan" id="sewa">
+<div class="section kendaraan" data-aos="fade-up" data-aos-duration="1000" id="sewa">
     <div class="container">
         <!-- Start Title Section -->
         <div class="mb-4">
@@ -189,7 +189,7 @@
                     <div class="btn-styled">
                         <ul>
                             <li>
-                                <p><a href="" class="btn">Selengkapnya</a></p>
+                                <p><a href="{{ 'product' }}" class="btn">Selengkapnya</a></p>
                             </li>
                             <li><i class="btn bi bi-arrow-right"></i></li>
                         </ul>
@@ -336,7 +336,7 @@
 </script>
 
 <!-- Start About Preview -->
-<div class="about section">
+<div class="about section" data-aos="fade-up" data-aos-duration="1000">
     <div class="banner-about">
         <img src="{{asset('frontend/images/banner/banner-2.png')}}" alt="Banner Image" class="banner-about-img img-fluid" />
         <!-- Start Title Section -->
@@ -348,7 +348,7 @@
             <div class="btn-styled mt-4">
                 <ul>
                     <li>
-                        <p><a href="#footer" class="btn">Kontak Kami<i class="btn bi bi-arrow-right"></i></a></p>
+                        <p><a href="{{ 'about' }}" class="btn">Tentang Kami<i class="btn bi bi-arrow-right"></i></a></p>
                     </li>
                 </ul>
             </div>
@@ -359,7 +359,7 @@
 <!-- End About Preview -->
 
 <!-- Start Review Pelanggan -->
-<div class="section review">
+<div class="section review" data-aos="fade-up" data-aos-duration="1000">
     <div class="container">
         <!-- Start Title Section -->
         <div class="title-section mb-4">
