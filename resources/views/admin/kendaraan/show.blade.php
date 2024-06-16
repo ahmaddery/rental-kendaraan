@@ -25,7 +25,8 @@
     </div>
 </div>
 
-<!-- Modal -->      <!--untuk modal Jangan diubah -->
+<!-- Modal -->
+<!--untuk modal Jangan diubah -->
 
 <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -54,19 +55,23 @@
         overflow: hidden;
         cursor: grab;
     }
+
     #modalImage {
         transition: transform 0.2s ease-in-out;
     }
+
     .btn {
         border-radius: 20px;
     }
+
     .modal-footer button {
         margin: 0 5px;
     }
+
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const image = document.querySelector('.clickable-image');
         const modalImage = document.getElementById('modalImage');
         let scale = 1;
@@ -80,46 +85,46 @@
         let translateX = 0;
         let translateY = 0;
 
-        image.addEventListener('click', function () {
+        image.addEventListener('click', function() {
             modalImage.src = image.src;
             const myModal = new bootstrap.Modal(document.getElementById('imageModal'));
             myModal.show();
         });
 
-        document.getElementById('zoomInBtn').addEventListener('click', function () {
+        document.getElementById('zoomInBtn').addEventListener('click', function() {
             if (scale < maxScale) {
                 scale += scaleStep;
                 modalImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
             }
         });
 
-        document.getElementById('zoomOutBtn').addEventListener('click', function () {
+        document.getElementById('zoomOutBtn').addEventListener('click', function() {
             if (scale > minScale) {
                 scale -= scaleStep;
                 modalImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
             }
         });
 
-        document.getElementById('resetZoomBtn').addEventListener('click', function () {
+        document.getElementById('resetZoomBtn').addEventListener('click', function() {
             scale = 1;
             translateX = 0;
             translateY = 0;
             modalImage.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
         });
 
-        modalImage.addEventListener('mousedown', function (event) {
+        modalImage.addEventListener('mousedown', function(event) {
             isPanning = true;
             startX = event.clientX - translateX;
             startY = event.clientY - translateY;
             modalImage.style.cursor = 'grabbing';
         });
 
-        modalImage.addEventListener('mouseup', function () {
+        modalImage.addEventListener('mouseup', function() {
             isPanning = false;
             modalImage.style.cursor = 'grab';
         });
 
-        modalImage.addEventListener('mousemove', function (event) {
+        modalImage.addEventListener('mousemove', function(event) {
             if (isPanning) {
                 translateX = event.clientX - startX;
                 translateY = event.clientY - startY;
@@ -127,9 +132,10 @@
             }
         });
 
-        modalImage.addEventListener('mouseleave', function () {
+        modalImage.addEventListener('mouseleave', function() {
             isPanning = false;
             modalImage.style.cursor = 'grab';
         });
     });
+
 </script>

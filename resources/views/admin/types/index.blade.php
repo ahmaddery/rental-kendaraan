@@ -1,38 +1,44 @@
 @extends('admin.layouts.navbar')
 @section('addCss')
-  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
-  <style>
+<link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+<style>
     .modal-dialog-centered {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100% - 1rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100% - 1rem);
     }
+
     .btn-margin-top {
-      margin-top: 15px;
+        margin-top: 15px;
     }
+
     .form-group {
-      margin-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
     }
+
     .form-label {
-      font-weight: bold;
+        font-weight: bold;
     }
+
     .help-text {
-      font-size: 0.875em;
-      color: #6c757d;
+        font-size: 0.875em;
+        color: #6c757d;
     }
-  </style>
+
+</style>
 @endsection
 
 @section('addJavascript')
-  <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script>
-    $(function () {
-      $("#data-table").DataTable();
+<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    $(function() {
+        $("#data-table").DataTable();
     })
-  </script>
-@endsection 
+
+</script>
+@endsection
 
 @section('content')
 <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center" style="min-height: 75vh;">
@@ -52,18 +58,18 @@
                 </thead>
                 <tbody>
                     @foreach ($types as $type)
-                        <tr>
-                            <td>{{ $type->id }}</td>
-                            <td>{{ $type->typekendaraan }}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-warning edit-btn" data-toggle="modal" data-target="#editTypeModal" data-id="{{ $type->id }}" data-typekendaraan="{{ $type->typekendaraan }}">Edit</button>
-                                <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $type->id }}</td>
+                        <td>{{ $type->typekendaraan }}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning edit-btn" data-toggle="modal" data-target="#editTypeModal" data-id="{{ $type->id }}" data-typekendaraan="{{ $type->typekendaraan }}">Edit</button>
+                            <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -145,4 +151,5 @@
             $('#editTypeKendaraan').val(typekendaraan);
         });
     });
+
 </script>

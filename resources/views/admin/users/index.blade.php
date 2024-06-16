@@ -6,10 +6,10 @@
             <h1 class="text-center mb-4">Daftar Pengguna</h1>
 
             @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             @endif
 
             <div class="card shadow-sm border-0">
@@ -22,39 +22,39 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($users as $user)
-                        <li class="list-group-item d-flex justify-content-between align-items-center user-item border-bottom">
-                            <div class="d-flex align-items-center">
-                                @if($user->trashed())
-                                    <i class="bi bi-person-x text-danger me-2"></i>
-                                    <span class="text-muted" style="text-decoration: line-through;">{{ $user->name }}</span>
-                                @else
-                                    <i class="bi bi-person-circle text-primary me-2"></i>
-                                    <a href="#" class="user-link" data-id="{{ $user->id }}">{{ $user->name }}</a>
-                                @endif
-                            </div>
-                            <div class="d-flex align-items-center">
-                                @if($user->trashed())
-                                    <form action="{{ route('admin.users.restore', $user->id) }}" method="POST" class="ms-2">
-                                        @csrf
-                                        <button type="submit" class="btn btn-sm btn-outline-primary restore-btn" onclick="return confirm('Anda yakin ingin memulihkan pengguna ini?')">
-                                            <i class="bi bi-arrow-clockwise me-1"></i>Pulihkan
-                                        </button>
-                                    </form>
-                                @else
-                                    @if($user->userType !== 'admin')
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="ms-2">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger delete-btn" onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">
-                                                <i class="bi bi-trash me-1"></i>Hapus
-                                            </button>
-                                        </form>
-                                    @else
-                                        <span class="badge bg-secondary ms-2 admin-badge">Admin</span>
-                                    @endif
-                                @endif
-                            </div>
-                        </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center user-item border-bottom">
+                        <div class="d-flex align-items-center">
+                            @if($user->trashed())
+                            <i class="bi bi-person-x text-danger me-2"></i>
+                            <span class="text-muted" style="text-decoration: line-through;">{{ $user->name }}</span>
+                            @else
+                            <i class="bi bi-person-circle text-primary me-2"></i>
+                            <a href="#" class="user-link" data-id="{{ $user->id }}">{{ $user->name }}</a>
+                            @endif
+                        </div>
+                        <div class="d-flex align-items-center">
+                            @if($user->trashed())
+                            <form action="{{ route('admin.users.restore', $user->id) }}" method="POST" class="ms-2">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-outline-primary restore-btn" onclick="return confirm('Anda yakin ingin memulihkan pengguna ini?')">
+                                    <i class="bi bi-arrow-clockwise me-1"></i>Pulihkan
+                                </button>
+                            </form>
+                            @else
+                            @if($user->userType !== 'admin')
+                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="ms-2">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger delete-btn" onclick="return confirm('Anda yakin ingin menghapus pengguna ini?')">
+                                    <i class="bi bi-trash me-1"></i>Hapus
+                                </button>
+                            </form>
+                            @else
+                            <span class="badge bg-secondary ms-2 admin-badge">Admin</span>
+                            @endif
+                            @endif
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
                 <div class="card-footer d-flex justify-content-between align-items-center">
@@ -117,9 +117,9 @@
             var userId = $(this).data('id');
 
             $.ajax({
-                url: '/admin/users/' + userId,
-                method: 'GET',
-                success: function(response) {
+                url: '/admin/users/' + userId
+                , method: 'GET'
+                , success: function(response) {
                     $('#modalUserName').text(response.name);
                     $('#modalUserEmail').text(response.email);
 
@@ -133,42 +133,52 @@
 
                     $('#deleteUserForm').attr('action', '/admin/users/' + userId);
                     $('#userModal').modal('show');
-                },
-                error: function() {
+                }
+                , error: function() {
                     alert('Failed to fetch user details.');
                 }
             });
         });
     });
+
 </script>
 
 <style>
     .content-wrapper {
         background-color: #f8f9fa;
     }
+
     .card {
         border-radius: 8px;
     }
+
     .card-header {
         border-radius: 8px 8px 0 0;
     }
+
     .card-footer {
         border-radius: 0 0 8px 8px;
     }
+
     .user-item {
         transition: background-color 0.3s ease;
     }
+
     .user-item:hover {
         background-color: #f1f1f1;
     }
+
     .modal-header {
         border-radius: 8px 8px 0 0;
     }
+
     .modal-content {
         border-radius: 8px;
     }
+
     .form-control:focus {
         border-color: #80bdff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
+
 </style>

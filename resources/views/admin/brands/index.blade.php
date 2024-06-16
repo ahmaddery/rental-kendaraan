@@ -1,33 +1,34 @@
 @extends('admin.layouts.navbar')
 
 @section('addCss')
-  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('addJavascript')
-  <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script>
-    $(function () {
-      $("#data-table").DataTable();
+<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    $(function() {
+        $("#data-table").DataTable();
     })
 
     // Function to open the edit modal and populate the form with brand data
     function openEditModal(brand) {
-      $('#editBrandModal').modal('show');
-      $('#editBrandForm').attr('action', '/admin/brands/' + brand.id);
-      $('#editBrandModal #kendaraan').val(brand.kendaraan);
-      $('#editBrandModal #previewImage').attr('src', '/storage/brands/' + brand.gambar);
+        $('#editBrandModal').modal('show');
+        $('#editBrandForm').attr('action', '/admin/brands/' + brand.id);
+        $('#editBrandModal #kendaraan').val(brand.kendaraan);
+        $('#editBrandModal #previewImage').attr('src', '/storage/brands/' + brand.gambar);
     }
 
     // Function to open the view modal and populate the details with brand data
     function openViewModal(brand) {
-      $('#viewBrandModal').modal('show');
-      $('#viewBrandModal #brand-id').text(brand.id);
-      $('#viewBrandModal #brand-kendaraan').text(brand.kendaraan);
-      $('#viewBrandModal #brand-image').attr('src', '/storage/brands/' + brand.gambar);
+        $('#viewBrandModal').modal('show');
+        $('#viewBrandModal #brand-id').text(brand.id);
+        $('#viewBrandModal #brand-kendaraan').text(brand.kendaraan);
+        $('#viewBrandModal #brand-image').attr('src', '/storage/brands/' + brand.gambar);
     }
-  </script>
+
+</script>
 @endsection
 
 @section('content')
@@ -50,20 +51,20 @@
                 </thead>
                 <tbody>
                     @foreach($brands as $brand)
-                        <tr>
-                            <td>{{ $i++ }}</td>
-                            <td><img src="{{ asset('storage/brands/' . $brand->gambar) }}" alt="Brand Image" style="max-width: 35px;"></td>
-                            <td>{{ $brand->kendaraan }}</td>
-                            <td class="text-center" nowrap>
-                                <button onclick="openViewModal({{ json_encode($brand) }})" class="btn btn-info">View</button>
-                                <button onclick="openEditModal({{ json_encode($brand) }})" class="btn btn-primary">Edit</button>
-                                <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $i++ }}</td>
+                        <td><img src="{{ asset('storage/brands/' . $brand->gambar) }}" alt="Brand Image" style="max-width: 35px;"></td>
+                        <td>{{ $brand->kendaraan }}</td>
+                        <td class="text-center" nowrap>
+                            <button onclick="openViewModal({{ json_encode($brand) }})" class="btn btn-info">View</button>
+                            <button onclick="openEditModal({{ json_encode($brand) }})" class="btn btn-primary">Edit</button>
+                            <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

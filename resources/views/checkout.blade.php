@@ -19,6 +19,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .container {
             background-color: #fff;
             padding: 40px;
@@ -27,28 +28,34 @@
             max-width: 400px;
             width: 100%;
         }
+
         h1 {
             margin-bottom: 30px;
             font-size: 26px;
             color: #333;
         }
+
         .order-summary {
             margin-bottom: 20px;
         }
+
         .order-summary h2 {
             font-size: 20px;
             margin-bottom: 15px;
         }
+
         .order-summary p {
             font-size: 16px;
             margin: 5px 0;
         }
+
         .order-summary .total {
             font-weight: bold;
             font-size: 18px;
             margin-top: 10px;
             color: #007bff;
         }
+
         .pay-button {
             background-color: #007bff;
             color: #fff;
@@ -59,9 +66,11 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .pay-button:hover {
             background-color: #0056b3;
         }
+
     </style>
 </head>
 <body>
@@ -87,11 +96,11 @@
             snap.pay('{{$snapToken}}', {
                 onSuccess: function(result) {
                     sendResultToServer(result);
-                },
-                onPending: function(result) {
+                }
+                , onPending: function(result) {
                     sendResultToServer(result);
-                },
-                onError: function(result) {
+                }
+                , onError: function(result) {
                     alert("Payment failed!");
                     console.error(result);
                 }
@@ -103,6 +112,7 @@
             document.getElementById('status_code').value = result.status_code;
             document.getElementById('payment-form').submit();
         }
+
     </script>
 </body>
 </html>

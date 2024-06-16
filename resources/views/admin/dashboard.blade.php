@@ -82,10 +82,10 @@
                                         <h6 class="card-subtitle mb-2 text-muted">Riwayat Terbaru</h6>
                                         <ul class="list-unstyled">
                                             @foreach($recentPengambilanPengembalian as $record)
-                                                <li class="mb-2">
-                                                    <span class="badge bg-primary me-1">Pengambilan: {{ $record->tanggal_pengambilan }}</span>
-                                                    <span class="badge bg-secondary">Pengembalian: {{ $record->tanggal_pengembalian }}</span>
-                                                </li>
+                                            <li class="mb-2">
+                                                <span class="badge bg-primary me-1">Pengambilan: {{ $record->tanggal_pengambilan }}</span>
+                                                <span class="badge bg-secondary">Pengembalian: {{ $record->tanggal_pengembalian }}</span>
+                                            </li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -103,7 +103,7 @@
                                         <div>
                                             <ul class="list-unstyled mb-0">
                                                 @foreach($feedbackCounts as $rating => $count)
-                                                    <li><span class="badge bg-primary me-1">Rating {{ $rating }}: {{ $count }}</span></li>
+                                                <li><span class="badge bg-primary me-1">Rating {{ $rating }}: {{ $count }}</span></li>
                                                 @endforeach
                                             </ul>
                                         </div>
@@ -126,62 +126,78 @@
     // User Chart
     var userCtx = document.getElementById('userChart').getContext('2d');
     var userChart = new Chart(userCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Registered Users'],
-            datasets: [{
-                label: 'Total',
-                data: [{{ $userCount }}],
-                backgroundColor: 'rgba(54, 162, 235, 0.8)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
+        type: 'bar'
+        , data: {
+            labels: ['Registered Users']
+            , datasets: [{
+                label: 'Total'
+                , data: [{
+                    {
+                        $userCount
+                    }
+                }]
+                , backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                , borderColor: 'rgba(54, 162, 235, 1)'
+                , borderWidth: 1
             }]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
+        }
+        , options: {
+            responsive: false
+            , maintainAspectRatio: false
+            , scales: {
                 y: {
                     beginAtZero: true
                 }
-            },
-            animation: {
-    duration: 2000,
-    easing: 'easeInOutCubic'
-}
+            }
+            , animation: {
+                duration: 2000
+                , easing: 'easeInOutCubic'
+            }
         }
     });
 
     // Transaction Status Chart
     var transactionCtx = document.getElementById('transactionChart').getContext('2d');
     var transactionChart = new Chart(transactionCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Sukses', 'Dibatalkan', 'Menunggu'],
-            datasets: [{
-                label: 'Status Transaksi',
-                data: [{{ $settlementCount }}, {{ $cancelCount }}, {{ $pendingCount }}],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.8)',
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1
+        type: 'doughnut'
+        , data: {
+            labels: ['Sukses', 'Dibatalkan', 'Menunggu']
+            , datasets: [{
+                label: 'Status Transaksi'
+                , data: [{
+                    {
+                        $settlementCount
+                    }
+                }, {
+                    {
+                        $cancelCount
+                    }
+                }, {
+                    {
+                        $pendingCount
+                    }
+                }]
+                , backgroundColor: [
+                    'rgba(75, 192, 192, 0.8)'
+                    , 'rgba(255, 99, 132, 0.8)'
+                    , 'rgba(255, 206, 86, 0.8)'
+                , ]
+                , borderColor: [
+                    'rgba(75, 192, 192, 1)'
+                    , 'rgba(255, 99, 132, 1)'
+                    , 'rgba(255, 206, 86, 1)'
+                , ]
+                , borderWidth: 1
             }]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutCubic'
-            },
-            plugins: {
+        }
+        , options: {
+            responsive: false
+            , maintainAspectRatio: false
+            , animation: {
+                duration: 2000
+                , easing: 'easeInOutCubic'
+            }
+            , plugins: {
                 legend: {
                     position: 'bottom'
                 }
@@ -192,28 +208,32 @@
     // Vehicle Chart
     var vehicleCtx = document.getElementById('vehicleChart').getContext('2d');
     var vehicleChart = new Chart(vehicleCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Registered Vehicles'],
-            datasets: [{
-                label: 'Total',
-                data: [{{ $vehicleCount }}],
-                backgroundColor: 'rgba(255, 159, 64, 0.8)',
-                borderColor: 'rgba(255, 159, 64, 1)',
-                borderWidth: 1
+        type: 'bar'
+        , data: {
+            labels: ['Registered Vehicles']
+            , datasets: [{
+                label: 'Total'
+                , data: [{
+                    {
+                        $vehicleCount
+                    }
+                }]
+                , backgroundColor: 'rgba(255, 159, 64, 0.8)'
+                , borderColor: 'rgba(255, 159, 64, 1)'
+                , borderWidth: 1
             }]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
+        }
+        , options: {
+            responsive: false
+            , maintainAspectRatio: false
+            , scales: {
                 y: {
                     beginAtZero: true
                 }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutCubic'
+            }
+            , animation: {
+                duration: 2000
+                , easing: 'easeInOutCubic'
             }
         }
     });
@@ -224,44 +244,49 @@
     var feedbackData = [];
 
     @foreach($feedbackCounts as $rating => $count)
-        feedbackLabels.push('Rating {{ $rating }}');
-        feedbackData.push({{ $count }});
+    feedbackLabels.push('Rating {{ $rating }}');
+    feedbackData.push({
+        {
+            $count
+        }
+    });
     @endforeach
 
     var feedbackChart = new Chart(feedbackCtx, {
-        type: 'bar',
-        data: {
-            labels: feedbackLabels,
-            datasets: [{
-                label: 'Jumlah Feedback',
-                data: feedbackData,
-                backgroundColor: [
-                    'rgba(153, 102, 255, 0.8)',
-                    'rgba(153, 102, 255, 0.6)',
-                    'rgba(153, 102, 255, 0.4)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1
+        type: 'bar'
+        , data: {
+            labels: feedbackLabels
+            , datasets: [{
+                label: 'Jumlah Feedback'
+                , data: feedbackData
+                , backgroundColor: [
+                    'rgba(153, 102, 255, 0.8)'
+                    , 'rgba(153, 102, 255, 0.6)'
+                    , 'rgba(153, 102, 255, 0.4)'
+                    , 'rgba(153, 102, 255, 0.2)'
+                , ]
+                , borderColor: [
+                    'rgba(153, 102, 255, 1)'
+                    , 'rgba(153, 102, 255, 1)'
+                    , 'rgba(153, 102, 255, 1)'
+                    , 'rgba(153, 102, 255, 1)'
+                , ]
+                , borderWidth: 1
             }]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
+        }
+        , options: {
+            responsive: false
+            , maintainAspectRatio: false
+            , scales: {
                 y: {
                     beginAtZero: true
                 }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeInOutCubic'
+            }
+            , animation: {
+                duration: 2000
+                , easing: 'easeInOutCubic'
             }
         }
     });
+
 </script>

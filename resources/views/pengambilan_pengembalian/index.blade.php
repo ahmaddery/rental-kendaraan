@@ -4,9 +4,9 @@
     <h1 class="mb-4 mt-5 text-center text-primary">Data Pengambilan Pengembalian</h1>
     <div class="card p-5 rounded-5">
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         <!-- Form pencarian dan filter item per page -->
@@ -20,22 +20,23 @@
                         <input type="text" class="form-control" placeholder="Cari berdasarkan Order ID atau Nama Kendaraan" name="search" id="searchInput" value="{{ $search }}">
                     </div>
                 </form>
-                
+
                 <script>
-                    document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function() {
                         const searchInput = document.getElementById('searchInput');
                         let timerId;
-                        
-                        searchInput.addEventListener('input', function () {
+
+                        searchInput.addEventListener('input', function() {
                             clearTimeout(timerId); // Menghapus timeout sebelumnya (jika ada)
-                            timerId = setTimeout(function () {
+                            timerId = setTimeout(function() {
                                 document.getElementById('searchForm').submit();
                             }, 1000); // Menunggu 3 detik sebelum mengirim form
                         });
                     });
+
                 </script>
-                
-                                
+
+
             </div>
         </div>
 
@@ -51,22 +52,22 @@
                 </select>
             </form>
         </div>
-<!-- Tabel untuk Unprocessed Payments -->
-@if ($unprocessedPayments->isNotEmpty())
-    <div class="table-responsive">
-        <h2 class="mt-5">Unprocessed Payments</h2>
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th>Order ID</th>
-                    <th>User ID</th>
-                    <th>Transaction Status</th>
-                    <th>Gross Amount</th>
-                    <th class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($unprocessedPayments as $payment)
+        <!-- Tabel untuk Unprocessed Payments -->
+        @if ($unprocessedPayments->isNotEmpty())
+        <div class="table-responsive">
+            <h2 class="mt-5">Unprocessed Payments</h2>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User ID</th>
+                        <th>Transaction Status</th>
+                        <th>Gross Amount</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($unprocessedPayments as $payment)
                     <tr>
                         <td class="text-center">{{ $payment->order_id }}</td>
                         <td class="text-center">{{ $payment->user_id }}</td>
@@ -78,33 +79,33 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@else
-    <div class="alert alert-info mt-3">
-        Tidak ada pembayaran yang belum diproses.
-    </div>
-@endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @else
+        <div class="alert alert-info mt-3">
+            Tidak ada pembayaran yang belum diproses.
+        </div>
+        @endif
 
-<!-- Tabel untuk Data Pengambilan Pengembalian -->
-<h2 class="mt-5">Data Pengambilan Pengembalian</h2>
-@if ($pengambilanPengembalian->isNotEmpty())
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th>Order ID</th>
-                    <th>User</th>
-                    <th>Kendaraan</th>
-                    <th>Tanggal Pengambilan</th>
-                    <th>Tanggal Pengembalian</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($pengambilanPengembalian as $data)
+        <!-- Tabel untuk Data Pengambilan Pengembalian -->
+        <h2 class="mt-5">Data Pengambilan Pengembalian</h2>
+        @if ($pengambilanPengembalian->isNotEmpty())
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Kendaraan</th>
+                        <th>Tanggal Pengambilan</th>
+                        <th>Tanggal Pengembalian</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pengambilanPengembalian as $data)
                     <tr class="text-center">
                         <td>{{ $data->order_id }}</td>
                         <td>{{ $data->user->name }}</td>
@@ -113,31 +114,31 @@
                         <td>{{ \Carbon\Carbon::parse($data->tanggal_pengembalian)->locale('id')->format('l, d F Y') }}</td>
                         <td>
                             @php
-                                $today = now();
-                                $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
-                                $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
+                            $today = now();
+                            $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
+                            $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
 
-                                if ($today->greaterThan($tanggalPengembalian)) {
-                                    echo 'Selesai';
-                                } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
-                                    echo 'On Process';
-                                } else {
-                                    echo 'Belum Diambil';
-                                }
+                            if ($today->greaterThan($tanggalPengembalian)) {
+                            echo 'Selesai';
+                            } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
+                            echo 'On Process';
+                            } else {
+                            echo 'Belum Diambil';
+                            }
                             @endphp
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@else
-    <div class="alert alert-info mt-3">
-        Tidak ada data pengambilan pengembalian.
-    </div>
-@endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @else
+        <div class="alert alert-info mt-3">
+            Tidak ada data pengambilan pengembalian.
+        </div>
+        @endif
 
-<!-- Pagination links untuk Data Pengambilan Pengembalian -->
-<div class="d-flex justify-content-center">
-    {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
-</div>
+        <!-- Pagination links untuk Data Pengambilan Pengembalian -->
+        <div class="d-flex justify-content-center">
+            {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
+        </div>

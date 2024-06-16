@@ -1,92 +1,98 @@
+<!-- Tailwind CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    .modal-content {
+        border-radius: 10px;
+    }
 
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .modal-content {
-            border-radius: 10px;
-        }
-        .modal-header {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .modal-footer {
-            background-color: #f8f9fa;
-            border-top: 1px solid #dee2e6;
-        }
-        .payment-detail {
-            border-bottom: 1px solid #dee2e6;
-            padding: 10px 0;
-        }
-        .payment-detail:last-child {
-            border-bottom: none;
-        }
-        .icon {
-            margin-right: 10px;
-            color: #007bff;
-        }
-    </style>
+    .modal-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .payment-detail {
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px 0;
+    }
+
+    .payment-detail:last-child {
+        border-bottom: none;
+    }
+
+    .icon {
+        margin-right: 10px;
+        color: #007bff;
+    }
+
+</style>
 </head>
 
 <body>
 
-@include('admin.layouts.navbar')
+    @include('admin.layouts.navbar')
 
-<div class="container-fluid content-wrapper p-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card pl-20">
-                <div class="card-header">
-                    <h3 class="card-title">Daftar Pembayaran</h3>
-                </div>
-                <div class="row mb-3">
-  <!-- Form pencarian -->
-  <div class="flex mb-4">
-    <form class="w-full md:w-1/3 ml-auto" method="GET" action="{{ route('admin.payments.index') }}" id="searchForm">
-        <div class="flex items-center">
-            <input type="text" name="search" class="form-input px-4 py-2 w-full" placeholder="Cari berdasarkan nama, kendaraan, atau order ID" value="{{ Request::get('search') }}">
-        </div>
-    </form>
-</div>
-                    <!-- Script untuk pencarian real-time -->
-                    <script>
-                        let searchTimer; // variabel untuk menyimpan timer
-                        const searchForm = document.getElementById('searchForm');
-                        const searchInput = document.querySelector('input[name="search"]');
-                
-                        // Fungsi untuk mengirimkan form pencarian
-                        const sendSearchRequest = () => {
-                            searchForm.submit();
-                        };
-                
-                        // Event listener untuk input pencarian
-                        searchInput.addEventListener('input', function() {
-                            clearTimeout(searchTimer); // menghapus timer sebelumnya
-                
-                            // Jika ada input, tunggu 2 detik setelah berhenti mengetik sebelum mengirimkan form
-                            if (this.value) {
-                                searchTimer = setTimeout(sendSearchRequest, 1000); // 2000 milidetik (2 detik)
-                            } else {
-                                sendSearchRequest(); // Jika input kosong, kirim form tanpa menunggu
-                            }
-                        });
-                    </script>
+    <div class="container-fluid content-wrapper p-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card pl-20">
+                    <div class="card-header">
+                        <h3 class="card-title">Daftar Pembayaran</h3>
+                    </div>
+                    <div class="row mb-3">
+                        <!-- Form pencarian -->
+                        <div class="flex mb-4">
+                            <form class="w-full md:w-1/3 ml-auto" method="GET" action="{{ route('admin.payments.index') }}" id="searchForm">
+                                <div class="flex items-center">
+                                    <input type="text" name="search" class="form-input px-4 py-2 w-full" placeholder="Cari berdasarkan nama, kendaraan, atau order ID" value="{{ Request::get('search') }}">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Script untuk pencarian real-time -->
+                        <script>
+                            let searchTimer; // variabel untuk menyimpan timer
+                            const searchForm = document.getElementById('searchForm');
+                            const searchInput = document.querySelector('input[name="search"]');
 
-                    
-                </div>
-                
-                <div class="card-body">
-                    <div class="table-responsive pl-15">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="col">#</th>
-                                    <th class="col">User</th>
-                                    <th class="col">Kendaraan</th>
-                                    <th class="col">Detail</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($payments as $payment)
+                            // Fungsi untuk mengirimkan form pencarian
+                            const sendSearchRequest = () => {
+                                searchForm.submit();
+                            };
+
+                            // Event listener untuk input pencarian
+                            searchInput.addEventListener('input', function() {
+                                clearTimeout(searchTimer); // menghapus timer sebelumnya
+
+                                // Jika ada input, tunggu 2 detik setelah berhenti mengetik sebelum mengirimkan form
+                                if (this.value) {
+                                    searchTimer = setTimeout(sendSearchRequest, 1000); // 2000 milidetik (2 detik)
+                                } else {
+                                    sendSearchRequest(); // Jika input kosong, kirim form tanpa menunggu
+                                }
+                            });
+
+                        </script>
+
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive pl-15">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="col">#</th>
+                                        <th class="col">User</th>
+                                        <th class="col">Kendaraan</th>
+                                        <th class="col">Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($payments as $payment)
                                     <tr>
                                         <td>{{ $payment->id }}</td>
                                         <td>{{ $payment->user->name }}</td>
@@ -164,7 +170,7 @@
                                                             <div class="col-md-6">
                                                                 <h6><i class="bi bi-currency-exchange icon"></i><strong>Jumlah Pembayaran:</strong></h6>
                                                                 <p>Rp {{ number_format($payment->gross_amount, 2, ',', '.') }}</p>
-                                                            </div>                                                            
+                                                            </div>
                                                         </div>
                                                         <div class="row payment-detail">
                                                             <div class="col-md-6">
@@ -190,30 +196,29 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <!-- Tampilkan navigasi pagination -->
-                <div class="card-footer">
-                    <div class="float-left">
-                        {{ $payments->links() }}
-                    </div>
-                    <div class="float-right">
-                        <form method="GET" action="{{ route('admin.payments.index') }}">
-                            <label for="perPage">Tampilkan per halaman:</label>
-                            <select name="perPage" id="perPage" class="form-select" onchange="this.form.submit()">
-                                <option value="5" {{ Request::get('perPage') == 5 ? 'selected' : '' }}>5</option>
-                                <option value="10" {{ Request::get('perPage') == 10 ? 'selected' : '' }}>10</option>
-                                <option value="20" {{ Request::get('perPage') == 20 ? 'selected' : '' }}>20</option>
-                                <option value="50" {{ Request::get('perPage') == 50 ? 'selected' : '' }}>50</option>
-                            </select>
-                        </form>
+                    <!-- Tampilkan navigasi pagination -->
+                    <div class="card-footer">
+                        <div class="float-left">
+                            {{ $payments->links() }}
+                        </div>
+                        <div class="float-right">
+                            <form method="GET" action="{{ route('admin.payments.index') }}">
+                                <label for="perPage">Tampilkan per halaman:</label>
+                                <select name="perPage" id="perPage" class="form-select" onchange="this.form.submit()">
+                                    <option value="5" {{ Request::get('perPage') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ Request::get('perPage') == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ Request::get('perPage') == 20 ? 'selected' : '' }}>20</option>
+                                    <option value="50" {{ Request::get('perPage') == 50 ? 'selected' : '' }}>50</option>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-

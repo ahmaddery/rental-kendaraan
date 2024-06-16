@@ -1,26 +1,27 @@
 @extends('admin.layouts.navbar')
 
 @section('addCss')
-  <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('addJavascript')
-  <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script>
-    $(function () {
-      $("#data-table").DataTable();
+<script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    $(function() {
+        $("#data-table").DataTable();
     })
 
     // Function to open the edit modal and populate the form with category data
     function openEditModal(category) {
-      $('#editCategoryModal').modal('show');
-      $('#editCategoryModal #category-id').val(category.id);
-      $('#editCategoryModal #kendaraan').val(category.kendaraan);
-      $('#editCategoryForm').attr('action', '/admin/categories/' + category.id);
+        $('#editCategoryModal').modal('show');
+        $('#editCategoryModal #category-id').val(category.id);
+        $('#editCategoryModal #kendaraan').val(category.kendaraan);
+        $('#editCategoryForm').attr('action', '/admin/categories/' + category.id);
     }
-  </script>
-@endsection 
+
+</script>
+@endsection
 
 @section('content')
 <div class="container-fluid content-wrapper d-flex justify-content-center align-items-center pt-5" style="min-height: 60vh;">
@@ -40,18 +41,18 @@
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
-                        <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->kendaraan }}</td>
-                            <td class="text-center">
-                                <button onclick="openEditModal({{ json_encode($category) }})" class="btn btn-warning">Edit</button>
-                                <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->kendaraan }}</td>
+                        <td class="text-center">
+                            <button onclick="openEditModal({{ json_encode($category) }})" class="btn btn-warning">Edit</button>
+                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -72,8 +73,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="kendaraan">Kendaraan</label>
-                        <input type="text" class="form-control" id="kendaraan" name="kendaraan"
-                            value="{{ old('kendaraan') }}" required>
+                        <input type="text" class="form-control" id="kendaraan" name="kendaraan" value="{{ old('kendaraan') }}" required>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Save</button>
                 </form>

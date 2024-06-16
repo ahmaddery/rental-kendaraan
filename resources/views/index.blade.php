@@ -13,16 +13,16 @@
         </div>
         <div class="hero-desc mt-3 mb-3">
             <p> Sewa kendaraan murah kini lebih mudah. <br />
-            Booking online tanpa perlu datang ke kantor! <br />
-            Segera hubungi kami! </p>
+                Booking online tanpa perlu datang ke kantor! <br />
+                Segera hubungi kami! </p>
         </div>
         <div class="btn-styled">
-          <ul>
-            <li>
-              <p><a href="#sewa" class="btn">Order Now</a></p>
-            </li>
-            <li><i class="btn bi bi-arrow-right"></i></li>
-          </ul>
+            <ul>
+                <li>
+                    <p><a href="#sewa" class="btn">Order Now</a></p>
+                </li>
+                <li><i class="btn bi bi-arrow-right"></i></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -76,7 +76,7 @@
                             <li class="icon"><i class="bi bi-shield-fill"></i></li>
                             <li class="title">Asuransi</li>
                             <li class="desc">Semua unit kendaraan menggunakan asuransi untuk memberikan
-                            perlindungan total.</li>
+                                perlindungan total.</li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                             <li class="icon"><i class="bi bi-bank2"></i></li>
                             <li class="title">Legalitas</li>
                             <li class="desc">Memiliki legalitas hukum dan terdaftar sebagai Perusahaan
-                            Jasa Transportasi.</li>
+                                Jasa Transportasi.</li>
                         </ul>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                             <li class="icon"><i class="bi bi-car-front-fill"></i></li>
                             <li class="title">Terbaru</li>
                             <li class="desc">Menyediakan kendaraan terbaru dengan kondisi prima, bersih,
-                            dan terawat.</li>
+                                dan terawat.</li>
                         </ul>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                             <li class="icon"><i class="bi bi-gear-fill"></i></li>
                             <li class="title">Servis Resmi</li>
                             <li class="desc">Melakukan servis berkala di bengkel resmi sehingga performa
-                            kendaraan tetap terjaga.</li>
+                                kendaraan tetap terjaga.</li>
                         </ul>
                     </div>
                 </div>
@@ -130,47 +130,47 @@
         </div>
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                    <span class="accordion-number">01.</span>
-                    <span class="accordion-title">Pilih Kendaraan</span>
-              </button>
-            </h2>
-            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                <p>Pilih kendaraan yang sesuai dengan kriteria Anda dari katalog kami yang beragam.</p>
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <span class="accordion-number">01.</span>
+                        <span class="accordion-title">Pilih Kendaraan</span>
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <p>Pilih kendaraan yang sesuai dengan kriteria Anda dari katalog kami yang beragam.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        <span class="accordion-number">02.</span>
+                        <span class="accordion-title">Isi Formulir</span>
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <p>Isi formulir pemesanan dengan informasi pribadi dan detail perjalanan Anda.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                        <span class="accordion-number">03.</span>
+                        <span class="accordion-title">Pembayaran</span>
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <p>Lakukan pembayaran menggunakan metode yang tersedia di website kami.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                <span class="accordion-number">02.</span>
-                <span class="accordion-title">Isi Formulir</span>
-            </button>
-            </h2>
-            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                <p>Isi formulir pemesanan dengan informasi pribadi dan detail perjalanan Anda.</p>
-            </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                <span class="accordion-number">03.</span>
-                <span class="accordion-title">Pembayaran</span>
-            </button>
-            </h2>
-            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                <p>Lakukan pembayaran menggunakan metode yang tersedia di website kami.</p>
-            </div>
-            </div>
-        </div>
-        </div>
     </div>
-</div>    
+</div>
 {{-- End Langkah --}}
 
 <!-- Start Sewa Kendaraan -->
@@ -198,79 +198,83 @@
             </div>
         </div>
         @if (session('success'))
-            <script>
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: '{{ session('success') }}',
-                    showConfirmButton: false,
-                    timer: 6000,
-                    timerProgressBar: true,
-                });
-            </script>
+        <script>
+            Swal.fire({
+                toast: true
+                , position: 'top-end'
+                , icon: 'success'
+                , title: '{{ session('
+                success ') }}'
+                , showConfirmButton: false
+                , timer: 6000
+                , timerProgressBar: true
+            , });
+
+        </script>
         @endif
         @if (session('error'))
-            <script>
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: '{{ session('error') }}',
-                    showConfirmButton: false,
-                    timer: 6000,
-                    timerProgressBar: true,
-                });
-            </script>
+        <script>
+            Swal.fire({
+                toast: true
+                , position: 'top-end'
+                , icon: 'error'
+                , title: '{{ session('
+                error ') }}'
+                , showConfirmButton: false
+                , timer: 6000
+                , timerProgressBar: true
+            , });
+
+        </script>
         @endif
         <!-- End Title Section -->
-        
+
         @if ($kendaraans->isEmpty())
         <div class="col-md-12">
             <p>Belum ada kendaraan.</p>
         </div>
         @else
         <div class="d-flex flex-wrap">
-        @foreach($kendaraans as $kendaraan)
+            @foreach($kendaraans as $kendaraan)
 
-                    <!-- Start Product Column -->
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
-                        <div class="card card-vehicle">
-                            <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                                <div class="card-title-year">
-                                    <ul>
-                                        <li class="card-title">{{ $kendaraan->nama }}</li>
-                                        <li class="card-year">{{ $kendaraan->tahun }}</li>
-                                    </ul>
-                                </div>
-                                <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
-                                <div class="card-specs mt-3">
-                                    <ul>
-                                        <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
-                                        <li><i class="bi bi-shield-check"></i> {{ $kendaraan->category->kendaraan}}</li>
-                                        <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
-                                        <li><i class="bi bi-suitcase-lg"></i> {{ $kendaraan->warna }}</li>
-                                    </ul>
-                                </div>
-                                <hr class="mt-4">
-                                <div class="card-price mb-2">
-                                    <ul>
-                                        <li class="idr">Rp</li>
-                                        <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
-                                    </ul>
-                                </div>
-                                <div class="btn-card mt-3">
-                                    <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn me-2">Detail</a>
-                                    <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
-                                </div>
-                            </div>
+            <!-- Start Product Column -->
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card card-vehicle">
+                    <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <div class="card-title-year">
+                            <ul>
+                                <li class="card-title">{{ $kendaraan->nama }}</li>
+                                <li class="card-year">{{ $kendaraan->tahun }}</li>
+                            </ul>
+                        </div>
+                        <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+                        <div class="card-specs mt-3">
+                            <ul>
+                                <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
+                                <li><i class="bi bi-shield-check"></i> {{ $kendaraan->category->kendaraan}}</li>
+                                <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                                <li><i class="bi bi-suitcase-lg"></i> {{ $kendaraan->warna }}</li>
+                            </ul>
+                        </div>
+                        <hr class="mt-4">
+                        <div class="card-price mb-2">
+                            <ul>
+                                <li class="idr">Rp</li>
+                                <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
+                            </ul>
+                        </div>
+                        <div class="btn-card mt-3">
+                            <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn me-2">Detail</a>
+                            <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
                         </div>
                     </div>
-                <!-- End Product Column -->
+                </div>
+            </div>
+            <!-- End Product Column -->
 
-                 
-                <!-- <div class="row">
+
+            <!-- <div class="row">
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card card-product h-100 border-0 shadow">
                             <div class="card-header">
@@ -301,8 +305,8 @@
                         </div>
                     </div>
                 </div> -->
-                @endforeach
-            </div>
+            @endforeach
+        </div>
         @endif
     </div>
 </div>
@@ -333,6 +337,7 @@
             document.getElementById('gambar').src = 'url_gambar_default';
         }
     };
+
 </script>
 
 <!-- Start About Preview -->
@@ -374,35 +379,34 @@
         <div id="custom-cards">
             <div class="owl-carousel owl-theme">
                 @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
-                    <div class="item">
-                        @foreach ($feedbackChunk as $feedback)
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="review-profile">
-                                        <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
-                                        <div class="review-profile-info">
-                                            <p class="card-profile-name">{{ $feedback->user->name }} pada
-                                                {{ $feedback->formatted_date }}</p>
-                                            <p class="card-vehicle-name">{{ $feedback->kendaraan->nama }}</p>
-                                            <div class="rating">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $feedback->rating)
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @else
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                        </div>
+                <div class="item">
+                    @foreach ($feedbackChunk as $feedback)
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="review-profile">
+                                <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
+                                <div class="review-profile-info">
+                                    <p class="card-profile-name">{{ $feedback->user->name }} pada
+                                        {{ $feedback->formatted_date }}</p>
+                                    <p class="card-vehicle-name">{{ $feedback->kendaraan->nama }}</p>
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$feedback->rating)
+                                            <i class="bi bi-star-fill"></i>
+                                            @else
+                                            <i class="bi bi-star-fill"></i>
+                                            @endif
+                                            @endfor
                                     </div>
-                                    <blockquote class="card-text">
-                                        {{ $feedback->komentar }}
-                                    </blockquote>
                                 </div>
                             </div>
-                        @endforeach
+                            <blockquote class="card-text">
+                                {{ $feedback->komentar }}
+                            </blockquote>
+                        </div>
                     </div>
-                    <!--End Review Card 1-->
+                    @endforeach
+                </div>
+                <!--End Review Card 1-->
                 @endforeach
             </div>
         </div>
