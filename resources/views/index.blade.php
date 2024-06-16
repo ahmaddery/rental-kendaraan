@@ -19,7 +19,7 @@
         <div class="btn-styled">
           <ul>
             <li>
-              <p><a href="" class="btn">Kontak Kami</a></p>
+              <p><a href="#sewa" class="btn">Order Now</a></p>
             </li>
             <li><i class="btn bi bi-arrow-right"></i></li>
           </ul>
@@ -174,7 +174,7 @@
 {{-- End Langkah --}}
 
 <!-- Start Sewa Kendaraan -->
-<div class="section kendaraan">
+<div class="section kendaraan" id="sewa">
     <div class="container">
         <!-- Start Title Section -->
         <div class="mb-4">
@@ -348,9 +348,8 @@
             <div class="btn-styled mt-4">
                 <ul>
                     <li>
-                        <p><a href="" class="btn">Kontak Kami</a></p>
+                        <p><a href="#footer" class="btn">Kontak Kami<i class="btn bi bi-arrow-right"></i></a></p>
                     </li>
-                    <li><i class="btn bi bi-arrow-right"></i></li>
                 </ul>
             </div>
         </div>
