@@ -41,8 +41,8 @@
         </div>
 
         <!-- Start Sewa Kendaraan -->
-        <!-- Start Title Section -->
         <div class="mb-4">
+            <!-- Start Title Section -->
             <div class="sub-title" id="sewa">Sewa Kendaraan</div>
                 <div class="row">
                     <div class="col-xl-7 col-lg-9">
@@ -52,6 +52,8 @@
                     </div>
                 </div>
             </div>
+            <!-- End Title Section -->
+
             @if (session('success'))
             <script>
             Swal.fire({
