@@ -15,7 +15,7 @@
                         Dengan pengalaman luas dalam melayani pelanggan asing maupun lokal, kami memastikan kendaraan yang nyaman untuk menjamin keistimewaan wisata anda.Kami siap memberikan pelayanan terbaik dalam hall rental mobil dan layanan perjalanan anda. <br>
                         Kami sangat menantikan kedatangan anda untuk menggunakan jasa kami. Untuk pertanyaan lebih lanjut silahkan hubungi kami melalui kontak yang tertera di bawah halaman ini.
                     </p>
-                    
+
                 </div>
             </div>
         </div>

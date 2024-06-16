@@ -13,7 +13,7 @@
                     <label for="brand_id">Brand:</label>
                     <select name="brand_id" class="form-control">
                         @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->kendaraan }}</option>
+                        <option value="{{ $brand->id }}">{{ $brand->kendaraan }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -21,7 +21,7 @@
                     <label for="type_id">Type:</label>
                     <select name="type_id" class="form-control">
                         @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->typekendaraan }}</option>
+                        <option value="{{ $type->id }}">{{ $type->typekendaraan }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -29,7 +29,7 @@
                     <label for="category_id">Category:</label>
                     <select name="category_id" class="form-control">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->kendaraan }}</option>
+                        <option value="{{ $category->id }}">{{ $category->kendaraan }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -74,6 +74,7 @@
                     .catch(error => {
                         console.error(error);
                     });
+
             </script>
         </div>
     </div>

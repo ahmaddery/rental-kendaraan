@@ -13,55 +13,72 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Models\Payment;
 
+
 class PengambilanPengembalianController extends Controller
 {   
     public function index(Request $request)
-    {
-        // Default value for items per page
-        $perPage = $request->input('per_page', 10);
-        $search = $request->input('search');
+{
+    // Default value for items per page
+    $perPage = $request->input('per_page', 10);
+    $search = $request->input('search');
 
-        // Validate the per_page input to ensure it's a positive integer
-        if (!is_numeric($perPage) || $perPage <= 0) {
-            $perPage = 10;
-        }
-
-        // Mendapatkan ID pengguna yang sedang login
-        $userId = Auth::id();
-
-        // Query pengambilan pengembalian dengan filter search dan pagination
-        $pengambilanPengembalianQuery = PengambilanPengembalian::with(['user', 'kendaraan'])
-            ->where('user_id', $userId);
-        
-        if ($search) {
-            $pengambilanPengembalianQuery->where(function($query) use ($search) {
-                $query->where('order_id', 'LIKE', "%{$search}%")
-                    ->orWhereHas('kendaraan', function($query) use ($search) {
-                        $query->where('nama', 'LIKE', "%{$search}%");
-                    });
-            });
-        }
-
-        $pengambilanPengembalian = $pengambilanPengembalianQuery->paginate($perPage);
-
-        // Query unprocessed payments
-        $unprocessedPaymentsQuery = Payment::where('transaction_status', 'settlement')
-            ->whereNotIn('order_id', $pengambilanPengembalian->pluck('order_id')->toArray());
-
-        if ($search) {
-            $unprocessedPaymentsQuery->where('order_id', 'LIKE', "%{$search}%");
-        }
-
-        $unprocessedPayments = $unprocessedPaymentsQuery->paginate($perPage);
-
-        // Mengirim data ke view dengan pagination
-        return view('pengambilan_pengembalian.index', [
-            'pengambilanPengembalian' => $pengambilanPengembalian,
-            'unprocessedPayments' => $unprocessedPayments,
-            'perPage' => $perPage,
-            'search' => $search,
-        ]);
+    // Validate the per_page input to ensure it's a positive integer
+    if (!is_numeric($perPage) || $perPage <= 0) {
+        $perPage = 10;
     }
+
+    // Mendapatkan ID pengguna yang sedang login
+    $userId = Auth::id();
+
+    // Query pengambilan pengembalian dengan filter search dan pagination
+    $pengambilanPengembalianQuery = PengambilanPengembalian::with(['user', 'kendaraan'])
+        ->where('user_id', $userId);
+
+    if ($search) {
+        $pengambilanPengembalianQuery->where(function($query) use ($search) {
+            $query->where('order_id', 'LIKE', "%{$search}%")
+                ->orWhereHas('kendaraan', function($query) use ($search) {
+                    $query->where('nama', 'LIKE', "%{$search}%");
+                });
+        });
+    }
+
+    // Paginate the query result
+    $pengambilanPengembalian = $pengambilanPengembalianQuery->paginate($perPage);
+
+    // Query unprocessed payments
+    $unprocessedPaymentsQuery = Payment::where('transaction_status', 'settlement')
+        ->where('user_id', $userId);
+
+    if ($search) {
+        $unprocessedPaymentsQuery->where('order_id', 'LIKE', "%{$search}%");
+    }
+
+    // Get all existing order_ids in pengambilan_pengembalian
+    $existingOrderIds = PengambilanPengembalian::pluck('order_id')->toArray();
+
+    // Get all payments
+    $payments = $unprocessedPaymentsQuery->get();
+
+    // Separate payments into processed and unprocessed
+    $processedPayments = $payments->filter(function ($payment) use ($existingOrderIds) {
+        return in_array($payment->order_id, $existingOrderIds);
+    });
+
+    $unprocessedPayments = $payments->reject(function ($payment) use ($existingOrderIds) {
+        return in_array($payment->order_id, $existingOrderIds);
+    });
+
+    // Mengirim data ke view dengan pagination
+    return view('pengambilan_pengembalian.index', [
+        'pengambilanPengembalian' => $pengambilanPengembalian,
+        'unprocessedPayments' => $unprocessedPayments,
+        'processedPayments' => $processedPayments,
+        'perPage' => $perPage,
+        'search' => $search,
+    ]);
+}
+
 
 
     public function store(Request $request)
