@@ -17,15 +17,25 @@
             <div class="col-md-6">
                 <form action="{{ route('pengambilan_pengembalian.index') }}" method="GET" id="searchForm">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari berdasarkan Order ID" name="search" value="{{ $search }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">Cari</button>
-                        </div>
-                        <div class="input-group-append">
-                            <button type="reset" class="btn btn-danger">Reset</button>
-                        </div>
+                        <input type="text" class="form-control" placeholder="Cari berdasarkan Order ID atau Nama Kendaraan" name="search" id="searchInput" value="{{ $search }}">
                     </div>
                 </form>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const searchInput = document.getElementById('searchInput');
+                        let timerId;
+                        
+                        searchInput.addEventListener('input', function () {
+                            clearTimeout(timerId); // Menghapus timeout sebelumnya (jika ada)
+                            timerId = setTimeout(function () {
+                                document.getElementById('searchForm').submit();
+                            }, 1000); // Menunggu 3 detik sebelum mengirim form
+                        });
+                    });
+                </script>
+                
+                                
             </div>
         </div>
 
@@ -41,94 +51,93 @@
                 </select>
             </form>
         </div>
-
-        <!-- Tabel untuk Unprocessed Payments -->
-        @if ($unprocessedPayments->isNotEmpty())
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark text-center">
-                        <tr>
-                            <th>Order ID</th>
-                            <th>User ID</th>
-                            <th>Transaction Status</th>
-                            <th>Gross Amount</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($unprocessedPayments as $payment)
-                            <tr>
-                                <td class="text-center">{{ $payment->order_id }}</td>
-                                <td class="text-center">{{ $payment->user_id }}</td>
-                                <td class="text-center">{{ $payment->transaction_status }}</td>
-                                <td class="text-end">{{ number_format($payment->gross_amount) }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('pengambilan_pengembalian.createComplete', $payment->order_id) }}" class="btn btn-primary">
-                                        Lengkapi Data
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination links untuk Unprocessed Payments -->
-            <div class="d-flex justify-content-center">
-                {{ $unprocessedPayments->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
-            </div>
-        @else
-            <div class="alert alert-info mt-3">
-                Tidak ada pembayaran yang belum diproses.
-            </div>
-        @endif
-
-        <!-- Tabel untuk Data Pengambilan Pengembalian -->
-        <h2 class="mt-5">Data Pengambilan Pengembalian</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark text-center">
+<!-- Tabel untuk Unprocessed Payments -->
+@if ($unprocessedPayments->isNotEmpty())
+    <div class="table-responsive">
+        <h2 class="mt-5">Unprocessed Payments</h2>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Transaction Status</th>
+                    <th>Gross Amount</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($unprocessedPayments as $payment)
                     <tr>
-                        <th>Order ID</th>
-                        <th>User</th>
-                        <th>Kendaraan</th>
-                        <th>Tanggal Pengambilan</th>
-                        <th>Tanggal Pengembalian</th>
-                        <th>Status</th>
+                        <td class="text-center">{{ $payment->order_id }}</td>
+                        <td class="text-center">{{ $payment->user_id }}</td>
+                        <td class="text-center">{{ $payment->transaction_status }}</td>
+                        <td class="text-end">{{ number_format($payment->gross_amount) }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('pengambilan_pengembalian.createComplete', $payment->order_id) }}" class="btn btn-primary">
+                                Lengkapi Data
+                            </a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pengambilanPengembalian as $data)
-                        <tr class="text-center">
-                            <td>{{ $data->order_id }}</td>
-                            <td>{{ $data->user->name }}</td>
-                            <td>{{ $data->kendaraan->nama }}</td>
-                            <td>{{ \Carbon\Carbon::parse($data->tanggal_pengambilan)->locale('id')->format('l, d F Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($data->tanggal_pengembalian)->locale('id')->format('l, d F Y') }}</td>
-                            <td>
-                                @php
-                                    $today = now();
-                                    $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
-                                    $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@else
+    <div class="alert alert-info mt-3">
+        Tidak ada pembayaran yang belum diproses.
+    </div>
+@endif
 
-                                    if ($today->greaterThan($tanggalPengembalian)) {
-                                        echo 'Selesai';
-                                    } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
-                                        echo 'On Process';
-                                    } else {
-                                        echo 'Belum Diambil';
-                                    }
-                                @endphp
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+<!-- Tabel untuk Data Pengambilan Pengembalian -->
+<h2 class="mt-5">Data Pengambilan Pengembalian</h2>
+@if ($pengambilanPengembalian->isNotEmpty())
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Kendaraan</th>
+                    <th>Tanggal Pengambilan</th>
+                    <th>Tanggal Pengembalian</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($pengambilanPengembalian as $data)
+                    <tr class="text-center">
+                        <td>{{ $data->order_id }}</td>
+                        <td>{{ $data->user->name }}</td>
+                        <td>{{ $data->kendaraan->nama }}</td>
+                        <td>{{ \Carbon\Carbon::parse($data->tanggal_pengambilan)->locale('id')->format('l, d F Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($data->tanggal_pengembalian)->locale('id')->format('l, d F Y') }}</td>
+                        <td>
+                            @php
+                                $today = now();
+                                $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
+                                $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
 
-        <!-- Pagination links untuk Data Pengambilan Pengembalian -->
-        <div class="d-flex justify-content-center">
-            {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
-        </div>
-    </div>
+                                if ($today->greaterThan($tanggalPengembalian)) {
+                                    echo 'Selesai';
+                                } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
+                                    echo 'On Process';
+                                } else {
+                                    echo 'Belum Diambil';
+                                }
+                            @endphp
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@else
+    <div class="alert alert-info mt-3">
+        Tidak ada data pengambilan pengembalian.
+    </div>
+@endif
+
+<!-- Pagination links untuk Data Pengambilan Pengembalian -->
+<div class="d-flex justify-content-center">
+    {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
 </div>
