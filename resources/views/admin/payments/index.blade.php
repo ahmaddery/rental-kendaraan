@@ -38,6 +38,42 @@
                 <div class="card-header">
                     <h3 class="card-title">Daftar Pembayaran</h3>
                 </div>
+                <div class="row mb-3">
+  <!-- Form pencarian -->
+  <div class="flex mb-4">
+    <form class="w-full md:w-1/3 ml-auto" method="GET" action="{{ route('admin.payments.index') }}" id="searchForm">
+        <div class="flex items-center">
+            <input type="text" name="search" class="form-input px-4 py-2 w-full" placeholder="Cari berdasarkan nama, kendaraan, atau order ID" value="{{ Request::get('search') }}">
+        </div>
+    </form>
+</div>
+                    <!-- Script untuk pencarian real-time -->
+                    <script>
+                        let searchTimer; // variabel untuk menyimpan timer
+                        const searchForm = document.getElementById('searchForm');
+                        const searchInput = document.querySelector('input[name="search"]');
+                
+                        // Fungsi untuk mengirimkan form pencarian
+                        const sendSearchRequest = () => {
+                            searchForm.submit();
+                        };
+                
+                        // Event listener untuk input pencarian
+                        searchInput.addEventListener('input', function() {
+                            clearTimeout(searchTimer); // menghapus timer sebelumnya
+                
+                            // Jika ada input, tunggu 2 detik setelah berhenti mengetik sebelum mengirimkan form
+                            if (this.value) {
+                                searchTimer = setTimeout(sendSearchRequest, 1000); // 2000 milidetik (2 detik)
+                            } else {
+                                sendSearchRequest(); // Jika input kosong, kirim form tanpa menunggu
+                            }
+                        });
+                    </script>
+
+                    
+                </div>
+                
                 <div class="card-body">
                     <div class="table-responsive pl-15">
                         <table class="table table-striped">
