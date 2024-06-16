@@ -11,15 +11,26 @@ class PaymentController extends Controller
     // Method untuk menampilkan daftar pembayaran
     public function index(Request $request)
     {
-        // Menentukan jumlah item yang ditampilkan per halaman, default adalah 10
         $perPage = $request->input('perPage', 10);
+        $query = Payment::with('user', 'kendaraan');
     
-        // Mengambil data pembayaran dengan relasi user dan kendaraan dari model Payment
-        $payments = Payment::with('user', 'kendaraan')->paginate($perPage);
-        
-        // Mengirim data pembayaran ke view
+        // Proses pencarian
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->whereHas('user', function($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                })->orWhereHas('kendaraan', function($q) use ($search) {
+                    $q->where('nama', 'like', '%' . $search . '%');
+                })->orWhere('order_id', 'like', '%' . $search . '%');
+            });
+        }
+    
+        $payments = $query->paginate($perPage);
+    
         return view('admin.payments.index', compact('payments'));
     }
+    
 
     // Method untuk menampilkan detail pembayaran
     public function show($id)
