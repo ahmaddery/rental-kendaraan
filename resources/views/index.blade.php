@@ -19,9 +19,15 @@
         <div class="btn-styled">
             <ul>
                 <li>
-                    <p><a href="#sewa" class="btn">Order Now</a></p>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <p>Pesan Sekarang</p>
+                    </a>
                 </li>
-                <li><i class="btn bi bi-arrow-right"></i></li>
+                <li>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -173,11 +179,11 @@
 {{-- End Langkah --}}
 
 <!-- Start Sewa Kendaraan -->
-<div class="section kendaraan" data-aos="fade-up" data-aos-duration="1000" id="sewa">
+<div class="section kendaraan" data-aos="fade-up" data-aos-duration="1000">
     <div class="container">
         <!-- Start Title Section -->
         <div class="mb-4">
-            <div class="sub-title">Sewa Kendaraan</div>
+            <div class="sub-title" id="sewa">Sewa Kendaraan</div>
             <div class="row">
                 <div class="col-xl-7 col-lg-9">
                     <div class="title-desc">
@@ -188,9 +194,15 @@
                     <div class="btn-styled">
                         <ul>
                             <li>
-                                <p><a href="{{ 'product' }}" class="btn">Selengkapnya</a></p>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <p>Selengkapnya</p>
+                                </a>
                             </li>
-                            <li><i class="btn bi bi-arrow-right"></i></li>
+                            <li>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -347,12 +359,19 @@
         <div class="banner-text">
             <div class="sub-title">Tentang Kami</div>
             <div class="title-desc">
-                <p>Ingin tahu lebih banyak tentang kami?</p>
+             <p>Ingin tahu lebih banyak tentang kami?</p>
             </div>
             <div class="btn-styled mt-4">
                 <ul>
                     <li>
-                        <p><a href="{{ 'about' }}" class="btn">Tentang Kami<i class="btn bi bi-arrow-right"></i></a></p>
+                        <a href="{{ 'about' }}" class="btn">
+                            <p>Tentang Kami</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ 'about' }}" class="btn">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
