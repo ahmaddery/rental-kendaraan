@@ -54,9 +54,9 @@
                                     <div class="col-md-3">
                                         <p><strong>Status Transaksi:</strong> 
                                             @if ($transaksi->transaction_status == 'settlement')
-                                                <span class="badge badge-success">Success</span>
+                                                <span class="badge bg-success">Success</span>
                                             @else
-                                                <span class="badge badge-warning">{{ $transaksi->transaction_status }}</span>
+                                                <span class="badge bg-danger">{{ $transaksi->transaction_status }}</span>
                                             @endif
                                         <button class="btn btn-primary mt-2 mx-5" onclick="printReceipt({{ $transaksi->id }})">Cetak Struk</button>
                                     </div>
