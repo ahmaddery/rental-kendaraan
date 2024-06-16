@@ -9,6 +9,41 @@
         </div>
     @endif
 
+    @if ($unprocessedPayments->isNotEmpty())
+        <h2 class="mt-5">Unprocessed Payments</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User ID</th>
+                        <th>Transaction Status</th>
+                        <th>Gross Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($unprocessedPayments as $payment)
+                        @if($payment->user_id == Auth::id())
+                            <tr>
+                                <td>{{ $payment->order_id }}</td>
+                                <td>{{ $payment->user_id }}</td>
+                                <td>{{ $payment->transaction_status }}</td>
+                                <td>{{ $payment->gross_amount }}</td>
+                                <td>
+                                    <a href="{{ route('pengambilan_pengembalian.createComplete', $payment->order_id) }}" class="btn btn-primary">
+                                        Lengkapi Data
+                                    </a>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
+
+    <h2 class="mt-5">Data Pengambilan Pengembalian</h2>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
@@ -23,28 +58,30 @@
             </thead>
             <tbody>
                 @foreach ($pengambilanPengembalian as $data)
-                    <tr>
-                        <td>{{ $data->order_id }}</td>
-                        <td>{{ $data->user->name }}</td>
-                        <td>{{ $data->kendaraan->nama }}</td>
-                        <td>{{ \Carbon\Carbon::parse($data->tanggal_pengambilan)->locale('id')->format('l, d F Y') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($data->tanggal_pengembalian)->locale('id')->format('l, d F Y') }}</td>
-                        <td>
-                            @php
-                                $today = now();
-                                $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
-                                $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
+                    @if($data->user_id == Auth::id())
+                        <tr>
+                            <td>{{ $data->order_id }}</td>
+                            <td>{{ $data->user->name }}</td>
+                            <td>{{ $data->kendaraan->nama }}</td>
+                            <td>{{ \Carbon\Carbon::parse($data->tanggal_pengambilan)->locale('id')->format('l, d F Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($data->tanggal_pengembalian)->locale('id')->format('l, d F Y') }}</td>
+                            <td>
+                                @php
+                                    $today = now();
+                                    $tanggalPengambilan = \Carbon\Carbon::parse($data->tanggal_pengambilan);
+                                    $tanggalPengembalian = \Carbon\Carbon::parse($data->tanggal_pengembalian);
 
-                                if ($today->greaterThan($tanggalPengembalian)) {
-                                    echo 'Selesai';
-                                } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
-                                    echo 'On Process';
-                                } else {
-                                    echo 'Belum Diambil';
-                                }
-                            @endphp
-                        </td>
-                    </tr>
+                                    if ($today->greaterThan($tanggalPengembalian)) {
+                                        echo 'Selesai';
+                                    } elseif ($today->between($tanggalPengambilan, $tanggalPengembalian)) {
+                                        echo 'On Process';
+                                    } else {
+                                        echo 'Belum Diambil';
+                                    }
+                                @endphp
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
