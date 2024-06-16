@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riwayat Transaksi</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <section>
+    @include('layouts.navbar')
+ 
         <div class="container mt-5">
             <div class="row mb-5">
-                <div class="col-6">
+                <div class="col-6 mt-5">
                     <h2 class="mb-1">Riwayat Transaksi</h2>
                 </div>
-                <div class="col-6">
+                <div class="col-6 mt-5">
                     <form method="GET" action="{{ route('riwayat.transaksi') }}" class="d-flex">
                         <input type="text" name="search" class="form-control me-2" placeholder="Search Id Transaksi...." value="{{ request('search') }}">
                         <button type="submit" class="btn btn-light">Search</button>
@@ -153,11 +145,7 @@
             </div>
            
         </div>
-    </section>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     function printReceipt(id) {
         var receiptContent = document.getElementById('receipt-' + id).innerHTML;
@@ -173,5 +161,4 @@
         printWindow.print();
     }
 </script>
-</body>
-</html>
+
