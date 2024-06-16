@@ -15,7 +15,6 @@
             </div>
             <div class="modal-body p-6">
                 @if($keranjang)
-                    <!-- Isi modal keranjang belanja disini -->
                     <div class="table-responsive">
                         <table class="table-auto w-full border-collapse">
                             <thead>
@@ -25,17 +24,37 @@
                                     <th class="p-2 border-b text-left">Jumlah</th>
                                     <th class="p-2 border-b text-left">Harga</th>
                                     <th class="p-2 border-b text-left">Total</th>
+                                    <th class="p-2 border-b text-left">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Tampilkan keranjang belanja disini -->
                                 @foreach($keranjang as $item)
                                     <tr class="hover:bg-gray-50">
                                         <td class="p-2 border-b">{{ $loop->iteration }}</td>
                                         <td class="p-2 border-b">{{ $item->kendaraan->nama }}</td>
-                                        <td class="p-2 border-b">{{ $item->quantity }} Hari</td>
+                                        <td class="p-2 border-b">
+                                            <div class="quantity-buttons">
+                                                <button type="button" class="btn-decrement bg-gray-300 text-black px-2 py-1 rounded">-</button>
+                                                <span class="quantity-value">{{ $item->quantity }}</span>
+                                                <input type="hidden" name="quantity" value="{{ $item->quantity }}">
+                                                <button type="button" class="btn-increment bg-gray-300 text-black px-2 py-1 rounded">+</button>
+                                            </div>
+                                        </td>
                                         <td class="p-2 border-b">{{ number_format($item->kendaraan->harga, 2) }}</td>
                                         <td class="p-2 border-b">{{ number_format($item->quantity * $item->kendaraan->harga, 2) }}</td>
+                                        <td class="p-2 border-b">
+                                            <form method="POST" action="{{ route('cart.update', $item->id) }}" class="inline-block update-quantity-form">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="hidden" name="quantity" value="{{ $item->quantity }}">
+                                                <button type="submit" class="btn btn-primary bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Update</button>
+                                            </form>
+                                            <form method="POST" action="{{ route('cart.delete', $item->id) }}" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -63,7 +82,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!--modal untuk contact di bagian footer-->
@@ -94,3 +112,32 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateForms = document.querySelectorAll('.update-quantity-form');
+
+        updateForms.forEach(form => {
+            const decrementButton = form.closest('tr').querySelector('.btn-decrement');
+            const incrementButton = form.closest('tr').querySelector('.btn-increment');
+            const quantityValue = form.closest('tr').querySelector('.quantity-value');
+            const quantityInput = form.querySelector('input[name="quantity"]');
+
+            decrementButton.addEventListener('click', () => {
+                let currentValue = parseInt(quantityValue.textContent);
+                if (currentValue > 1) {
+                    currentValue--;
+                    quantityValue.textContent = currentValue;
+                    quantityInput.value = currentValue;
+                }
+            });
+
+            incrementButton.addEventListener('click', () => {
+                let currentValue = parseInt(quantityValue.textContent);
+                currentValue++;
+                quantityValue.textContent = currentValue;
+                quantityInput.value = currentValue;
+            });
+        });
+    });
+</script>

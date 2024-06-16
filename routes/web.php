@@ -45,6 +45,8 @@ Route::get('/admin/index', [HomeController::class, 'index'])->name('admin.index'
 Route::get('/', [UtamaController::class, 'index'])->name('index');
 Route::get('/kendaraan/{id}', [UtamaController::class, 'show'])->name('kendaraan.detail');
 Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang'])->name('tambah.keranjang');
+Route::patch('/cart/{id}', [UtamaController::class, 'updateCartItem'])->name('cart.update');
+Route::delete('/cart/{id}', [UtamaController::class, 'deleteCartItem'])->name('cart.delete');
 //Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
 Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');
 //Route::post('/checkout', 'UtamaController@checkout')->name('checkout');
@@ -55,6 +57,11 @@ Route::post('/pengambilan/store', [PengambilanPengembalianController::class, 'st
 
 //route untuk pengambilan
 Route::get('/pengambilan-pengembalian', [PengambilanPengembalianController::class, 'index'])->name('pengambilan_pengembalian.index');
+Route::get('/pengambilan_pengembalian/complete/{orderId}', [PengambilanPengembalianController::class, 'createComplete'])->name('pengambilan_pengembalian.createComplete');
+Route::post('/pengambilan_pengembalian/storeComplete', [PengambilanPengembalianController::class, 'storeComplete'])->name('pengambilan_pengembalian.storeComplete');
+
+
+
 
 //route untuk riwayat transaksi 
 Route::get('/riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->name('riwayat.transaksi');

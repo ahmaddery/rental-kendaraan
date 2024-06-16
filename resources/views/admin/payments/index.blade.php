@@ -1,14 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Pembayaran</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .modal-content {
+            border-radius: 10px;
+        }
+        .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .modal-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
+        .payment-detail {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px 0;
+        }
+        .payment-detail:last-child {
+            border-bottom: none;
+        }
+        .icon {
+            margin-right: 10px;
+            color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,10 +56,104 @@
                                         <td>{{ $payment->user->name }}</td>
                                         <td>{{ $payment->kendaraan->nama }}</td>
                                         <td>
-                                            <a href="{{ route('admin.payments.show', $payment->id) }}"
-                                                class="btn btn-sm btn-primary">Detail</a>
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#paymentDetailModal{{ $payment->id }}">Detail</button>
                                         </td>
                                     </tr>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="paymentDetailModal{{ $payment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Detail Pembayaran</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-person-fill icon"></i><strong>User:</strong></h6>
+                                                                <p>{{ $payment->user->name }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-truck icon"></i><strong>Kendaraan:</strong></h6>
+                                                                <p>{{ $payment->kendaraan->nama }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-receipt icon"></i><strong>Order ID:</strong></h6>
+                                                                <p>{{ $payment->order_id }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-calendar-date icon"></i><strong>Tanggal Pembelian:</strong></h6>
+                                                                <p>{{ $payment->purchase_date }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-clock icon"></i><strong>Waktu Transaksi:</strong></h6>
+                                                                <p>{{ $payment->transaction_time }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-info-circle icon"></i><strong>Status Transaksi:</strong></h6>
+                                                                <p>{{ $payment->transaction_status }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-arrow-left-right icon"></i><strong>ID Transaksi:</strong></h6>
+                                                                <p>{{ $payment->transaction_id }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-chat-left-text icon"></i><strong>Pesan Status:</strong></h6>
+                                                                <p>{{ $payment->status_message }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-check-circle icon"></i><strong>Code Status:</strong></h6>
+                                                                <p>{{ $payment->status_code }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-hourglass-split icon"></i><strong>Jam Pembayaran:</strong></h6>
+                                                                <p>{{ $payment->settlement_time }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-credit-card icon"></i><strong>Tipe Transaksi:</strong></h6>
+                                                                <p>{{ $payment->payment_type }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-currency-exchange icon"></i><strong>Jumlah Pembayaran:</strong></h6>
+                                                                <p>Rp {{ number_format($payment->gross_amount, 2, ',', '.') }}</p>
+                                                            </div>                                                            
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-shield-fill-exclamation icon"></i><strong>Fraud Status:</strong></h6>
+                                                                <p>{{ $payment->fraud_status }}</p>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-cash-coin icon"></i><strong>Mata Uang:</strong></h6>
+                                                                <p>{{ $payment->currency }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row payment-detail">
+                                                            <div class="col-md-6">
+                                                                <h6><i class="bi bi-shop icon"></i><strong>ID Merchant:</strong></h6>
+                                                                <p>{{ $payment->merchant_id }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -71,6 +181,3 @@
     </div>
 </div>
 
-</body>
-
-</html>
