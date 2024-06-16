@@ -12,7 +12,7 @@
                     <p class="card-text">Category: {{ $kendaraan->category->kendaraan }}</p>
                     <p class="card-text">Warna: {{ $kendaraan->warna }}</p>
                     <p class="card-text">Tahun: {{ $kendaraan->tahun }}</p>
-                    <p class="card-text">Harga: {{ $kendaraan->harga }}</p>
+                    <p class="card-text">Harga: RP {{ number_format( $kendaraan->harga, 2, ',', '.') }}</p>
                     <p class="card-text">Deskripsi: {!! $kendaraan->deskripsi !!}</p>
                     <p class="card-text">Plat Nomor: {{ $kendaraan->plat_nomor }}</p>
                     <p class="card-text">Stok: {{ $kendaraan->stok }}</p> <!-- Tambahkan informasi stok -->
