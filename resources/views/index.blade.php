@@ -394,39 +394,33 @@
         <!-- End Title Section -->
         <!-- Start Main Review -->
         <div class="review-cards">
-            <div class="review-content">
             @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4">
-                    @foreach ($feedbackChunk as $feedback)
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="review-profile">
-                                <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
-                                <div class="review-profile-info">
-                                    <div class="review-profile-name">{{ $feedback->user->name }} pada {{ $feedback->formatted_date }}</div>
-                                    <div class="review-vehicle-name">{{ $feedback->kendaraan->nama }}</div>
-                                    <div class="rating">
-                                        @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $feedback->rating)
-                                        <i class="bi bi-star-fill"></i>
-                                        @else
-                                        <i class="bi bi-star"></i>
-                                        @endif
-                                        @endfor
-                                    </div>
-                                </div>
+            @foreach ($feedbackChunk as $feedback)
+            <div class="card">
+                <div class="card-body">
+                    <div class="review-profile">
+                        <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
+                        <div class="review-profile-info">
+                            <div class="review-profile-name">{{ $feedback->user->name }} pada {{ $feedback->formatted_date }}</div>
+                            <div class="review-vehicle-name">{{ $feedback->kendaraan->nama }}</div>
+                            <div class="rating">
+                                @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $feedback->rating)
+                                <i class="bi bi-star-fill"></i>
+                                @else
+                                <i class="bi bi-star"></i>
+                                @endif
+                                @endfor
                             </div>
-                            <blockquote class="card-text">
-                                {{ $feedback->komentar }}
-                            </blockquote>
                         </div>
                     </div>
-                    @endforeach
+                    <blockquote class="card-text mt-4">
+                        {{ $feedback->komentar }}
+                    </blockquote>
                 </div>
             </div>
             @endforeach
-            </div>
+            @endforeach
         </div>
         <!-- End Main Review -->
     </div>
@@ -439,6 +433,10 @@
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
+        prevArrow:
+        '<button type="button" class="slick-prev"><i class="bi bi-chevron-left"></i></button>',
+        nextArrow:
+        '<button type="button" class="slick-next"><i class="bi bi-chevron-right"></i></button>',
       });
     });
   </script>

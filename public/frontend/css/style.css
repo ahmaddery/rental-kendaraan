@@ -8,6 +8,7 @@
     --blue: #3f8ffd;
     --black: #343a40;
     --white-transparent: rgba(255, 255, 255, 0.8);
+    --greytransparent: rgba(88, 88, 88, 0.7);
     --transparent: rgba(255, 255, 255, 0);
     --shadow: rgba(0, 0, 0, 0.2);
 }
@@ -603,6 +604,40 @@ blockquote::after {
 }
 .review-profile-info {
     margin-left: 1rem;
+}
+.slick-prev,
+.slick-next {
+    background-color: var(--greytransparent);
+    backdrop-filter: blur(25px);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.slick-prev {
+    /* Jarak tombol prev dari kiri */
+    left: -50px;
+}
+.slick-next {
+    /* Jarak tombol next dari kanan */
+    right: -50px;
+}
+.slick-prev:hover,
+.slick-next:hover {
+    background-color: var(--grey);
+}
+.slick-prev:before,
+.slick-next:before {
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 /* Footer Section */
