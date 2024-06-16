@@ -45,6 +45,7 @@ Route::get('/admin/index', [HomeController::class, 'index'])->name('admin.index'
 Route::get('/', [UtamaController::class, 'index'])->name('index');
 Route::get('/kendaraan/{id}', [UtamaController::class, 'show'])->name('kendaraan.detail');
 Route::get('/tambah-keranjang/{id}', [UtamaController::class, 'tambahKeranjang'])->name('tambah.keranjang');
+Route::patch('/cart/{id}', [UtamaController::class, 'updateCartItem'])->name('cart.update');
 Route::delete('/cart/{id}', [UtamaController::class, 'deleteCartItem'])->name('cart.delete');
 //Route::get('/keranjang', [UtamaController::class, 'showKeranjang'])->name('keranjang');
 Route::post('/checkout', [UtamaController::class, 'checkout'])->name('checkout');

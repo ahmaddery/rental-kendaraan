@@ -375,6 +375,25 @@ class UtamaController extends Controller
         return $generatedSignature === $inputSignature;
     }
 
+    public function updateCartItem(Request $request, $id)
+{
+    $request->validate([
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $user_id = Auth::id();
+    $keranjang = Keranjang::where('user_id', $user_id)->where('id', $id)->first();
+
+    if ($keranjang) {
+        $keranjang->quantity = $request->input('quantity');
+        $keranjang->save();
+        return redirect()->back()->with('success', 'Kuantitas item berhasil diperbarui.');
+    } else {
+        return redirect()->back()->with('error', 'Item tidak ditemukan atau Anda tidak memiliki izin untuk memperbarui item ini.');
+    }
+}
+
+
     public function deleteCartItem($id)
     {
         $user_id = Auth::id();
