@@ -564,6 +564,7 @@ blockquote::after {
 .review .container {
     background-color: var(--darkgrey);
     border-radius: 30px;
+    padding: 3rem;
 }
 .review .card {
     color: var(--lightgrey);
