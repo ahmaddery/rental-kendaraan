@@ -4,27 +4,59 @@
     <h1 class="mb-4 mt-5 text-center text-primary">Data Pengambilan Pengembalian</h1>
     <div class="card p-5 rounded-5">
         @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    @if ($unprocessedPayments->isNotEmpty())
-        <h2 class="mt-5">Unprocessed Payments</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark text-center">
-                    <tr>
-                        <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Transaction Status</th>
-                        <th>Gross Amount</th>
-                        <th class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($unprocessedPayments as $payment)
-                        @if($payment->user_id == Auth::id())
+        <!-- Form pencarian dan filter item per page -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h2 class="mt-5">Unprocessed Payments</h2>
+            </div>
+            <div class="col-md-6">
+                <form action="{{ route('pengambilan_pengembalian.index') }}" method="GET" id="searchForm">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Cari berdasarkan Order ID" name="search" value="{{ $search }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Cari</button>
+                        </div>
+                        <div class="input-group-append">
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dropdown untuk memilih jumlah item per page -->
+        <div class="mb-3">
+            <form action="{{ route('pengambilan_pengembalian.index') }}" method="GET" id="itemsPerPageForm">
+                <label for="per_page">Items per page:</label>
+                <select name="per_page" id="per_page" class="form-select w-auto" onchange="document.getElementById('itemsPerPageForm').submit()">
+                    <option value="10" {{ $perPage == 10 ? 'selected' : '' }}>10</option>
+                    <option value="25" {{ $perPage == 25 ? 'selected' : '' }}>25</option>
+                    <option value="50" {{ $perPage == 50 ? 'selected' : '' }}>50</option>
+                    <option value="100" {{ $perPage == 100 ? 'selected' : '' }}>100</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Tabel untuk Unprocessed Payments -->
+        @if ($unprocessedPayments->isNotEmpty())
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark text-center">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User ID</th>
+                            <th>Transaction Status</th>
+                            <th>Gross Amount</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($unprocessedPayments as $payment)
                             <tr>
                                 <td class="text-center">{{ $payment->order_id }}</td>
                                 <td class="text-center">{{ $payment->user_id }}</td>
@@ -36,29 +68,37 @@
                                     </a>
                                 </td>
                             </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-    <h2 class="mt-5">Data Pengambilan Pengembalian</h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark text-center">
-                <tr>
-                    <th>Order ID</th>
-                    <th>User</th>
-                    <th>Kendaraan</th>
-                    <th>Tanggal Pengambilan</th>
-                    <th>Tanggal Pengembalian</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($pengambilanPengembalian as $data)
-                    @if($data->user_id == Auth::id())
+            <!-- Pagination links untuk Unprocessed Payments -->
+            <div class="d-flex justify-content-center">
+                {{ $unprocessedPayments->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
+            </div>
+        @else
+            <div class="alert alert-info mt-3">
+                Tidak ada pembayaran yang belum diproses.
+            </div>
+        @endif
+
+        <!-- Tabel untuk Data Pengambilan Pengembalian -->
+        <h2 class="mt-5">Data Pengambilan Pengembalian</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Kendaraan</th>
+                        <th>Tanggal Pengambilan</th>
+                        <th>Tanggal Pengembalian</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pengambilanPengembalian as $data)
                         <tr class="text-center">
                             <td>{{ $data->order_id }}</td>
                             <td>{{ $data->user->name }}</td>
@@ -81,10 +121,14 @@
                                 @endphp
                             </td>
                         </tr>
-                    @endif
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination links untuk Data Pengambilan Pengembalian -->
+        <div class="d-flex justify-content-center">
+            {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
+        </div>
+    </div>
 </div>
