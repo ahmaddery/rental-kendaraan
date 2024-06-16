@@ -559,68 +559,49 @@ blockquote::after {
 }
 .review {
     margin-top: 6rem !important;
+    color: var(--white);
 }
-.review-profile img {
-    height: 4rem;
-    width: 4rem !important;
-    border-radius: 50%;
-    object-fit: cover;
+.review .container {
+    background-color: var(--darkgrey);
+    border-radius: 30px;
+}
+.review .card {
+    color: var(--lightgrey);
+    background-image: linear-gradient(
+        90deg,
+        var(--lightmediumgery),
+        var(--mediumgrey),
+        var(--darkgrey)
+    );
+    border-radius: 25px;
+}
+.review .card-body {
+    background-image: linear-gradient(
+        90deg,
+        var(--lightmediumgery),
+        var(--mediumgrey),
+        var(--darkgrey)
+    );
+    border: none;
+    border-radius: 25px;
 }
 .review-profile {
     display: flex;
 }
-.review-profile-info {
-    margin-left: 1rem;
+.review-profile img {
+    width: 5rem !important;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
 }
-.review .card-profile-name {
-    margin-bottom: 0.1rem;
+.review-profile .review-profile-name {
     font-weight: bold;
 }
-.review .card-vehicle-name {
-    margin-bottom: 0.1rem;
+.review-profile .review-vehicle-name {
     font-weight: lighter;
 }
 .review-profile-info {
-    margin-top: -0.5rem;
-}
-.review .card-text {
-    margin-top: 1rem;
-    overflow: hidden;
-    width: auto;
-    height: 6rem;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-.owl-nav button.owl-next,
-.owl-nav button.owl-prev {
-    border-radius: 50% !important;
-    width: 3rem !important;
-    height: 3rem !important;
-    background-color: var(--darkgrey) !important;
-    opacity: 50% !important;
-}
-button.owl-next span,
-button.owl-prev span {
-    position: absolute;
-    color: var(--white);
-    font-size: 3rem;
-    margin-top: -2.7rem;
-    margin-left: -0.5rem;
-}
-button.owl-dot {
-    border-radius: 50% !important;
-    width: 3rem !important;
-    height: 3rem !important;
-}
-.owl-theme .owl-dots .owl-dot span {
-    width: 2.2rem !important;
-    height: 10px;
-    margin: 5px 7px;
-    background: var(--darkgrey);
-    display: block;
-    transition: opacity 0.2s ease;
-    border-radius: 30px;
+    margin-left: 1rem;
 }
 
 /* Footer Section */

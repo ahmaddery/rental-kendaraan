@@ -26,7 +26,6 @@
         </div>
     </div>
 </div>
-
 <!-- End Hero -->
 
 <!-- Start Brands -->
@@ -360,7 +359,7 @@
 <!-- End About Preview -->
 
 <!-- Start Review Pelanggan -->
-<div class="section review">
+<div class="review section">
     <div class="container">
         <!-- Start Title Section -->
         <div class="title-section mb-4">
@@ -371,45 +370,55 @@
         </div>
         <!-- End Title Section -->
         <!-- Start Main Review -->
-        <!-- Start Review Card 1 -->
-        <div id="custom-cards">
-            <div class="owl-carousel owl-theme">
-                @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
-                    <div class="item">
-                        @foreach ($feedbackChunk as $feedback)
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="review-profile">
-                                        <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
-                                        <div class="review-profile-info">
-                                            <p class="card-profile-name">{{ $feedback->user->name }} pada
-                                                {{ $feedback->formatted_date }}</p>
-                                            <p class="card-vehicle-name">{{ $feedback->kendaraan->nama }}</p>
-                                            <div class="rating">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $feedback->rating)
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @else
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                        </div>
+        <div class="review-cards">
+            <div class="review-content">
+            @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    @foreach ($feedbackChunk as $feedback)
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="review-profile">
+                                <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
+                                <div class="review-profile-info">
+                                    <div class="review-profile-name">{{ $feedback->user->name }} pada {{ $feedback->formatted_date }}</div>
+                                    <div class="review-vehicle-name">{{ $feedback->kendaraan->nama }}</div>
+                                    <div class="rating">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $feedback->rating)
+                                        <i class="bi bi-star-fill"></i>
+                                        @else
+                                        <i class="bi bi-star"></i>
+                                        @endif
+                                        @endfor
                                     </div>
-                                    <blockquote class="card-text">
-                                        {{ $feedback->komentar }}
-                                    </blockquote>
                                 </div>
                             </div>
-                        @endforeach
+                            <blockquote class="card-text">
+                                {{ $feedback->komentar }}
+                            </blockquote>
+                        </div>
                     </div>
-                    <!--End Review Card 1-->
-                @endforeach
+                    @endforeach
+                </div>
+            </div>
+            @endforeach
             </div>
         </div>
         <!-- End Main Review -->
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.review-cards').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      });
+    });
+  </script>
 
 @include('layouts.modal')
 @include('layouts.footer')
