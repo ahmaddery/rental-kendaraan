@@ -12,7 +12,7 @@ class HomeController extends Controller
             $usertype = Auth::user()->userType;
             
             if ($usertype == 'user') {
-                return view('dashboard');
+                return redirect()->route('index'); // Redirect user to the index route
             } else if ($usertype == 'admin') {
                 return redirect()->route('admin.dashboard');
             } else {

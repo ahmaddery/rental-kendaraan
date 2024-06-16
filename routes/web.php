@@ -56,6 +56,11 @@ Route::post('/pengambilan/store', [PengambilanPengembalianController::class, 'st
 
 //route untuk pengambilan
 Route::get('/pengambilan-pengembalian', [PengambilanPengembalianController::class, 'index'])->name('pengambilan_pengembalian.index');
+Route::get('/pengambilan_pengembalian/complete/{orderId}', [PengambilanPengembalianController::class, 'createComplete'])->name('pengambilan_pengembalian.createComplete');
+Route::post('/pengambilan_pengembalian/storeComplete', [PengambilanPengembalianController::class, 'storeComplete'])->name('pengambilan_pengembalian.storeComplete');
+
+
+
 
 //route untuk riwayat transaksi 
 Route::get('/riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->name('riwayat.transaksi');
