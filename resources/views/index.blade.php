@@ -2,132 +2,199 @@
 
 
 <!-- Start Hero -->
-<div class="section hero">
-    <div class="container">
+<div class="hero-container">
+    <img src="{{asset('frontend/images/banner/banner-1.jpg')}}" alt="" class="hero-img">
+</div>
+<div class="hero">
+    <div class="hero-text-bg"></div>
+    <div class="hero-text mb-4">
         <div class="hero-title">
             <p>SEWA KENDARAAN</p>
         </div>
-        <div class="hero-banner">
-            <img class="img-fluid" src="{{ asset('frontend/images/banner/banner-1.jpg') }}" alt="" />
+        <div class="hero-desc mt-3 mb-3">
+            <p> Sewa kendaraan murah kini lebih mudah. <br />
+            Booking online tanpa perlu datang ke kantor! <br />
+            Segera hubungi kami! </p>
         </div>
-        <!-- <div class="running-text">
-          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
-          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
-          <p class="running-text-scroll">SEWA MOBIL & MOTOR</p>
-        </div> -->
-    </div>
-</div>
-<!-- End Hero -->
-{{-- Start logo --}}
-<div class="section logo">
-    <div class="row">
-        <div class="col"><img src="{{ asset('assets/images/logos/toyota.png') }}" alt="logo1"></div>
-        <div class="col"><img src="{{ asset('assets/images/logos/honda.png') }}" alt="logo2"></div>
-        <div class="col"><img src="{{ asset('assets/images/logos/bmw.png') }}" alt="logo3"></div>
-        <div class="col"><img src="{{ asset('assets/images/logos/daihatsu.png') }}" alt="logo4"></div>
-        <div class="col"><img src="{{ asset('assets/images/logos/suzuki.png') }}" alt="logo5"></div>
+        <div class="btn-styled">
+          <ul>
+            <li>
+              <p><a href="" class="btn">Kontak Kami</a></p>
+            </li>
+            <li><i class="btn bi bi-arrow-right"></i></li>
+          </ul>
+        </div>
     </div>
 </div>
 
-<!-- Start Keunggulan -->
-<div class="section keunggulan">
+<!-- End Hero -->
+
+<!-- Start Brands -->
+<div class="brands section">
     <div class="container">
-        <!-- Start Main Section -->
-        <div class="row">
-            <!-- Start Keunggulan 1 -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Asuransi</h5>
-                        <p class="card-text">
-                            Semua unit kendaraan menggunakan asuransi untuk memberikan
-                            perlindungan total.
-                        </p>
-                    </div>
-                </div>
+        <div class="marquee">
+            <div class="marquee-content scroll">
+                <div><img src="{{asset('frontend/images/brand/honda.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/toyota.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/tesla.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/hyundai.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/bmw.png')}}" alt="" /></div>
             </div>
-            <!-- End Keunggulan 1 -->
-            <!-- Start Keunggulan 2 -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Kendaraan Terbaru</h5>
-                        <p class="card-text">
-                            Menyediakan kendaraan terbaru dengan kondisi prima, bersih,
-                            dan terawat.
-                        </p>
-                    </div>
-                </div>
+            <div class="marquee-content scroll">
+                <div><img src="{{asset('frontend/images/brand/honda.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/toyota.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/tesla.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/hyundai.png')}}" alt="" /></div>
+                <div><img src="{{asset('frontend/images/brand/bmw.png')}}" alt="" /></div>
             </div>
-            <!-- End Keunggulan 2 -->
-            <!-- Start Keunggulan 3 -->
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Legalitas</h5>
-                        <p class="card-text">
-                            Memiliki legalitas hukum dan terdaftar sebagai Perusahaan Jasa
-                            Transportasi.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- End Keunggulan 3 -->
         </div>
-        <!-- End Main Section -->
+    </div>
+</div>
+<!-- End Brands -->
+
+<!-- Start Keunggulan -->
+<div class="keunggulan section">
+    <div class="row p-3">
+        <!-- First Column -->
+        <div class="col-12 col-lg-4 p-2">
+            <div class="kcol-left p-3">
+                <div class="title-section">
+                    <div class="sub-title">Keunggulan</div>
+                    <div class="title-desc">
+                        <p>Mengapa memilih kami?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Second Column Container-->
+        <div class="kcol-right col-12 col-lg-8">
+            <div class="row">
+                <!-- First Row inside Second Column -->
+                <div class="col-12 col-md-6 p-2">
+                    <div class="kcol-sub-right ksr1 p-3">
+                        <ul>
+                            <li class="icon"><i class="bi bi-shield-fill"></i></li>
+                            <li class="title">Asuransi</li>
+                            <li class="desc">Semua unit kendaraan menggunakan asuransi untuk memberikan
+                            perlindungan total.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-2">
+                    <div class="kcol-sub-right ksr2 p-3">
+                        <ul>
+                            <li class="icon"><i class="bi bi-bank2"></i></li>
+                            <li class="title">Legalitas</li>
+                            <li class="desc">Memiliki legalitas hukum dan terdaftar sebagai Perusahaan
+                            Jasa Transportasi.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Second Row inside Second Column -->
+                <div class="col-12 col-md-6 p-2">
+                    <div class="kcol-sub-right ksr3 p-3">
+                        <ul>
+                            <li class="icon"><i class="bi bi-car-front-fill"></i></li>
+                            <li class="title">Terbaru</li>
+                            <li class="desc">Menyediakan kendaraan terbaru dengan kondisi prima, bersih,
+                            dan terawat.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 p-2">
+                    <div class="kcol-sub-right ksr4 p-3">
+                        <ul>
+                            <li class="icon"><i class="bi bi-gear-fill"></i></li>
+                            <li class="title">Servis Resmi</li>
+                            <li class="desc">Melakukan servis berkala di bengkel resmi sehingga performa
+                            kendaraan tetap terjaga.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- End Keunggulan -->
 
 {{-- Start Langkah --}}
-    <div class="section langkah">
-        <div class="container">
-            <div class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-outline-dark rounded-5">Langkah Pemesanan</button>
-            </div>
-            <h3 class="text-center mt-2 mb-4"><b>Langkah mudah untuk menyewa <br> kendaraan</b></h3>
-            <hr style="border-top:3px solid black">
-            <div class="step">
-                <div class="step-number">01.</div>
-                <div class="step-content">
-                    <h2>Pilih Kendaraan</h2>
-                    <p class="mt-3">Pilih kendaraan yang sesuai dengan kriteria Anda dari <br> katalog kami yang beragam.</p>
-                </div>
-                <div class="arrow arrow-up"></div>
-            </div>              
-            <div class="step">
-                <div class="step-number">02.</div>
-                <div class="step-content">
-                    <h2>Isi Form</h2>
-                </div>
-                <div class="arrow arrow-down"></div>
-            </div>
-            <div class="step">
-                <div class="step-number">03.</div>
-                <div class="step-content">
-                    <h2>Pembayaran</h2>
-                </div>
-                <div class="arrow arrow-down"></div>
+<div class="langkah section">
+    <div class="container">
+        <div class="title-section mb-4">
+            <div class="sub-title">Langkah Pemesanan</div>
+            <div class="title-desc">
+                <p>Langkah mudah untuk menyewa kendaraan</p>
             </div>
         </div>
-    </div>    
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <span class="accordion-number">01.</span>
+                    <span class="accordion-title">Pilih Kendaraan</span>
+              </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                <p>Pilih kendaraan yang sesuai dengan kriteria Anda dari katalog kami yang beragam.</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                <span class="accordion-number">02.</span>
+                <span class="accordion-title">Isi Formulir</span>
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                <p>Isi formulir pemesanan dengan informasi pribadi dan detail perjalanan Anda.</p>
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                <span class="accordion-number">03.</span>
+                <span class="accordion-title">Pembayaran</span>
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                <p>Lakukan pembayaran menggunakan metode yang tersedia di website kami.</p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>    
 {{-- End Langkah --}}
 
 <!-- Start Sewa Kendaraan -->
 <div class="section kendaraan">
     <div class="container">
         <!-- Start Title Section -->
-        <div class="row">
-            <div class="d-flex">
-                <button class="btn btn-outline-dark rounded-5 mb-3">Sewa Kendaraan</button>
-            </div>
-            <div class="sub-title col-xl-7 col-lg-9">
-                <h3 class="mb-4 section-title">
-                    <b>Sewa kendaraan terpercaya <br> dengan harga bersahabat</b>
-                </h3>
-            </div>
-            <div class="sub-title-btn col-xl-5 col-lg-3">
-                <p><a href="{{ route('product') }}" class="btn btn-primary mb-4">Selengkapnya</a></p>
+        <div class="mb-4">
+            <div class="sub-title">Sewa Kendaraan</div>
+            <div class="row">
+                <div class="col-xl-7 col-lg-9">
+                    <div class="title-desc">
+                        <p>Sewa kendaraan berharga dengan harga bersahabat</p>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-3 d-flex justify-content-end">
+                    <div class="btn-styled">
+                        <ul>
+                            <li>
+                                <p><a href="" class="btn">Selengkapnya</a></p>
+                            </li>
+                            <li><i class="btn bi bi-arrow-right"></i></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         @if (session('success'))
@@ -157,13 +224,53 @@
             </script>
         @endif
         <!-- End Title Section -->
-        <div class="row">
-            @if ($kendaraans->isEmpty())
-                <div class="col-md-12">
-                    <p>Belum ada kendaraan.</p>
-                </div>
-            @else
-                @foreach($kendaraans as $kendaraan)
+        
+        @if ($kendaraans->isEmpty())
+        <div class="col-md-12">
+            <p>Belum ada kendaraan.</p>
+        </div>
+        @else
+        <div class="d-flex flex-wrap">
+        @foreach($kendaraans as $kendaraan)
+
+                    <!-- Start Product Column -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card card-vehicle">
+                            <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <div class="card-title-year">
+                                    <ul>
+                                        <li class="card-title">{{ $kendaraan->nama }}</li>
+                                        <li class="card-year">{{ $kendaraan->tahun }}</li>
+                                    </ul>
+                                </div>
+                                <p class="card-type">{{ $kendaraan->brand->kendaraan }}</p>
+                                <div class="card-specs mt-3">
+                                    <ul>
+                                        <li><i class="bi bi-people"></i> {{ $kendaraan->plat_nomor }}</li>
+                                        <li><i class="bi bi-shield-check"></i> {{ $kendaraan->category->kendaraan}}</li>
+                                        <li><i class="bi bi-car-front"></i> {{ $kendaraan->type->typekendaraan }}</li>
+                                        <li><i class="bi bi-suitcase-lg"></i> {{ $kendaraan->warna }}</li>
+                                    </ul>
+                                </div>
+                                <hr class="mt-4">
+                                <div class="card-price mb-2">
+                                    <ul>
+                                        <li class="idr">IDR</li>
+                                        <li class="idrnom">{{ number_format($kendaraan->harga, 0, ',', '.') }}</li>
+                                    </ul>
+                                </div>
+                                <div class="btn-card mt-3">
+                                    <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn me-2">Detail</a>
+                                    <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- End Product Column -->
+
+                 
+                <!-- <div class="row">
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card card-product h-100 border-0 shadow">
                             <div class="card-header">
@@ -193,10 +300,10 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
                 @endforeach
-            @endif
-            <!-- End Column 1 -->
-        </div>
+            </div>
+        @endif
     </div>
 </div>
 <!-- End Sewa Kendaraan -->
@@ -229,22 +336,25 @@
 </script>
 
 <!-- Start About Preview -->
-<div class="section about">
-    <div class="container">
-        <div class="banner-about">
-            <img src="{{ asset('frontend/images/banner/banner-2.png') }}" alt="Banner Image"
-                class="banner-about-img img-fluid" />
-            <!-- Start Title Section -->
-            <div class="banner-text">
-                <div class="dot-title">
-                    <i class="bi bi-circle-fill"></i>
-                    <h5>Tentang Kami</h5>
-                </div>
-                <h2 class="section-title">Ingin tahu lebih banyak tentang kami?</h2>
-                <p><a href="{{ route('about') }}" class="btn btn-primary">Selengkapnya</a></p>
+<div class="about section">
+    <div class="banner-about">
+        <img src="{{asset('frontend/images/banner/banner-2.png')}}" alt="Banner Image" class="banner-about-img img-fluid" />
+        <!-- Start Title Section -->
+        <div class="banner-text">
+            <div class="sub-title">Tentang Kami</div>
+            <div class="title-desc">
+                <p>Ingin tahu lebih banyak tentang kami?</p>
             </div>
-            <!-- End Title Section -->
+            <div class="btn-styled mt-4">
+                <ul>
+                    <li>
+                        <p><a href="" class="btn">Kontak Kami</a></p>
+                    </li>
+                    <li><i class="btn bi bi-arrow-right"></i></li>
+                </ul>
+            </div>
         </div>
+        <!-- End Title Section -->
     </div>
 </div>
 <!-- End About Preview -->
@@ -253,13 +363,10 @@
 <div class="section review">
     <div class="container">
         <!-- Start Title Section -->
-        <div class="row">
-            <div class="dot-title">
-                <i class="bi bi-circle-fill"></i>
-                <h5>Testimoni</h5>
-            </div>
-            <div class="sub-title col-xl-7 col-lg-9">
-                <h2 class="mb-4 section-title">Testimoni dari pelanggan kami</h2>
+        <div class="title-section mb-4">
+            <div class="sub-title">Testimoni</div>
+            <div class="title-desc">
+                <p>Testimoni dari pelanggan kami</p>
             </div>
         </div>
         <!-- End Title Section -->
