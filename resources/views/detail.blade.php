@@ -10,6 +10,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Link Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Custom CSS -->
     <style>
         .card {
@@ -32,14 +33,15 @@
         .modal-content {
             background-color: #f8f9fa;
             border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
         }
 
         img {
-            padding: 15px;
-            width: 100%;
+            padding: 10px;
+            width: auto;
             height: 85%;
             border-radius: 35px;
+            object-fit: cover;
         }
 
         .harga {
@@ -146,8 +148,8 @@
         <div class="card mt-5 rounded-5">
             <!-- Start Product Column -->
             <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card card-vehicle">
-                    <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
+                <div class="card card-vehicle rounded-5">
+                    <img src="{{ asset($kendaraan->image) }}" class="card-img-top" alt="foto {{ $kendaraan->nama }}" />
                     <div class="card-body">
                         <div class="card-title-year">
                             <ul>
