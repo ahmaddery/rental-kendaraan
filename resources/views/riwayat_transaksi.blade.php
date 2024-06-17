@@ -33,8 +33,8 @@
                             <p><strong>Tgl Order:</strong> {{ $transaksi->purchase_date }}</p>
                         </div>
                         <div class="col-md-3">
-                            <p><strong>Total Pembayaran:</strong> {{ number_format($transaksi->gross_amount, 0, ',', '.') }} IDR</p>
-                            <p><strong>Payment Type:</strong> {{ $transaksi->payment_type }}</p>
+                            <p><strong>Total Pembayaran:</strong>Rp {{ number_format($transaksi->gross_amount, 2, ',', '.') }}</p>
+                            <p><strong>Tipe Pembayaran:</strong> {{ $transaksi->payment_type }}</p>
                         </div>
                         <div class="col-md-3">
                             @php
@@ -42,8 +42,8 @@
                             $kendaraans = \App\Models\Kendaraan::whereIn('id', $kendaraanIds)->get();
                             @endphp
                             @foreach ($kendaraans as $kendaraan)
-                            <p><strong>Detail:</strong> {{ $kendaraan->nama }} - {{ number_format($kendaraan->harga, 0, ',', '.') }} IDR</p>
-                            <p><strong>Quantity:</strong> {{ floor($transaksi->gross_amount / $kendaraan->harga) }}</p>
+                            <p><strong>Detail:</strong> {{ $kendaraan->nama }} - Rp {{ number_format($kendaraan->harga, 2, ',', '.') }}</p>
+                            <p><strong>jumlah:</strong> {{ floor($transaksi->gross_amount / $kendaraan->harga) }}</p>
                             @if ($feedbackStatuses[$transaksi->id][$kendaraan->id] === 'not_exists')
                             <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-warning">Beri Feedback</a>
                             @else
@@ -106,7 +106,7 @@
                                             @endforeach
                                         </div>
                                         <div class="col-4">
-                                            <p><strong>Quantity</strong></p>
+                                            <p><strong>jumlah</strong></p>
                                         </div>
                                         <div class="col-8">
                                             @foreach ($kendaraans as $kendaraan)
@@ -140,7 +140,7 @@
                 {{ $riwayatTransaksi->links('pagination::bootstrap-4') }}
             </div>
             <div class="col-md-1">
-                <a class="btn btn-danger float-end" href="{{ route('index') }}">Back</a>
+                <a class="btn btn-danger float-end" href="{{ route('index') }}">Kembali</a>
             </div>
         </div>
 

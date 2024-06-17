@@ -12,7 +12,6 @@
         <!-- Form pencarian dan filter item per page -->
         <div class="row mb-3">
             <div class="col-md-6">
-                <h2 class="mt-5">Unprocessed Payments</h2>
             </div>
             <div class="col-md-6">
                 <form action="{{ route('pengambilan_pengembalian.index') }}" method="GET" id="searchForm">
@@ -55,24 +54,26 @@
         <!-- Tabel untuk Unprocessed Payments -->
         @if ($unprocessedPayments->isNotEmpty())
         <div class="table-responsive">
-            <h2 class="mt-5">Unprocessed Payments</h2>
+            <h3 class="mt-5">Kendaraan belum ditentukan pengambilan</h3><br>
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark text-center">
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Transaction Status</th>
-                        <th>Gross Amount</th>
-                        <th class="text-center">Action</th>
+                        <th>Nama</th>
+                        <th>Kendaraan</th>
+                        <th>Status Transaksi</th>
+                        <th>Total Pembayaran</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($unprocessedPayments as $payment)
                     <tr>
                         <td class="text-center">{{ $payment->order_id }}</td>
-                        <td class="text-center">{{ $payment->user_id }}</td>
+                        <td class="text-center">{{ $payment->user->name }}</td>
+                        <td class="text-center">{{ $payment->kendaraan->nama }}</td>
                         <td class="text-center">{{ $payment->transaction_status }}</td>
-                        <td class="text-end">{{ number_format($payment->gross_amount) }}</td>
+                        <td class="text-end">Rp {{ number_format($payment->gross_amount, 2, ',', '.') }}</td>
                         <td class="text-center">
                             <a href="{{ route('pengambilan_pengembalian.createComplete', $payment->order_id) }}" class="btn btn-primary">
                                 Lengkapi Data
@@ -97,7 +98,7 @@
                 <thead class="thead-dark text-center">
                     <tr>
                         <th>Order ID</th>
-                        <th>User</th>
+                        <th>Nama</th>
                         <th>Kendaraan</th>
                         <th>Tanggal Pengambilan</th>
                         <th>Tanggal Pengembalian</th>
