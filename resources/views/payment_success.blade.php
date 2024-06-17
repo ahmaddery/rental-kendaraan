@@ -62,7 +62,7 @@
                 <div class="col-6 bg-light">
                     <p class="card-text"><strong>Order ID:</strong> {{ $payment->order_id }}</p>
                     <p class="card-text"><strong>Tanggal Pembelian: {{ date('d F Y, H:i', strtotime($payment->purchase_date)) }}</strong></p>
-                    <p class="card-text mb-4"><strong>Transaction Status:</strong>
+                    <p class="card-text mb-4"><strong>Status Transaksi:</strong>
                         @if ($payment->transaction_status == 'settlement')
                         <span class="badge badge-success">Success</span>
                         @else
@@ -75,7 +75,7 @@
                     @endphp
                     @foreach ($kendaraans as $kendaraan)
                     <p><strong>Kendaraan:</strong> {{ $kendaraan->nama }}</p>
-                    <p><strong>Price:</strong> Rp. {{ number_format($kendaraan->harga, 0, ',', '.') }} / Hari</p>
+                    <p><strong>Harga:</strong> Rp. {{ number_format($kendaraan->harga, 2, ',', '.') }} / Hari</p>
                     <p><strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} days</p>
                     @endforeach
                 </div>
@@ -102,17 +102,17 @@
                     <p class="text-success">Anda telah menentukan Tanggal pengambilan kendaraan</p>
                     @endif
                     @else
-                    <h2 class="mt-4 mb-4 text-xl font-semibold">Retry Payment</h2>
+                    <h2 class="mt-4 mb-4 text-xl font-semibold">Ulangi Pembayaran</h2>
                     <form action="{{ route('checkout') }}" method="POST">
                         @csrf
                         <input type="hidden" name="payment_id" value="{{ $payment->id }}">
-                        <button type="submit" class="btn btn-warning">Retry Payment</button>
+                        <button type="submit" class="btn btn-warning">Ulangi Pembayaran</button>
                     </form>
                     @endif
                 </div>
             </div>
         </div>
-        <a href="{{ route('index') }}" class="btn btn-secondary mt-6">Return to Home</a>
+        <a href="{{ route('index') }}" class="btn btn-secondary mt-6">Kembali</a>
     </div>
 
     <footer class="mt-10 text-gray-600">
