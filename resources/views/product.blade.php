@@ -56,33 +56,32 @@
 
             @if (session('success'))
             <script>
-            Swal.fire({
-                toast: true
-                , position: 'top-end'
-                , icon: 'success'
-                , title: '{{ session('
-                success ') }}'
-                , showConfirmButton: false
-                , timer: 6000
-                , timerProgressBar: true
-            , });
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                });
             </script>
         @endif
+        
         @if (session('error'))
-        <script>
-            Swal.fire({
-                toast: true
-                , position: 'top-end'
-                , icon: 'error'
-                , title: '{{ session('
-                error ') }}'
-                , showConfirmButton: false
-                , timer: 6000
-                , timerProgressBar: true
-            , });
-
-        </script>
+            <script>
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 6000,
+                    timerProgressBar: true,
+                });
+            </script>
         @endif
+        
         <!-- End Title Section -->
 
         @if ($kendaraans->isEmpty())
