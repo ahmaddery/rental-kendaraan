@@ -21,7 +21,7 @@ body {
     align-items: center;
     margin: 0rem 6rem !important;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .section {
         margin: 0rem 2rem !important;
     }
@@ -91,7 +91,7 @@ body {
 .navbar {
     background-color: var(--white-transparent) !important;
     backdrop-filter: blur(25px);
-    padding: 0.7rem 6rem !important;
+    padding: 0.7rem 5.7rem !important;
     box-shadow: 0 2px 7px var(--shadow);
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -150,9 +150,9 @@ body {
     font-weight: 700;
     color: var(--black) !important;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .navbar {
-        padding: 0.7rem 2rem;
+        padding: 0.7rem 2rem !important;
     }
 }
 .underline-active {
@@ -276,6 +276,11 @@ body {
     }
     .hero-desc {
         font-size: 1.2rem;
+    }
+}
+@media (max-width: 400px) {
+    .btn-styled a {
+        font-size: 1rem;
     }
 }
 
@@ -448,9 +453,10 @@ body {
     margin: 1rem;
 }
 .card-vehicle img {
-    height: 17rem;
-    width: auto;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
+    aspect-ratio: 1/1;
 }
 .card-vehicle .card-title-year ul {
     display: flex;
@@ -475,12 +481,20 @@ body {
 .card-vehicle .card-specs ul {
     list-style-type: none;
     display: flex;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     justify-content: space-between;
     font-size: 0.9rem;
     font-weight: lighter;
     color: var(--grey);
+}
+.card-vehicle .card-specs li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
 }
 .card-price ul {
     display: flex;
@@ -491,6 +505,7 @@ body {
 }
 .btn-card .btn {
     background-color: var(--blue);
+    color: var(--white);
     border-radius: 10px;
     padding: 0.3rem 0.7rem;
     transition: background-color 0.3s, transform 0.3s;

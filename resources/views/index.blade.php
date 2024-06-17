@@ -17,12 +17,18 @@
             Segera hubungi kami! </p>
         </div>
         <div class="btn-styled">
-          <ul>
-            <li>
-              <p><a href="#sewa" class="btn">Order Now</a></p>
-            </li>
-            <li><i class="btn bi bi-arrow-right"></i></li>
-          </ul>
+            <ul>
+                <li>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <p>Sewa Sekarang</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -189,9 +195,15 @@
                     <div class="btn-styled">
                         <ul>
                             <li>
-                                <p><a href="{{ 'product' }}" class="btn">Selengkapnya</a></p>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <p>Selengkapnya</p>
+                                </a>
                             </li>
-                            <li><i class="btn bi bi-arrow-right"></i></li>
+                            <li>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -234,7 +246,7 @@
         @foreach($kendaraans as $kendaraan)
 
                     <!-- Start Product Column -->
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="col-12 col-md-6 col-xxl-4 mb-4">
                         <div class="card card-vehicle">
                             <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
                             <div class="card-body">
@@ -254,7 +266,7 @@
                                     </ul>
                                 </div>
                                 <hr class="mt-4">
-                                <div class="card-price mb-2">
+                                <div class="card-price mt-3 mb-2">
                                     <ul>
                                         <li class="idr">Rp</li>
                                         <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
@@ -267,7 +279,7 @@
                             </div>
                         </div>
                     </div>
-                <!-- End Product Column -->
+                    <!-- End Product Column -->
 
                  
                 <!-- <div class="row">
@@ -348,7 +360,14 @@
             <div class="btn-styled mt-4">
                 <ul>
                     <li>
-                        <p><a href="{{ 'about' }}" class="btn">Tentang Kami<i class="btn bi bi-arrow-right"></i></a></p>
+                        <a href="{{ 'about' }}" class="btn">
+                            <p>Tentang Kami</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ 'about' }}" class="btn">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -93,7 +93,7 @@
             @foreach($kendaraans as $kendaraan)
 
             <!-- Start Product Column -->
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="col-12 col-md-6 col-xxl-4 mb-4">
                 <div class="card card-vehicle">
                     <img src="{{ $kendaraan->image }}" class="card-img-top" alt="..." />
                     <div class="card-body">
@@ -113,7 +113,7 @@
                             </ul>
                         </div>
                         <hr class="mt-4">
-                        <div class="card-price mb-2">
+                        <div class="card-price mt-3 mb-2">
                             <ul>
                                 <li class="idr">Rp</li>
                                 <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
