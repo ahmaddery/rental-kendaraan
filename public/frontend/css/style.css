@@ -91,7 +91,7 @@ body {
 .navbar {
     background-color: var(--white-transparent) !important;
     backdrop-filter: blur(25px);
-    padding: 0.7rem 6rem !important;
+    padding: 0.7rem 5.7rem !important;
     box-shadow: 0 2px 7px var(--shadow);
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -150,9 +150,9 @@ body {
     font-weight: 700;
     color: var(--black) !important;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .navbar {
-        padding: 0.7rem 2rem;
+        padding: 0.7rem 2rem !important;
     }
 }
 .underline-active {
