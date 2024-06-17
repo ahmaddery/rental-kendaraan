@@ -1,6 +1,5 @@
 @include('layouts.navbar')
 
-
 <!-- Start Hero -->
 <div class="hero-container">
     <img src="{{asset('frontend/images/banner/banner-1.jpg')}}" alt="" class="hero-img">
@@ -32,7 +31,6 @@
         </div>
     </div>
 </div>
-
 <!-- End Hero -->
 
 <!-- Start Brands -->
@@ -378,7 +376,7 @@
 <!-- End About Preview -->
 
 <!-- Start Review Pelanggan -->
-<div class="section review" data-aos="fade-up" data-aos-duration="1000">
+<div class="review section" data-aos="fade-up" data-aos-duration="1000">
     <div class="container">
         <!-- Start Title Section -->
         <div class="title-section mb-4">
@@ -390,44 +388,69 @@
         <!-- End Title Section -->
         <!-- Start Main Review -->
         <!-- Start Review Card 1 -->
-        <div id="custom-cards">
-            <div class="owl-carousel owl-theme">
-                @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
-                    <div class="item">
-                        @foreach ($feedbackChunk as $feedback)
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="review-profile">
-                                        <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
-                                        <div class="review-profile-info">
-                                            <p class="card-profile-name">{{ $feedback->user->name }} pada
-                                                {{ $feedback->formatted_date }}</p>
-                                            <p class="card-vehicle-name">{{ $feedback->kendaraan->nama }}</p>
-                                            <div class="rating">
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    @if ($i <= $feedback->rating)
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @else
-                                                        <i class="bi bi-star-fill"></i>
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <blockquote class="card-text">
-                                        {{ $feedback->komentar }}
-                                    </blockquote>
+        <div class="review-cards">
+            @foreach ($feedbacks->chunk(3) as $index => $feedbackChunk)
+            @foreach ($feedbackChunk as $feedback)
+                <div class="card">
+                    <div class="card-body">
+                        <div class="review-profile">
+                            <img src="{{ asset('frontend/images/product/car-01.jpg') }}" alt="">
+                            <div class="review-profile-info">
+                                <div class="review-profile-name">{{ $feedback->user->name }} pada {{ $feedback->formatted_date }}</div>
+                                <div class="review-vehicle-name">{{ $feedback->kendaraan->nama }}</div>
+                                <div class="rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $feedback->rating)
+                                    <i class="bi bi-star-fill"></i>
+                                    @else
+                                    <i class="bi bi-star"></i>
+                                    @endif
+                                    @endfor
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                        <blockquote class="card-text">
+                            {{ $feedback->komentar }}
+                        </blockquote>
                     </div>
-                    <!--End Review Card 1-->
-                @endforeach
-            </div>
+                </div>
+            @endforeach
+            @endforeach
         </div>
         <!-- End Main Review -->
     </div>
 </div>
+
+<script>
+$(document).ready(function () {
+  $(".review-cards").slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+    prevArrow:
+      '<button type="button" class="slick-prev"><i class="bi bi-chevron-left"></i></button>',
+    nextArrow:
+      '<button type="button" class="slick-next"><i class="bi bi-chevron-right"></i></button>',
+  });
+});
+
+</script>
+<!-- End Review Pelanggan -->
 
 @include('layouts.modal')
 @include('layouts.footer')
