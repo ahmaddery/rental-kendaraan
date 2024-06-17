@@ -17,12 +17,18 @@
             Segera hubungi kami! </p>
         </div>
         <div class="btn-styled">
-          <ul>
-            <li>
-              <p><a href="#sewa" class="btn">Order Now</a></p>
-            </li>
-            <li><i class="btn bi bi-arrow-right"></i></li>
-          </ul>
+            <ul>
+                <li>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <p>Sewa Sekarang</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ '#sewa' }}" class="btn">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -189,9 +195,15 @@
                     <div class="btn-styled">
                         <ul>
                             <li>
-                                <p><a href="{{ 'product' }}" class="btn">Selengkapnya</a></p>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <p>Selengkapnya</p>
+                                </a>
                             </li>
-                            <li><i class="btn bi bi-arrow-right"></i></li>
+                            <li>
+                                <a href="{{ 'product' }}" class="btn">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -348,7 +360,14 @@
             <div class="btn-styled mt-4">
                 <ul>
                     <li>
-                        <p><a href="{{ 'about' }}" class="btn">Tentang Kami<i class="btn bi bi-arrow-right"></i></a></p>
+                        <a href="{{ 'about' }}" class="btn">
+                            <p>Tentang Kami</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ 'about' }}" class="btn">
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
