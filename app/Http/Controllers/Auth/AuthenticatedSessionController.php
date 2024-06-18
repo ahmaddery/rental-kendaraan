@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -25,11 +27,30 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
+            // Set success message
+            session()->flash('success', 'Login berhasil!');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } catch (ValidationException $e) {
+            // Set validation error message
+            session()->flash('error', 'Validasi gagal: ' . $e->getMessage());
+
+            return redirect()->route('login')->withErrors($e->errors());
+        } catch (AuthenticationException $e) {
+            // Set authentication error message
+            session()->flash('error', 'Autentikasi gagal: ' . $e->getMessage());
+
+            return redirect()->route('login');
+        } catch (\Exception $e) {
+            // Set general error message
+            session()->flash('error', 'Login gagal: ' . $e->getMessage());
+
+            return redirect()->route('login');
+        }
     }
 
     /**
@@ -40,9 +61,12 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
+
+        // Set logout message
+        session()->flash('success', 'Logout berhasil!');
 
         return redirect('/');
     }
 }
+
