@@ -61,6 +61,7 @@
                         <th>Order ID</th>
                         <th>Nama</th>
                         <th>Kendaraan</th>
+                        <th>Harga/Hari</th>
                         <th>Status Transaksi</th>
                         <th>Total Pembayaran</th>
                         <th class="text-center">Aksi</th>
@@ -143,3 +144,7 @@
         <div class="d-flex justify-content-center">
             {{ $pengambilanPengembalian->appends(['per_page' => $perPage, 'search' => $search])->links('pagination::bootstrap-4') }}
         </div>
+    </div>
+</div>
+@include('layouts.modal')
+{{-- @include('layouts.footer') --}}

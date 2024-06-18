@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Keranjang;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use App\Models\Feedback;
@@ -13,6 +14,7 @@ class RiwayatTransaksiController extends Controller
     {
         if (Auth::check()) {
             $user_id = Auth::id();
+            $keranjang = Keranjang::where('user_id', $user_id)->get();
             $search = $request->input('search');
             $perPage = $request->input('per_page', 5); // Default to 5 if not set
 
@@ -41,6 +43,8 @@ class RiwayatTransaksiController extends Controller
             return view('riwayat_transaksi', [
                 'riwayatTransaksi' => $riwayatTransaksi,
                 'feedbackStatuses' => $feedbackStatuses,
+                'keranjang' => $keranjang,
+                
             ]);
         } else {
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk melihat riwayat transaksi.');

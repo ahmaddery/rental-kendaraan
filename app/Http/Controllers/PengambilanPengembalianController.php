@@ -29,7 +29,7 @@ class PengambilanPengembalianController extends Controller
 
     // Mendapatkan ID pengguna yang sedang login
     $userId = Auth::id();
-
+    $keranjang = Keranjang::where('user_id', $userId)->get();
     // Query pengambilan pengembalian dengan filter search dan pagination
     $pengambilanPengembalianQuery = PengambilanPengembalian::with(['user', 'kendaraan'])
         ->where('user_id', $userId);
@@ -76,6 +76,7 @@ class PengambilanPengembalianController extends Controller
         'processedPayments' => $processedPayments,
         'perPage' => $perPage,
         'search' => $search,
+        'keranjang' => $keranjang,
     ]);
 }
 

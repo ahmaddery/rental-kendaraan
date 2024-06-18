@@ -145,6 +145,8 @@
         </div>
 
     </div>
+    @include('layouts.modal')
+    @include('layouts.footer')
 
     <script>
         function printReceipt(id) {
