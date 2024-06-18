@@ -110,7 +110,7 @@
                             <div class="name text-md"><p>Tahun Kendaraan : {{ $kendaraan->tahun }}</p></div>
                             <div class="card-price mb-2">
                                 <ul>
-                                    <li class="idr">IDR : {{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
+                                    <li class="idr">Rp : {{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
                                 </ul>
                             </div>
                         </div>
