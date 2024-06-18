@@ -76,13 +76,13 @@
                     @foreach ($kendaraans as $kendaraan)
                     <p><strong>Kendaraan:</strong> {{ $kendaraan->nama }}</p>
                     <p><strong>Harga:</strong> Rp. {{ number_format($kendaraan->harga, 2, ',', '.') }} / Hari</p>
-                    <p><strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} days</p>
+                    <p><strong>Durasi Penyewaan:</strong> {{ floor($payment->gross_amount / $kendaraan->harga) }} Hari</p>
                     @endforeach
                 </div>
                 <div class="col-12 mt-2 bg-light">
                     @if ($payment->transaction_status == 'settlement')
                     @if (!$isVehicleTaken)
-                    <h2 class="mt-4 mb-4 text-xl font-semibold">Pick Up Vehicle</h2>
+                    <h2 class="mt-4 mb-4 text-xl font-semibold">Pilih Tanggal Pengambilan:</h2>
                     <form action="{{ route('pengambilan.store') }}" method="POST" id="pickUpForm">
                         @csrf
                         <div class="form-group mb-4">
@@ -93,10 +93,15 @@
                             <input type="date" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control" required min="{{ date('Y-m-d') }}">
                         </div>
                         <div class="form-group mb-4">
-                            <label for="tanggal_pengembalian" class="block font-bold mb-2">Return Date:</label>
+                            <label for="tanggal_pengembalian" class="block font-bold mb-2">Tanggal Pengembalian: *Diisi Otomatis</label>
                             <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian" class="form-control" readonly>
                         </div>
-                        <button type="submit" class="btn btn-primary d-flex justify-content-center">Pick Up</button>
+                        <p class="alert alert-info">
+                            Pastikan Anda telah memilih tanggal dengan benar. Tanggal tidak dapat diubah setelah ditentukan.
+                            Kami telah mengirimkan detail transaksi Anda. Silakan cek email untuk informasi lebih lanjut.
+                        </p>
+                        
+                        <button type="submit" class="btn btn-primary d-flex justify-content-center">simpan</button>
                     </form>
                     @else
                     <p class="text-success">Anda telah menentukan Tanggal pengambilan kendaraan</p>
@@ -120,11 +125,7 @@
     </footer>
 
     <script>
-        var duration = {
-            {
-                $duration
-            }
-        };
+        var duration = {{ $duration }};
         document.getElementById('tanggal_pengambilan').addEventListener('change', function() {
             var pickUpDate = new Date(this.value);
             pickUpDate.setDate(pickUpDate.getDate() + duration);
@@ -137,13 +138,13 @@
 
         // Tampilkan animasi loading saat halaman dimuat
         Swal.fire({
-            title: ""
-            , text: "Memuat data..."
-            , imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif"
-            , imageAlt: "Loading animation"
-            , showConfirmButton: false
-            , allowOutsideClick: false
-            , allowEscapeKey: false
+            title: "",
+            text: "Memuat data...",
+            imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
+            imageAlt: "Loading animation",
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            allowEscapeKey: false
         });
 
         window.addEventListener('load', function() {
@@ -156,16 +157,15 @@
         // Tampilkan animasi loading saat mengirimkan formulir
         document.getElementById('pickUpForm').addEventListener('submit', function() {
             Swal.fire({
-                title: ""
-                , text: "Mengirim data..."
-                , imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif"
-                , imageAlt: "Loading animation"
-                , showConfirmButton: false
-                , allowOutsideClick: false
-                , allowEscapeKey: false
+                title: "",
+                text: "Mengirim data...",
+                imageUrl: "https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif",
+                imageAlt: "Loading animation",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false
             });
         });
-
     </script>
 </body>
 </html>

@@ -64,7 +64,6 @@
                         <th>Harga/Hari</th>
                         <th>Status Transaksi</th>
                         <th>Total Pembayaran</th>
-                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,4 +146,3 @@
     </div>
 </div>
 @include('layouts.modal')
-{{-- @include('layouts.footer') --}}
