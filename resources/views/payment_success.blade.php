@@ -43,7 +43,7 @@
             <div class="card-header bg-light">
                 <h1 class="text-center">
                     @if ($payment->transaction_status == 'settlement')
-                    <span class="badge badge-success text-xl font-bold ">Payment Success</span>
+                    <span class="badge badge-success text-xl font-bold ">Pembayaran Berhasil</span>
                     @else
                     <span class="badge badge-warning">{{ $payment->transaction_status }}</span>
                     @endif

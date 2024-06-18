@@ -35,19 +35,19 @@
                                         <td class="p-2 border-b">
                                             <div class="quantity-buttons">
                                                 <button type="button" class="btn-decrement bg-gray-300 text-black px-2 py-1 rounded">-</button>
-                                                <span class="quantity-value">{{ $item->quantity }}</span>
+                                                <span class="quantity-value">{{ $item->quantity }} Hari</span>
                                                 <input type="hidden" name="quantity" value="{{ $item->quantity }}">
                                                 <button type="button" class="btn-increment bg-gray-300 text-black px-2 py-1 rounded">+</button>
                                             </div>
                                         </td>
-                                        <td class="p-2 border-b">{{ number_format($item->kendaraan->harga, 2) }}</td>
-                                        <td class="p-2 border-b">{{ number_format($item->quantity * $item->kendaraan->harga, 2) }}</td>
+                                        <td class="p-2 border-b">RP. {{ number_format($item->kendaraan->harga, 2) }}</td>
+                                        <td class="p-2 border-b">RP. {{ number_format($item->quantity * $item->kendaraan->harga, 2) }}</td>
                                         <td class="p-2 border-b">
                                             <form method="POST" action="{{ route('cart.update', $item->id) }}" class="inline-block update-quantity-form">
                                                 @csrf
                                                 @method('PATCH')
                                                 <input type="hidden" name="quantity" value="{{ $item->quantity }}">
-                                                <button type="submit" class="btn btn-primary bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Update</button>
+                                                <button type="submit" class="btn btn-primary bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Perbarui</button>
                                             </form>
                                             <form method="POST" action="{{ route('cart.delete', $item->id) }}" class="inline-block">
                                                 @csrf
