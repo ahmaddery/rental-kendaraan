@@ -55,11 +55,13 @@ Route::post('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect
 Route::post('/pengambilan/store', [PengambilanPengembalianController::class, 'store'])->name('pengambilan.store');
 //Route::get('/payment-redirect', [UtamaController::class, 'handlePaymentRedirect'])->name('payment.redirect');
 
+
+Route::group(['middleware' => ['auth']], function () {
 //route untuk pengambilan
 Route::get('/pengambilan-pengembalian', [PengambilanPengembalianController::class, 'index'])->name('pengambilan_pengembalian.index');
 Route::get('/pengambilan_pengembalian/complete/{orderId}', [PengambilanPengembalianController::class, 'createComplete'])->name('pengambilan_pengembalian.createComplete');
 Route::post('/pengambilan_pengembalian/storeComplete', [PengambilanPengembalianController::class, 'storeComplete'])->name('pengambilan_pengembalian.storeComplete');
-
+});
 
 
 
