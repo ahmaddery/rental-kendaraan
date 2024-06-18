@@ -89,7 +89,7 @@
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                             <input type="hidden" name="kendaraan_id" value="{{ $payment->kendaraan_id }}">
                             <input type="hidden" name="order_id" value="{{ $payment->order_id }}" hidden>
-                            <label for="tanggal_pengambilan" class="block font-bold mb-2">Pick Up Date:</label>
+                            <label for="tanggal_pengambilan" class="block font-bold mb-2">Pilih tanggal pengambilan:</label>
                             <input type="date" id="tanggal_pengambilan" name="tanggal_pengambilan" class="form-control" required min="{{ date('Y-m-d') }}">
                         </div>
                         <div class="form-group mb-4">
