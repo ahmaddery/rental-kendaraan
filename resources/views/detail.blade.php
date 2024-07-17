@@ -94,6 +94,12 @@
         body {
             padding-top: 70px; /* Adjust based on your navbar height */
         }
+
+        /* Unavailable Dates Section */
+        .unavailable-dates {
+            max-height: 200px; /* Set the maximum height */
+            overflow-y: auto;  /* Enable vertical scrolling */
+        }
     </style>
 </head>
 <body>
@@ -121,6 +127,15 @@
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false">02. Deskripsi</a>
                             </li>
+                            @if(!$unavailableDates)
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="available-tab" data-toggle="tab" href="#available-tab-pane" role="tab" aria-controls="available-tab-pane" aria-selected="false">03. Kendaraan Tersedia</a>
+                                </li>
+                            @else
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="unavailable-dates-tab" data-toggle="tab" href="#unavailable-dates-tab-pane" role="tab" aria-controls="unavailable-dates-tab-pane" aria-selected="false">03. Tanggal Tidak Tersedia</a>
+                                </li>
+                            @endif
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
                             <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -148,18 +163,38 @@
                                     {!! $kendaraan->deskripsi !!}
                                 </p>
                             </div>
+                            @if(!$unavailableDates)
+                                <div class="tab-pane fade" id="available-tab-pane" role="tabpanel" aria-labelledby="available-tab" tabindex="0">
+                                    <p class="text-success mt-3">Kendaraan tersedia untuk semua tanggal.</p>
+                                </div>
+                            @else
+                                <div class="tab-pane fade" id="unavailable-dates-tab-pane" role="tabpanel" aria-labelledby="unavailable-dates-tab" tabindex="0">
+                                    <div class="unavailable-dates">
+                                        <ul>
+                                            @foreach($unavailableDates as $date)
+                                                <li>{{ $date }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         <hr>
                         <div class="btn-card mt-3">
-                            @if($payment && $payment->transaction_status === 'settlement' && !$userHasRated)
-                                <button type="button" class="btn btn-success btn-1 rounded-4" data-toggle="modal" data-target="#ratingModal">Berikan Rating</button>
+                            @if(!$unavailableDates)
+                                @if($payment && $payment->transaction_status === 'settlement' && !$userHasRated)
+                                    <button type="button" class="btn btn-success btn-1 rounded-4" data-toggle="modal" data-target="#ratingModal">Berikan Rating</button>
+                                @endif
+                                <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
+                            @else
+                                <button type="button" class="btn btn-secondary btn-1 rounded-4" disabled>Kendaraan Tidak Tersedia</button>
                             @endif
-                            <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>  
         </div>
+    </div>
 
         <!-- Bagian Rating dan Komentar -->
         <div class="card mt-5 rounded-5">

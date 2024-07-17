@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use App\Models\Keranjang;
+use App\Models\PengambilanPengembalian;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,7 @@ use Midtrans\Notification;
 use Illuminate\Support\Facades\Log;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Carbon;
 
 
 class UtamaController extends Controller
@@ -23,24 +25,34 @@ class UtamaController extends Controller
             return Kendaraan::inRandomOrder()->limit(3)->get();
         });
     
+        // Retrieve all feedbacks with formatted date
         $feedbacks = Feedback::with('user', 'kendaraan')->get()->map(function ($feedback) {
             $feedback->formatted_date = $feedback->created_at->format('d F Y'); // Format the date
             return $feedback;
         });
     
+        // Initialize keranjang variable
+        $keranjang = null;
+    
+        // Retrieve unavailable kendaraan ids
+        $unavailableKendaraanIds = PengambilanPengembalian::whereDate('tanggal_pengambilan', '>=', now())
+            ->pluck('kendaraan_id')
+            ->toArray();
+    
+        // Check if user is authenticated
         if (Auth::check()) {
             $user_id = Auth::id();
             $keranjang = Keranjang::where('user_id', $user_id)->get();
-        } else {
-            $keranjang = null; // Jika pengguna tidak terautentikasi, keranjang akan null
         }
     
         return view('index', [
             'kendaraans' => $kendaraans,
-            'feedbacks' => $feedbacks, // Pass feedbacks with formatted date to the view
-            'keranjang' => $keranjang, // Pass keranjang data to the view
+            'feedbacks' => $feedbacks,
+            'keranjang' => $keranjang,
+            'unavailableKendaraanIds' => $unavailableKendaraanIds, // Pass unavailable kendaraan ids to view
         ]);
     }
+    
     
     
 
@@ -62,13 +74,36 @@ class UtamaController extends Controller
             ->where('kendaraan_id', $id)
             ->exists();
     
+        // Inisialisasi $bookings sebagai array kosong
+        $bookings = [];
+    
+        // Ambil tanggal booking dari model PengambilanPengembalian
+        $pengambilanPengembalians = PengambilanPengembalian::where('kendaraan_id', $id)->get(['tanggal_pengambilan', 'tanggal_pengembalian']);
+    
+        // Hitung tanggal yang tidak tersedia
+        $unavailableDates = [];
+        foreach ($pengambilanPengembalians as $booking) {
+            $start = Carbon::parse($booking->tanggal_pengambilan);
+            $end = Carbon::parse($booking->tanggal_pengembalian);
+    
+            for ($date = $start; $date->lte($end); $date->addDay()) {
+                // Hanya tambahkan tanggal yang belum lewat hari ini
+                if ($date->isFuture()) {
+                    $unavailableDates[] = $date->format('Y-m-d');
+                }
+            }
+        }
+    
         return view('detail', [
             'kendaraan' => $kendaraan,
             'payment' => $payment,
             'ratings' => $ratings,
-            'userHasRated' => $userHasRated
+            'userHasRated' => $userHasRated,
+            'unavailableDates' => $unavailableDates
         ]);
     }
+    
+    
     
     
     
@@ -146,6 +181,25 @@ class UtamaController extends Controller
            // Ambil kendaraan_id dari entri di tabel keranjang
            $kendaraan_ids = $keranjang->pluck('kendaraan_id')->toArray();
    
+           // Ambil tanggal booking dari model PengambilanPengembalian
+           $unavailableDates = [];
+           foreach ($kendaraan_ids as $kendaraan_id) {
+               $bookings = PengambilanPengembalian::where('kendaraan_id', $kendaraan_id)->get(['tanggal_pengambilan', 'tanggal_pengembalian']);
+   
+               foreach ($bookings as $booking) {
+                   $start = Carbon::parse($booking->tanggal_pengambilan);
+                   $end = Carbon::parse($booking->tanggal_pengembalian);
+   
+                   // Hanya tambahkan tanggal awal dan akhir dari rentang tidak tersedia
+                   if ($start->isFuture() && $end->isFuture()) {
+                       $unavailableDates[] = [
+                           'start' => $start->isoFormat('D MMMM YYYY', 'id'),
+                           'end' => $end->isoFormat('D MMMM YYYY', 'id'),
+                       ];
+                   }
+               }
+           }
+   
            // Buat transaksi menggunakan Midtrans
            $transaction_params = [
                'transaction_details' => [
@@ -201,11 +255,16 @@ class UtamaController extends Controller
            }
    
            // Redirect ke halaman pembayaran Midtrans dengan snapToken
-           return view('checkout', ['snapToken' => $snapToken, 'payment' => $payment]);
+           return view('checkout', [
+               'snapToken' => $snapToken,
+               'payment' => $payment,
+               'unavailableDates' => $unavailableDates,
+           ]);
        } else {
            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk checkout.');
        }
    }
+   
    
     
     

@@ -270,9 +270,17 @@
                                         <li class="idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
                                     </ul>
                                 </div>
+                                @php
+                                // Check if current kendaraan is unavailable
+                                $isUnavailable = in_array($kendaraan->id, $unavailableKendaraanIds);
+                            @endphp
                                 <div class="btn-card mt-3">
                                     <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn me-2">Detail</a>
-                                    <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
+                                    @if (!$isUnavailable)
+                                        <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn"><i class="bi bi-cart2"></i></a>
+                                    @else
+                                        <button class="btn btn-secondary" disabled>Tidak Tersedia</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

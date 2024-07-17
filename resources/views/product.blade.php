@@ -122,15 +122,28 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <li class="list-inline-item idrnom">{{ number_format($kendaraan->harga, 2, ',', '.') }}</li>
                                 </ul>
                             </div>
-                            <div class="btn-card mt-3 d-flex justify-content-between">
-                                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary me-2">Detail</a>
-                                <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-outline-secondary"><i class="bi bi-cart2"></i></a>
-                            </div>
-                        </div>
-                        <div class="card-footer">
+                            @php
+                // Check if current kendaraan is unavailable
+                $isUnavailable = in_array($kendaraan->id, $unavailableKendaraanIds);
+            @endphp
+            
+            <div class="btn-card mt-3 d-flex justify-content-between">
+                <a href="{{ route('kendaraan.detail', $kendaraan->id) }}" class="btn btn-primary me-2">Detail</a>
+                
+                @if (!$isUnavailable)
+                    <a href="{{ route('tambah.keranjang', $kendaraan->id) }}" class="btn btn-outline-secondary"><i class="bi bi-cart2"></i></a>
+                @else
+                    <button class="btn btn-outline-secondary" disabled>Tidak Tersedia</button>
+                @endif
+            </div>
+                    </div>
+                    <div class="card-footer">
+                        @if (!$isUnavailable)
                             <span class="badge bg-success">Tersedia</span>
-                            <span class="text-muted float-end"><i class="bi bi-eye"></i> {{ $kendaraan->views }} views</span>
-                        </div>
+                        @else
+                            <span class="badge bg-danger">Tidak Tersedia</span>
+                        @endif
+                    </div>
                     </div>
                 </div>
                 <!-- End Product Column -->

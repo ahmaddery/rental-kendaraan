@@ -152,6 +152,16 @@
             <p><span class="icon">&#128663;</span><strong>Kendaraan:</strong> {{ $payment->kendaraan->nama }}</p>
             <p><span class="icon">&#128176;</span><strong>Harga:</strong> Rp{{ number_format($payment->kendaraan->harga, 0, ',', '.') }}/ Hari</p>
             <p class="total"><span class="icon">&#128181;</span>Total: Rp{{ number_format($payment->gross_amount, 0, ',', '.') }}</p>
+            @if(!empty($unavailableDates))
+            <div class="unavailable-dates">
+                <h2>Kendaraan Tidak Tersedia pada Tanggal-tanggal Berikut:</h2>
+                <ul>
+                    @foreach($unavailableDates as $unavailableDate)
+                        <li>Dari {{ $unavailableDate['start'] }} hingga {{ $unavailableDate['end'] }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         </div>
         <div class="payment-info">
             <p><strong>Mohon pastikan semua detail telah benar sebelum melanjutkan pembayaran.</strong></p>
