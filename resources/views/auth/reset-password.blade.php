@@ -124,9 +124,9 @@
 
                     <div class="input-group">
                         <label for="email">Email</label>
-                        <input id="email" type="email" name="email" placeholder="Enter your email" value="{{ old('email', $request->email) }}" required autofocus>
+                        <input id="email" type="email" name="email" placeholder="Enter your email" value="{{ old('email', $request->email) }}" required readonly autofocus>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
+                    </div>                    
 
                     <div class="input-group">
                         <label for="password">Password</label>
