@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
 
         'admin' => \App\Http\Middleware\Admin::class,
+        'check.token' => \App\Http\Middleware\CheckToken::class,
      ];
 }
