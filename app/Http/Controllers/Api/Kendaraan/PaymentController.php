@@ -7,6 +7,7 @@ use App\Models\XenditPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Keranjang;
 use Illuminate\Support\Carbon;
 
 class PaymentController extends Controller
@@ -221,7 +222,6 @@ public function getTransactionByExternalId($user_id, $external_id)
         ], 500);
     }
 }
-
 public function getPaymentStatus($user_id)
 {
     try {
@@ -239,6 +239,9 @@ public function getPaymentStatus($user_id)
             'success' => true,
             'status' => $payment->status, // Check if PAID or pending
             'amount' => $payment->amount,
+            'externalid' => $payment->external_id,
+            'userid' => $payment->user_id,
+            'kendaraanid' => $payment->kendaraan_id,
             'bankcode' => $payment->bank_code
         ]);
     } catch (\Exception $e) {
@@ -249,6 +252,4 @@ public function getPaymentStatus($user_id)
         ], 500);
     }
 }
-
-
 }

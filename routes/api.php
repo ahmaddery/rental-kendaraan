@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Api\Kendaraan\KendaraanController;
 use App\Http\Controllers\Api\Kendaraan\CartController;
 use App\Http\Controllers\Api\Kendaraan\PaymentController;
+use App\Http\Controllers\Api\Kendaraan\PengambilanPengembalianController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -59,3 +60,6 @@ Route::get('payments/{user_id}/{external_id}', [PaymentController::class, 'getTr
 // Route untuk menangani callback webhook dari Xendit
 Route::post('/payment/callback', [PaymentController::class, 'handleCallback']);
 Route::get('payment/status/{user_id}', [PaymentController::class, 'getPaymentStatus']);
+
+
+Route::post('pengambilan-pengembalian', [PengambilanPengembalianController::class, 'store']);
