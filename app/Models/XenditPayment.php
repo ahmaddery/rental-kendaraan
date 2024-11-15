@@ -23,12 +23,13 @@ class XenditPayment extends Model
         'status',
         'currency',
         'paid_amount',
-        'bank_code',          
-        'paid_at',            
-        'payment_channel',     
-        'payment_destination',    
-        'payment_id',           
-        'is_high',     
+        'bank_code',
+        'paid_at',
+        'payment_channel',
+        'payment_destination',
+        'payment_id',
+        'is_high',
+        'quantity', // Added quantity here
     ];
 
     // Define the relationship with the User model

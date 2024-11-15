@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Kendaraan\KendaraanController;
 use App\Http\Controllers\Api\Kendaraan\CartController;
 use App\Http\Controllers\Api\Kendaraan\PaymentController;
 use App\Http\Controllers\Api\Kendaraan\PengambilanPengembalianController;
+use App\Http\Controllers\Api\Kendaraan\HistoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -63,3 +64,4 @@ Route::get('payment/status/{user_id}', [PaymentController::class, 'getPaymentSta
 
 
 Route::post('pengambilan-pengembalian', [PengambilanPengembalianController::class, 'store']);
+Route::get('kendaraan/history/{user_id}', [HistoryController::class, 'index']);

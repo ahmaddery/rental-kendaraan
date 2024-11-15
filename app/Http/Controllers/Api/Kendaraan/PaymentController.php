@@ -44,6 +44,22 @@ class PaymentController extends Controller
             // Ambil dan konversi expiry date
             $expiryDate = date('Y-m-d H:i:s', strtotime($request->input('expiry_date')));
     
+            // Retrieve the quantity from the keranjang table based on user_id and kendaraan_id
+            $keranjangItem = Keranjang::where('user_id', $request->user_id)
+                ->where('kendaraan_id', $request->kendaraan_id)
+                ->first();
+    
+            // If there's no item in the cart, return an error response
+            if (!$keranjangItem) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No cart item found for this user and vehicle.'
+                ], 404);
+            }
+    
+            // Get the quantity from keranjang
+            $quantity = $keranjangItem->quantity;
+    
             // Kirim permintaan ke API Xendit
             $response = Http::withBasicAuth($secretKey, '')
                 ->post('https://api.xendit.co/v2/invoices', [
@@ -57,7 +73,7 @@ class PaymentController extends Controller
             // Jika berhasil, simpan data ke database
             if ($response->successful()) {
                 $xenditResponse = $response->json();
-                
+    
                 // Buat record baru di tabel xendit_payments
                 $xenditPayment = XenditPayment::create([
                     'user_id' => $request->user_id,
@@ -71,7 +87,8 @@ class PaymentController extends Controller
                     'expiry_date' => $expiryDate, // Simpan expiry_date
                     'invoice_url' => $xenditResponse['invoice_url'],
                     'status' => $xenditResponse['status'],
-                    'currency' => $xenditResponse['currency']
+                    'currency' => $xenditResponse['currency'],
+                    'quantity' => $quantity, // Simpan quantity
                 ]);
     
                 return response()->json([
@@ -80,7 +97,7 @@ class PaymentController extends Controller
                     'data' => $xenditPayment,
                     'invoice_url' => $xenditResponse['invoice_url']
                 ], 201);
-            } 
+            }
     
             return response()->json([
                 'success' => false,
@@ -96,6 +113,7 @@ class PaymentController extends Controller
             ], 500);
         }
     }
+    
     
 
     /**
@@ -242,7 +260,8 @@ public function getPaymentStatus($user_id)
             'externalid' => $payment->external_id,
             'userid' => $payment->user_id,
             'kendaraanid' => $payment->kendaraan_id,
-            'bankcode' => $payment->bank_code
+            'bankcode' => $payment->bank_code,
+            'quantity' => $payment->quantity // Include the quantity field
         ]);
     } catch (\Exception $e) {
         return response()->json([
@@ -252,4 +271,5 @@ public function getPaymentStatus($user_id)
         ], 500);
     }
 }
+
 }
